@@ -2,25 +2,55 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
+// CONFIGURACIÓN LIMPIA Y COMPATIBLE
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
-			sidebar: [
+			// =====================================
+			// BRANDING
+			// =====================================
+			title: 'FIRSTHub Docs',
+			description:
+				'Centro oficial de documentación de FIRSTHub para FRC, FTC, programación, liderazgo y desarrollo de equipos.',
+
+			// CSS PERSONALIZADO (COLORES)
+			customCss: ['./src/styles/custom.css'],
+
+			// =====================================
+			// LINKS SUPERIORES
+			// =====================================
+			social: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/Regirex21',
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					icon: 'instagram',
+					label: 'Instagram',
+					href: 'https://www.instagram.com/_firsthub/',
 				},
 			],
+
+			// =====================================
+			// SIDEBAR SIMPLE (SIN ERRORES)
+			// SOLO PÁGINAS QUE EXISTAN
+			// =====================================
+			sidebar: [
+				{
+					label: 'Inicio',
+					items: [
+						{ slug: 'index' },
+					],
+				},
+			],
+
+			// =====================================
+			// EDIT LINK
+			// =====================================
+			editLink: {
+				baseUrl: 'https://github.com/Regirex21/firsthub-docs/edit/main/src/content/docs/',
+			},
 		}),
 	],
 });
