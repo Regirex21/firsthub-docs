@@ -3,22 +3,103 @@ title: FIRSTHub Docs
 description: Centro oficial de documentación de FIRSTHub
 ---
 
-# FIRSTHub Docs
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Icon } from '@astrojs/starlight/components';
 
-&lt;/ Aprende • Construye • Compite /&gt;
+### Plataforma de crecimiento para equipos FIRST Robotics
 
-Bienvenido al centro oficial de documentación de FIRSTHub.
+Aprende más rápido. Construye mejor. Lidera con estructura. Compite al máximo.
 
-Aquí encontrarás recursos diseñados para impulsar estudiantes, mentores, voluntarios y equipos dentro de FIRST Robotics.
+<CardGrid>
+  <a href="/frc/" class="card-link frc-card">
+    <Card title="Explorar FRC" icon="rocket">
+      Recursos dedicados a FRC: temporada, robot, estrategia y competencia.
+    </Card>
+  </a>
 
-## Qué encontrarás aquí
+  <a href="/ftc/" class="card-link ftc-card">
+    <Card title="Explorar FTC" icon="laptop">
+      Recursos dedicados a FTC: Control Hub, mecanum, programación y crecimiento.
+    </Card>
+  </a>
+</CardGrid>
 
-- Manuales de programación para FRC y FTC  
-- Electrónica y sistemas de control  
-- Liderazgo y estructura de equipos  
-- Capacitación para mentores y voluntarios  
-- Organización de temporadas competitivas  
-- Recursos prácticos construidos desde experiencia real
+## Áreas principales
 
-La documentación está en expansión constante. Nuevas guías y manuales serán añadidos progresivamente.
+<CardGrid>
+  <a href="/frc/" class="card-link frc-card">
+    <Card title="FRC Hub" icon="rocket">
+      Build season, operación anual, scouting y rendimiento competitivo.
+    </Card>
+  </a>
 
+  <a href="/ftc/" class="card-link ftc-card">
+    <Card title="FTC Hub" icon="laptop">
+      Diseño de robot, programación, outreach y competencias FTC.
+    </Card>
+  </a>
+
+  <a href="/ftc/" class="card-link programming-card">
+    <Card title="Setup Android Studio" icon="download">
+      Instalación, configuración inicial y entorno recomendado para FTC.
+    </Card>
+  </a>
+
+  <a href="/frc/" class="card-link programming-card">
+    <Card title="Setup WPILib" icon="download">
+      Instalación completa de WPILib y herramientas para FRC.
+    </Card>
+  </a>
+
+  <a href="/" class="card-link leadership-card">
+    <Card title="Liderazgo" icon="puzzle">
+      Coaches, captains, sponsors, cultura y gestión de equipos.
+    </Card>
+  </a>
+
+  <a href="/" class="card-link resources-card">
+    <Card title="Recursos" icon="open-book">
+      Checklists, templates, planners y herramientas útiles.
+    </Card>
+  </a>
+</CardGrid>
+
+## Empieza hoy
+
+<CardGrid>
+  <a href="/frc/que-es-frc/" class="card-link frc-card">
+    <Card title="¿Qué es FRC?" icon="information" />
+  </a>
+
+  <a href="/ftc/que-es-ftc/" class="card-link ftc-card">
+    <Card title="¿Qué es FTC?" icon="information" />
+  </a>
+
+  <a href="/frc/season-overview/" class="card-link frc-card">
+    <Card title="Temporada FRC" icon="seti:bicep" />
+  </a>
+
+  <a href="/ftc/season-overview/" class="card-link ftc-card">
+    <Card title="Temporada FTC" icon="seti:bicep" />
+  </a>
+</CardGrid>
+
+## Rutas recomendadas
+
+<CardGrid>
+  <a href="/frc/" class="card-link frc-card">
+    <Card title="Soy Rookie FRC" icon="star" />
+  </a>
+
+  <a href="/ftc/" class="card-link ftc-card">
+    <Card title="Soy Rookie FTC" icon="star" />
+  </a>
+
+  <a href="/" class="card-link leadership-card">
+    <Card title="Soy Mentor" icon="puzzle" />
+  </a>
+
+  <a href="/" class="card-link resources-card">
+    <Card title="Soy Voluntario" icon="heart" />
+  </a>
+</CardGrid>
