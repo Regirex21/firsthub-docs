@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import SpeedInsights from "@vercel/speed-insights/astro"
 
 export default defineConfig({
   integrations: [
