@@ -1,8 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import SpeedInsights from "@vercel/speed-insights/astro"
-import Analytics from '@vercel/analytics/astro'
 
 export default defineConfig({
   integrations: [
@@ -13,6 +11,10 @@ export default defineConfig({
         'Centro oficial de documentación de FIRSTHub para FRC, FTC, programación, liderazgo y desarrollo de equipos.',
 
       customCss: ['./src/styles/custom.css'],
+
+      components: {
+        Head: './src/components/overrides/Head.astro',
+      },
 
       social: [
         {
