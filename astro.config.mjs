@@ -1,13 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import SpeedInsights from "@vercel/speed-insights/astro"
-import Analytics from '@vercel/analytics/astro'
+
+import firsthubLogo from './src/assets/firsthub_logo_full.svg';
 
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'FIRSTHub Docs',
+      title: '',
+
+      logo: {
+        // @ts-ignore
+        light: firsthubLogo,
+        // @ts-ignore
+        dark: firsthubLogo,
+        alt: 'FIRSTHub',
+      },
 
       description:
         'Centro oficial de documentación de FIRSTHub para FRC, FTC, programación, liderazgo y desarrollo de equipos.',
@@ -15,11 +23,6 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
 
       social: [
-        {
-          icon: 'github',
-          label: 'GitHub',
-          href: 'https://github.com/Regirex21',
-        },
         {
           icon: 'instagram',
           label: 'Instagram',
@@ -32,6 +35,7 @@ export default defineConfig({
           label: 'Inicio',
           items: [{ label: 'FIRSTHub Docs', link: '/' }],
         },
+
         {
           label: 'FRC',
           items: [
@@ -39,8 +43,29 @@ export default defineConfig({
             { label: '¿Qué es FRC?', link: '/frc/que-es-frc/' },
             { label: 'Temporada FRC', link: '/frc/season-overview/' },
             { label: 'Kickoff', link: '/frc/kickoff/' },
+            { label: 'Eventos', link: '/frc/events/' },
+            { label: 'Roles de equipo', link: '/frc/team-roles/' },
+            {label: 'Programación FRC',
+              items: [
+              { label: 'programming Hub', link: '/frc/programming/' },
+
+              {
+                label: 'Instalación y herramientas',
+                items: [
+                  { label: 'Overview', link: '/frc/programming/installation-tools/' },
+                  { label: 'Instalación offline', link: '/frc/programming/installation-tools/offline-preparation/' },
+                  { label: 'LabVIEW', link: '/frc/programming/installation-tools/labview-setup/' },
+                  { label: 'Game Tools', link: '/frc/programming/installation-tools/game-tools/' },
+                  { label: 'WPILib', link: '/frc/programming/installation-tools/wpilib-setup/' },
+                  { label: 'Python', link: '/frc/programming/installation-tools/python-setup/' },
+                  { label: 'Siguientes pasos', link: '/frc/programming/installation-tools/next-steps/' },
+                ]
+              }
+            ]
+          }
           ],
         },
+
         {
           label: 'FTC',
           items: [
@@ -59,7 +84,3 @@ export default defineConfig({
     }),
   ],
 });
-
-
-
-//npm run dev -- --host

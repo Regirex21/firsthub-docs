@@ -1,0 +1,183 @@
+---
+title: FRC Game Tools
+description: Instalación de FRC Game Tools para desarrollo, Driver Station y herramientas oficiales de competencia.
+---
+
+import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+FRC Game Tools es el paquete oficial que instala las herramientas esenciales para participar en la temporada de FIRST Robotics Competition en Windows.
+
+Incluye componentes necesarios para operar robots, conectarse al campo, actualizar firmware y utilizar el entorno oficial de competencia.
+
+---
+
+## ¿Qué incluye FRC Game Tools?
+
+Dependiendo de la versión de temporada, normalmente instala:
+
+- Driver Station
+- FRC Radio Configuration Utility
+- NI Update Suite
+- LabVIEW Runtime Components
+- Herramientas USB / CAN necesarias
+- Utilidades oficiales de comunicación
+
+---
+
+## Requisitos Previos
+
+Antes de instalar:
+
+- Windows 10 u 11 (recomendado)
+- Cuenta con permisos de administrador
+- Conexión a internet
+- Haber cerrado programas de NI abiertos
+- Antivirus sin bloquear instaladores
+
+> Esta herramienta es solo para Windows.
+
+---
+
+## ¿Quién necesita instalarlo?
+
+### Obligatorio para:
+
+- Driver Station laptops
+- Computadoras de programación en pits
+- PCs de prueba del robot
+- Equipos que usarán Driver Station
+---
+
+## Descarga Oficial
+
+Descarga siempre desde:
+
+- Sitio oficial de WPILib
+- Página oficial de FIRST Robotics Competition
+- Repositorios enlazados por WPILib
+
+> Nunca uses versiones viejas encontradas en terceros.
+
+---
+
+## Instalación Paso a Paso
+
+## 1. Descargar instalador
+
+Busca la versión correspondiente a la temporada actual.
+
+
+
+<CardGrid>
+  <LinkCard
+    title="FRC Game Tools - Página oficial"
+    href="https://www.ni.com/es/support/downloads/drivers/download.frc-game-tools.html"
+    description="Descarga oficial"
+  />
+</CardGrid>
+
+```text id="8i9o6q"
+[IMAGEN PLACEHOLDER: Página de descarga oficial de FRC Game Tools con botón de descarga destacado]
+```
+---
+
+## 2. Ejecutar como administrador
+
+Haz clic derecho al instalador:
+
+`Run as Administrator`
+
+---
+
+## 3. Seleccionar componentes
+
+Deja marcada la instalación completa si no sabes qué elegir.
+
+Recomendado:
+
+- Driver Station
+- Radio Configuration Utility
+- Update Suite
+- Runtime Components
+
+---
+
+## 4. Esperar instalación
+
+Puede tardar varios minutos.
+
+No cierres ventanas durante el proceso.
+
+---
+
+## 5. Reiniciar computadora
+
+Muy recomendado después de instalar.
+
+---
+
+## Verificar Instalación
+
+Después del reinicio revisa:
+
+### Menú Inicio
+
+Debes ver:
+
+- FRC Driver Station
+- FRC Radio Configuration Utility
+- NI Tools
+
+### Driver Station abre correctamente
+
+Sin errores al iniciar.
+
+```text id="8i9o6q"
+[IMAGEN PLACEHOLDER: Pantalla de inicio del Driver Station mostrando estado de conexión y controles]
+```
+
+---
+
+## Actualización Anual
+
+Cada temporada cambia la versión.
+
+Eso significa:
+
+- Instalar nueva versión cada año
+- No depender de versiones anteriores
+- Revisar compatibilidad con WPILib actual
+
+---
+
+## Problemas Comunes
+
+### Instalador no abre
+
+Solución:
+
+- Ejecutar como administrador
+- Desactivar antivirus temporalmente
+- Redescargar archivo
+
+### Driver Station no detecta robot
+
+Revisar:
+
+- IP correcta
+- Ethernet
+- Firewall
+- Radio configurada
+
+### Error de NI components
+
+Reinstalar Game Tools completo.
+
+## Siguiente Paso
+
+Después de instalar Game Tools continúa con:
+
+- Driver Station Setup
+- Radio Configuration
+- RoboRIO Imaging
+- Conexión Robot-PC

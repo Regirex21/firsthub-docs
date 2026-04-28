@@ -1,0 +1,224 @@
+---
+title: Programming FRC
+description: Introducción al área de programación dentro de FIRST Robotics Competition.
+---
+
+import { Card, CardGrid, Aside, Tabs, TabItem, Steps, LinkCard, LinkButton } from '@astrojs/starlight/components';
+
+El área de programación se encarga de desarrollar el software que permite operar el robot durante prácticas, pruebas y competencia.
+
+En FRC, el código controla sistemas de manejo, mecanismos, sensores, rutinas autónomas y herramientas de diagnóstico.
+
+<Aside type="note" title="Importante">
+Un robot competitivo necesita buena mecánica, buena estrategia y software confiable.
+</Aside>
+
+---
+
+## Responsabilidades principales
+
+<CardGrid>
+  <Card title="Drivetrain" icon="seti:java">
+    Configuración del sistema de manejo, controles y respuesta del robot.
+  </Card>
+
+  <Card title="Mecanismos" icon="seti:java">
+    Control de intake, elevadores, shooters, brazos y demás subsistemas.
+  </Card>
+
+  <Card title="Autonomous" icon="seti:java">
+    Programación de rutinas automáticas para el inicio del match.
+  </Card>
+
+  <Card title="Sensores" icon="seti:java">
+    Integración de encoders, giroscopios, cámaras y switches.
+  </Card>
+
+  <Card title="Dashboard" icon="seti:java">
+    Datos en tiempo real, pruebas y ajustes.
+  </Card>
+
+  <Card title="Mantenimiento" icon="seti:java">
+    Corrección de errores, respaldo y soporte en evento.
+  </Card>
+</CardGrid>
+
+---
+
+## Lenguajes disponibles en FRC
+
+<CardGrid>
+  <Card title="Java" icon="seti:java">
+    Opción más común en equipos nuevos y veteranos.
+  </Card>
+
+  <Card title="C++" icon="seti:cpp">
+    Alto rendimiento y mayor complejidad técnica.
+  </Card>
+
+    <Card title="Python" icon="seti:labview">
+    Lenguaje implementado recientemente.
+  </Card>
+
+  <Card title="LabVIEW" icon="seti:labview">
+    Menos utilizado actualmente.
+  </Card>
+</CardGrid>
+
+---
+
+## Ruta sugerida para nuevos miembros
+
+<Tabs>
+
+<TabItem label="Inicio">
+
+<Steps>
+
+1. Aprender lógica básica de programación  
+2. Conocer Java básico  
+3. Instalar WPILib  
+4. Entender estructura de proyecto FRC  
+5. Ejecutar deploy al robot  
+
+</Steps>
+<LinkButton
+  href="https://docs.astro.build"
+  variant="secondary"
+  icon="external"
+  iconPlacement="start"
+>
+  Descarga el manual para Rookies
+</LinkButton>
+</TabItem>
+
+<TabItem label="Intermedio">
+
+<Steps>
+
+1. Command-Based  
+2. Subsystems y Commands  
+3. Sensores  
+4. Autonomous básico  
+5. Git y trabajo colaborativo  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Avanzado">
+
+<Steps>
+
+1. PID Control  
+2. PathPlanner  
+3. Vision Processing  
+4. Logging avanzado  
+5. Optimización y arquitectura  
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Lo que normalmente se trabaja en temporada
+
+- Base de manejo  
+- Integración con hardware nuevo  
+- Ajuste de controles para drivers  
+- Código de mecanismos  
+- Rutinas autónomas  
+- Pruebas en campo  
+- Corrección de fallas rápidas  
+- Versionado de cambios  
+
+---
+
+## Buenas prácticas
+
+- Código ordenado y entendible  
+- Nombres claros en variables y clases  
+- Cambios pequeños y probados  
+- Uso de Git  
+- Respaldos frecuentes  
+- Documentar decisiones importantes  
+- Probar antes del evento  
+
+<Aside type="tip" title="Recomendación">
+Es mejor un sistema simple y estable que uno complejo e inconsistente.
+</Aside>
+
+---
+
+## Errores comunes
+
+- Programar sin probar físicamente  
+- Cambiar muchas cosas antes de competir  
+- Depender de una sola persona  
+- No usar control de versiones  
+- Código duplicado y desordenado  
+- No registrar errores del robot  
+
+---
+## Explorar programación
+
+<CardGrid >
+  <LinkCard
+    title="Rookie Roadmap"
+    href="/frc/programming/rookie-roadmap/"
+  >
+    Ruta recomendada para comenzar desde cero.
+  </LinkCard>
+
+    <LinkCard
+    title="Instalación y herramientas"
+    href="/frc/programming/installation-tools/"
+  >
+    Instalacion de software, configuración de laptop y herramientas esenciales.
+  </LinkCard>
+
+  <LinkCard
+    title="WPILib Básico"
+    href="/frc/programming/wpilib-basics/"
+  >
+    Estructura base del framework oficial de FRC.
+  </LinkCard>
+
+  <LinkCard
+    title="Command-Based"
+    href="/frc/programming/command-based/"
+  >
+    Organización moderna con subsystems y commands.
+  </LinkCard>
+
+  <LinkCard
+    title="Autónomos"
+    href="/frc/programming/autonomous/"
+  >
+    Rutinas automáticas y primeros puntos del match.
+  </LinkCard>
+
+  <LinkCard
+    title="Sensores"
+    href="/frc/programming/sensors/"
+  >
+    Encoders, gyro, switches y retroalimentación.
+  </LinkCard>
+
+  <LinkCard
+    title="Git para equipos"
+    href="/frc/programming/git/"
+  >
+    Trabajo colaborativo y control de versiones.
+  </LinkCard>
+
+  <LinkCard
+    title="Buenas prácticas"
+    href="/frc/programming/best-practices/"
+  >
+    Código limpio, estable y fácil de mantener.
+  </LinkCard>
+</CardGrid>

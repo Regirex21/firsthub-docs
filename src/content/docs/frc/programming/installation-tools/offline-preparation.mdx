@@ -1,0 +1,182 @@
+---
+title: Preparación para Instalación Offline
+description: Cómo descargar y preparar instaladores de FRC para usarlos sin internet en talleres, escuelas o eventos.
+---
+
+import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+La instalación offline permite preparar todas las herramientas de FRC con anticipación para usarlas en computadoras sin internet o con conexión inestable.
+
+Es especialmente útil para equipos nuevos, talleres, laboratorios escolares y días de competencia.
+
+<Aside type="note" title="Qué lograrás">
+Al terminar esta guía tendrás una USB o carpeta local con todo lo necesario para instalar herramientas FRC sin depender de internet.
+</Aside>
+
+---
+
+## ¿Cuándo conviene instalación offline?
+
+<CardGrid>
+  <Card title="Escuelas">
+    Redes restringidas o internet lento en campus.
+  </Card>
+
+  <Card title="Workshops">
+    Instalar muchas laptops el mismo día.
+  </Card>
+
+  <Card title="Competencias">
+    Tener respaldo si algo falla.
+  </Card>
+
+  <Card title="Equipos nuevos">
+    Evitar perder tiempo descargando archivos.
+  </Card>
+</CardGrid>
+
+```text
+[IMAGEN PLACEHOLDER: USB con etiqueta FIRSTHub Install Pack]
+```
+
+---
+
+## Qué deberías descargar antes
+
+<CardGrid>
+  <Card title="WPILib Installer">
+    Entorno principal para Java y C++.
+  </Card>
+
+  <Card title="FRC Game Tools">
+    Driver Station y utilidades oficiales.
+  </Card>
+
+  <Card title="LabVIEW (Opcional)">
+    Solo si tu equipo usa LabVIEW.
+  </Card>
+
+  <Card title="Drivers / Updates">
+    Dependencias extra si aplican.
+  </Card>
+</CardGrid>
+
+---
+## Descarga Oficial
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Releases"
+    href="https://github.com/wpilibsuite/allwpilib/releases"
+    description="Instaladores oficiales de WPILib"
+  />
+
+  <LinkCard
+    title="FRC Game Tools"
+    href="https://www.ni.com/es/support/downloads/drivers/download.frc-game-tools.html"
+    description="Descarga oficial"
+  />
+</CardGrid>
+
+```text
+[IMAGEN PLACEHOLDER: Página de GitHub Releases de WPILib]
+```
+```text
+[IMAGEN PLACEHOLDER: Página de descarga oficial de FRC Game Tools con botón de descarga destacado]
+```
+---
+
+## Preparación Paso a Paso
+
+<Steps>
+
+1. Desde una computadora con internet, descarga todos los instaladores actuales.
+2. Verifica que correspondan a la temporada correcta.
+3. Guarda cada archivo en carpetas ordenadas.
+4. Renombra archivos si es necesario para identificarlos rápido.
+5. Copia todo a una USB o disco externo.
+6. Prueba al menos una instalación en otra laptop.
+
+</Steps>
+
+---
+
+## Nombres recomendados de archivos
+
+| Archivo    | Nombre sugerido        |
+| ---------- | ---------------------- |
+| WPILib     | WPILib-2026.exe        |
+| Game Tools | FRC-GameTools-2026.exe |
+| LabVIEW    | LabVIEW-FRC-2026.iso   |
+| Drivers    | NI-Drivers.exe         |
+
+Estos nombres deben ser coherentes con la temporada y fáciles de identificar rápidamente.
+---
+
+## Errores Comunes
+
+<Tabs>
+
+<TabItem label="Versión incorrecta">
+
+Descargar archivos de otro año puede romper compatibilidad.
+
+</TabItem>
+
+<TabItem label="USB desordenada">
+
+Pierdes tiempo buscando instaladores en evento.
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Recomendación FIRSTHub
+
+<Aside type="tip" title="Consejo">
+Cada equipo serio debería tener un kit offline listo. Resolver instalaciones bajo presión en temporada puede resultar contraproducente.
+</Aside>
+
+---
+
+## Checklist Final
+
+* USB preparada
+* Instaladores correctos
+* Temporada actual
+* Carpetas ordenadas
+* Instalación probada
+
+<Badge text="Offline Ready" />
+
+---
+
+## Recursos Relacionados
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Setup"
+    href="/frc/programming/installation-tools/wpilib-setup/"
+    description="Instalación del entorno principal."
+  />
+
+<LinkCard
+ title="FRC Game Tools"
+ href="/frc/programming/installation-tools/frc-game-tools/"
+ description="Driver Station y herramientas oficiales."
+/>
+
+<LinkCard
+ title="LabVIEW Setup"
+ href="/frc/programming/installation-tools/labview-setup/"
+ description="Ruta opcional para equipos LabVIEW."
+/>
+
+<LinkCard
+ title="Python Setup"
+ href="/frc/programming/installation-tools/python-setup/"
+ description="Ruta opcional para equipos Python."
+/> </CardGrid>
+

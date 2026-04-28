@@ -1,0 +1,258 @@
+
+---
+title: Python Setup for FRC
+description: Instalación de Python y RobotPy para programar robots FRC con herramientas compatibles con WPILib.
+---
+
+import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge, Code } from '@astrojs/starlight/components';
+
+Python es una opción soportada por la comunidad FRC mediante **RobotPy**, permitiendo desarrollar robots con WPILib usando Python.
+
+No es la ruta principal más común, pero puede ser una gran decisión para equipos con experiencia previa o enfoque educativo.
+
+<Aside type="note" title="Qué lograrás">
+Al terminar esta guía deberías poder instalar Python, configurar RobotPy, crear un proyecto nuevo y desplegar código al robot.
+</Aside>
+
+---
+
+## Antes de empezar
+
+<Aside type="tip" title="Honestidad estratégica">
+Si tu equipo busca máxima compatibilidad con tutoriales y recursos FRC, Java sigue siendo la opción más sólida.  
+Python conviene cuando existe una razón técnica real para usarlo.
+</Aside>
+
+---
+
+## ¿Por qué usar Python?
+
+<CardGrid>
+  <Card title="Sintaxis limpia">
+    Fácil de leer y mantener.
+  </Card>
+
+  <Card title="Rápido desarrollo">
+    Excelente para prototipos.
+  </Card>
+
+  <Card title="Educativo">
+    Muy bueno para nuevos programadores.
+  </Card>
+
+  <Card title="Gran ecosistema">
+    Comunidad enorme fuera de FRC.
+  </Card>
+</CardGrid>
+
+```text
+[IMAGEN PLACEHOLDER: VS Code abierto con proyecto RobotPy]
+```
+
+---
+
+## Requisitos Previos
+
+* Windows, macOS o Linux
+* Internet estable
+* VS Code recomendado
+* Terminal funcional
+* Permisos para instalar software
+
+<Badge text="Multiplataforma" />
+
+---
+
+## Qué instalarás
+
+<CardGrid>
+  <Card title="Python 3">
+    Lenguaje principal.
+  </Card>
+
+  <Card title="pip">
+    Gestor de paquetes.
+  </Card>
+
+  <Card title="RobotPy">
+    Librerías FRC para Python.
+  </Card>
+
+  <Card title="VS Code">
+    Editor recomendado.
+  </Card>
+</CardGrid>
+
+---
+
+## Descarga Oficial
+
+<CardGrid>
+  <LinkCard
+    title="Python Downloads"
+    href="https://www.python.org/downloads/"
+    description="Descarga oficial de Python"
+  />
+
+<LinkCard
+ title="RobotPy Docs"
+ href="https://robotpy.readthedocs.io/"
+ description="Documentación oficial"
+/> </CardGrid>
+
+```text
+[IMAGEN PLACEHOLDER: Sitio oficial de Python.org]
+```
+
+---
+
+## Instalar Python
+
+<Steps>
+
+1. Descarga Python 3 desde el sitio oficial.
+2. Ejecuta el instalador.
+3. Marca **Add Python to PATH**.
+4. Completa la instalación.
+5. Reinicia la terminal.
+
+</Steps>
+
+<Code
+code={`python --version`}
+lang="bash"
+title="Verificar instalación"
+/>
+
+```text
+[IMAGEN PLACEHOLDER: Instalador con Add Python to PATH seleccionado]
+```
+
+---
+
+## Instalar RobotPy
+
+<Code
+code={`pip install robotpy`}
+lang="bash"
+title="Instalar RobotPy"
+/>
+
+<Code
+code={`python -m robotpy --help`}
+lang="bash"
+title="Verificar instalación de RobotPy"
+/>
+
+<Aside type="note" title="Importante">
+Muchos errores vienen de múltiples versiones de Python instaladas. Usa siempre la misma versión.
+</Aside>
+
+---
+
+## Crear Proyecto Nuevo
+
+<Steps>
+
+1. Abre terminal en la carpeta deseada.
+2. Ejecuta el comando de inicialización.
+3. Abre la carpeta en VS Code.
+4. Empieza a programar.
+
+</Steps>
+
+<Code
+code={`python -m robotpy init`}
+lang="bash"
+title="Crear proyecto RobotPy"
+/>
+
+```text
+[IMAGEN PLACEHOLDER: Carpeta de proyecto RobotPy creada]
+```
+
+---
+
+## Deploy al Robot
+
+<Code
+code={`python -m robotpy deploy`}
+lang="bash"
+title="Enviar código al roboRIO"
+/>
+
+```text
+[IMAGEN PLACEHOLDER: Terminal haciendo deploy al robot]
+```
+
+---
+
+## Simulación
+
+<Code
+code={`python -m robotpy sim`}
+lang="bash"
+title="Ejecutar simulación local"
+/>
+
+<Badge text="Ideal para offseason" />
+
+---
+
+## Problemas Comunes
+
+<Tabs>
+
+<TabItem label="python no reconocido">
+
+Python no está agregado al PATH. Reinstala activando esa opción.
+
+</TabItem>
+
+<TabItem label="pip falla">
+
+<Code
+code={`python -m pip install --upgrade pip`}
+lang="bash"
+title="Actualizar pip"
+/>
+
+</TabItem>
+
+<TabItem label="Deploy no conecta">
+
+Revisa red, IP del robot y Driver Station.
+
+</TabItem>
+
+<TabItem label="Múltiples versiones">
+
+Usa `py -3` o la ruta explícita correcta.
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Recursos Relacionados
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Setup"
+    href="/frc/programming/installation-tools/wpilib-setup/"
+    description="Ruta principal Java/C++."
+  />
+
+<LinkCard
+ title="Offline Installation"
+ href="/frc/programming/installation-tools/offline-installation-preparations/"
+ description="Instalación sin internet."
+/>
+
+<LinkCard
+ title="FRC Game Tools"
+ href="/frc/programming/installation-tools/frc-game-tools/"
+ description="Driver Station y utilidades."
+/> </CardGrid>
+

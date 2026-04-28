@@ -1,0 +1,86 @@
+---
+title: Next Steps
+description: Qué hacer después de instalar las herramientas principales de FRC.
+---
+
+import {
+  Aside,
+  Steps,
+  Tabs,
+  TabItem,
+  LinkCard,
+  LinkButton,
+  Badge,
+  Code,
+  FileTree
+} from '@astrojs/starlight/components';
+
+Ya instalaste las herramientas base, felicidades! Ahora empieza el trabajo real: conectar tu robot, crear proyectos y hacer que todo funcione.
+
+---
+
+## Ruta Recomendada
+
+<Steps>
+
+1. Confirmar que todas las herramientas abren correctamente.  
+2. Crear primer proyecto de robot.  
+3. Conectar roboRIO por USB o red.  
+4. Compilar código sin errores.  
+5. Hacer primer deploy.  
+6. Probar movimiento básico.  
+
+</Steps>
+---
+
+## Comandos que debes dominar
+
+<Code
+  lang="bash"
+  title="Comandos WPILib comunes"
+  code={`Build Robot Code
+Deploy Robot Code
+Start Simulation
+Team Number Settings`}
+ />
+
+---
+
+## Según tu lenguaje
+
+<Tabs>
+
+<TabItem label="Java / C++">
+
+- Ruta principal de la comunidad FRC  
+- Más tutoriales y ejemplos  
+- Mejor para equipos nuevos
+
+</TabItem>
+
+<TabItem label="Python">
+
+- Rápido desarrollo  
+- Excelente para equipos con experiencia Python  
+- Usa RobotPy
+
+</TabItem>
+
+<TabItem label="LabVIEW">
+
+- Útil si ya existe experiencia NI  
+- Menos común en equipos nuevos
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Siguiente documentación recomendada
+
+<LinkButton
+  href="/frc/programming/installation-tools/driver-station-setup/"
+>
+Continuar con Driver Station →
+</LinkButton>

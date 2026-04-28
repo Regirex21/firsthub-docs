@@ -1,0 +1,197 @@
+---
+title: LabVIEW for FRC
+description: Instalación de LabVIEW y configuración inicial para programar robots FRC con herramientas oficiales de NI y FIRST.
+---
+
+import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+LabVIEW es uno de los entornos oficiales soportados en FIRST Robotics Competition para desarrollar robots FRC mediante programación gráfica.
+
+Es ampliamente usado en educación e industria, y ofrece integración sólida con hardware de National Instruments.
+
+<Aside type="note" title="Qué lograrás">
+Al terminar esta guía deberías poder abrir LabVIEW, crear un proyecto FRC y preparar deploy hacia un roboRIO.
+</Aside>
+
+---
+
+## ¿Qué instala LabVIEW para FRC?
+
+<CardGrid>
+  <Card title="LabVIEW IDE">
+    Entorno principal de desarrollo visual.
+  </Card>
+
+  <Card title="FRC Templates">
+    Plantillas oficiales para proyectos de robot.
+  </Card>
+
+  <Card title="roboRIO Support">
+    Comunicación y despliegue al controlador del robot.
+  </Card>
+
+  <Card title="Drivers">
+    Dependencias necesarias para hardware NI.
+  </Card>
+
+  <Card title="Build Tools">
+    Herramientas para compilar y deploy.
+  </Card>
+
+  <Card title="Diagnostics">
+    Utilidades para pruebas y soporte técnico.
+  </Card>
+</CardGrid>
+
+```text
+[IMAGEN PLACEHOLDER: Pantalla principal de LabVIEW mostrando entorno visual]
+```
+
+---
+
+## ¿Quién debería usar LabVIEW?
+
+<Tabs>
+
+<TabItem label="Buena opción">
+
+* Equipos con mentores que ya usan NI
+* Equipos veteranos con flujo establecido
+* Enfoque educativo visual
+* Necesidad de diagnóstico rápido de hardware
+
+</TabItem>
+
+<TabItem label="Considera otras opciones">
+
+* Equipos nuevos sin mentor técnico
+* Equipos que buscan mucha comunidad online
+* Proyectos de software complejos a largo plazo
+* Estudiantes que ya dominan Java o C++
+
+</TabItem>
+
+</Tabs>
+
+<Aside type="tip" title="Opinión estratégica">
+Si tu equipo empieza desde cero, Java suele ofrecer mejor continuidad competitiva. LabVIEW sigue siendo válido, pero no siempre es la mejor primera elección.
+</Aside>
+
+---
+
+## Antes de instalar
+
+* Windows 10 u 11 actualizado
+* Internet estable
+* Espacio libre suficiente
+* Permisos de administrador
+* Cerrar programas de NI abiertos
+* Tener FRC Game Tools instalado (recomendado)
+
+<Badge text="Solo Windows" />
+
+---
+
+```text
+[IMAGEN PLACEHOLDER: Página oficial de WPILib con sección LabVIEW Setup]
+```
+
+---
+
+## Instalación Paso a Paso
+
+<Steps>
+
+1. Descarga el instalador oficial correspondiente a la temporada actual.
+2. Ejecuta el archivo como administrador.
+3. Selecciona instalación completa recomendada.
+4. Espera a que terminen todos los paquetes.
+5. Reinicia la computadora al finalizar.
+6. Abre LabVIEW desde el menú inicio.
+
+</Steps>
+
+```text
+[IMAGEN PLACEHOLDER: Instalador de LabVIEW mostrando progreso]
+```
+
+---
+
+## Verificar Instalación
+
+* LabVIEW abre correctamente
+* Existe plantilla **FRC roboRIO Robot Project**
+* Detecta soporte para roboRIO
+* Sin errores de runtime o licencia
+
+<Badge text="Checklist completado" />
+
+```text
+[IMAGEN PLACEHOLDER: Menú de creación de proyecto FRC en LabVIEW]
+```
+
+---
+
+## Crear Proyecto FRC
+
+<Steps>
+
+1. Abrir LabVIEW.
+2. Seleccionar **FRC roboRIO Robot Project**.
+3. Ingresar team number.
+4. Elegir plantilla base.
+5. Guardar proyecto.
+
+</Steps>
+
+---
+
+## Deploy al roboRIO
+
+<Aside type="note" title="Flujo habitual">
+Build Specifications → FRC Robot Boot-Up Deployment → Build → Run as Startup
+</Aside>
+
+```text
+[IMAGEN PLACEHOLDER: Ventana Build Specifications de LabVIEW]
+```
+
+---
+
+## Problemas Comunes
+
+<Tabs>
+
+<TabItem label="No aparece plantilla FRC">
+
+Reinstala componentes FRC correctos o usa la versión oficial de temporada.
+
+</TabItem>
+
+<TabItem label="No detecta roboRIO">
+
+Revisa USB, Ethernet, Driver Station e imagen del roboRIO.
+
+</TabItem>
+
+<TabItem label="Instalación lenta">
+
+Es normal. Los paquetes de NI suelen ser pesados.
+
+</TabItem>
+
+<TabItem label="Errores extraños">
+
+Haz instalación limpia y reinicia el equipo.
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Recomendación FIRSTHub
+
+<Aside type="tip" title="Consejo realista">
+Si tu objetivo es competir fuerte y atraer más programadores nuevos, Java suele ser mejor apuesta. Si ya tienen ecosistema LabVIEW, entonces aprovéchenlo.
+</Aside>
