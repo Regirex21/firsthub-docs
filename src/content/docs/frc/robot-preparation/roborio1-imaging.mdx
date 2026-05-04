@@ -1,0 +1,131 @@
+---
+title: roboRIO 1 Imaging
+description: Instalación de imagen en roboRIO 1 usando la herramienta oficial de FRC.
+---
+
+import { Aside, Steps, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+
+<Aside type="caution" title="Advertencia">
+Antes de instalar la imagen en tu roboRIO, debes haber completado la instalación de las FRC Game Tools. También debes tener la roboRIO correctamente conectada al sistema de distribución de energía y asegurarte de que esté energizada.
+</Aside>
+
+<Aside type="note" title="Nota">
+Las instrucciones para roboRIO 2.0 son diferentes. Esta página es solo para roboRIO 1.
+</Aside>
+
+---
+
+## Configuración de la roboRIO
+
+### Conexión USB
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: puertos USB de roboRIO 1
+</div>
+
+
+---
+
+## Instalación de drivers
+
+Los drivers de la roboRIO se instalan automáticamente al instalar las FRC Game Tools. Si es la primera vez que conectas la roboRIO, espera a que Windows complete la instalación.
+
+---
+
+## Abrir la herramienta de Imaging
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: iconos de roboRIO Imaging Tool en Windows
+</div>
+
+
+La herramienta de imaging se puede encontrar dentro de las FRC Game Tools instaladas en tu computadora.
+
+---
+
+## roboRIO Imaging Tool
+
+La herramienta permite:
+
+* Seleccionar la roboRIO conectada
+* Configurar el número de equipo
+* Actualizar firmware
+* Instalar la imagen del sistema
+
+---
+
+## Actualizar firmware
+
+<Aside type="caution" title="Firmware">
+Si la roboRIO tiene firmware antiguo, se debe actualizar antes de instalar la imagen.
+</Aside>
+
+---
+
+## Instalar la imagen en la roboRIO
+
+<Aside type="caution" title="Importante">
+En Windows, asegúrate de ejecutar la herramienta con permisos de administrador.
+</Aside>
+
+<Aside type="note" title="Nota">
+Este proceso tomará varios minutos y no debe interrumpirse.
+</Aside>
+
+<Steps>
+
+1. Abre la herramienta de roboRIO Imaging
+2. Selecciona la roboRIO conectada
+3. Ingresa el Team Number
+4. Selecciona la imagen correcta
+5. Presiona **Reformat**
+6. Espera a que el proceso termine
+
+</Steps>
+
+---
+
+## Progreso del imaging
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: barra de progreso del imaging
+</div>
+
+---
+
+## Imaging completo
+
+Cuando el proceso termine:
+
+* La roboRIO se reiniciará
+* La imagen quedará instalada
+* El Team Number quedará configurado
+
+---
+
+## Solución de problemas
+
+* Verifica conexión USB
+* Revisa drivers instalados
+* Ejecuta la herramienta como administrador
+* Reinicia la roboRIO
+* Usa otro cable USB
+
+---
+
+## Siguiente paso
+
+Continúa con la configuración de la radio para establecer comunicación con la Driver Station.
+
+<CardGrid>
+  <LinkCard
+    title="Configurar radio"
+    href="/frc/robot-preparation/radio-configuration/"
+  >
+    Aprende a configurar la radio para conectar tu roboRIO a la Driver Station.
+  </LinkCard>
+</CardGrid>
+
+
+

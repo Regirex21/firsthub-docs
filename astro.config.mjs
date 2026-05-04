@@ -49,7 +49,8 @@ export default defineConfig({
             { label: 'Kickoff', link: '/frc/kickoff/' },
             { label: 'Eventos', link: '/frc/events/' },
             { label: 'Roles de equipo', link: '/frc/team-roles/' },
-            {label: 'Programación FRC',
+
+            {label: 'Programación Y Electrónica',
               items: [
               { label: 'programming Hub', link: '/frc/programming/' },
 
@@ -64,11 +65,26 @@ export default defineConfig({
                   { label: 'Python', link: '/frc/programming/installation-tools/python-setup/' },
                   { label: 'Siguientes pasos', link: '/frc/programming/installation-tools/next-steps/' },
                 ]
-              }
+              },
+
+                           {
+      label: 'Preparación del Robot',
+      items: [
+        { label: 'Overview', link: '/frc/robot-preparation/' },
+        { label: 'roboRIO 2 Imaging', link: '/frc/robot-preparation/roborio-imaging/' },
+        { label: 'roboRIO 1 Imaging', link: '/frc/robot-preparation/roborio1-imaging/' },
+        { label: 'Radio Configuration', link: '/frc/robot-preparation/radio-configuration/' },
+        { label: 'OpenMesh (Legacy)', link: '/frc/robot-preparation/openmesh-om5p/' },
+      ]
+    }
             ]
-          }
-          ],
-        },
+           
+             },
+
+  ],
+},
+
+        
 
         {
           label: 'FTC',

@@ -1,95 +1,112 @@
 ---
-title: Programming FRC
-description: Introducción al área de programación dentro de FIRST Robotics Competition.
+title: Programming Hub
+description: Centro de documentación del área de programación para FIRST Robotics Competition.
 ---
 
-import { Card, CardGrid, Aside, Tabs, TabItem, Steps, LinkCard, LinkButton } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard, Aside, Tabs, TabItem, Steps, Card } from '@astrojs/starlight/components';
 
-El área de programación se encarga de desarrollar el software que permite operar el robot durante prácticas, pruebas y competencia.
+El área de programación desarrolla el software que permite controlar el robot durante prácticas, pruebas y competencia.
 
-En FRC, el código controla sistemas de manejo, mecanismos, sensores, rutinas autónomas y herramientas de diagnóstico.
+En FRC, el código conecta hardware y estrategia: manejo, mecanismos, sensores, dashboards, autónomos y diagnóstico.
 
-<Aside type="note" title="Importante">
-Un robot competitivo necesita buena mecánica, buena estrategia y software confiable.
+<Aside type="note" title="Empieza aquí">
+Si eres nuevo, comienza por Instalación y Herramientas. Puedes avanzar sin dominar programación al inicio, pero para crecer necesitarás practicar un lenguaje.
 </Aside>
 
 ---
 
-## Responsabilidades principales
+## ¿Qué hace programación en FRC?
 
 <CardGrid>
-  <Card title="Drivetrain" icon="seti:java">
-    Configuración del sistema de manejo, controles y respuesta del robot.
-  </Card>
+    <Card title="Drivetrain" icon="download">
+      Sistema de manejo, controles y respuesta del robot.
+    </Card>
 
-  <Card title="Mecanismos" icon="seti:java">
-    Control de intake, elevadores, shooters, brazos y demás subsistemas.
-  </Card>
+        <Card title="Mecanismos" icon="download">
+       Intake, elevadores, shooters, brazos y subsistemas.
+    </Card>
 
-  <Card title="Autonomous" icon="seti:java">
-    Programación de rutinas automáticas para el inicio del match.
-  </Card>
+        <Card title="Autónomos" icon="download">
+      Rutinas automáticas para sumar puntos al inicio del match.
+    </Card>
 
-  <Card title="Sensores" icon="seti:java">
-    Integración de encoders, giroscopios, cámaras y switches.
-  </Card>
+        <Card title="Sensores" icon="download">
+      Encoders, giroscopios, cámaras, limit switches y feedback.
+    </Card>
 
-  <Card title="Dashboard" icon="seti:java">
-    Datos en tiempo real, pruebas y ajustes.
-  </Card>
+        <Card title="Dashboard" icon="download">
+      Datos en tiempo real, tuning y monitoreo.
+    </Card>
 
-  <Card title="Mantenimiento" icon="seti:java">
-    Corrección de errores, respaldo y soporte en evento.
-  </Card>
+        <Card title="Diagnóstico" icon="download">
+      Logs, pruebas unitarias y resolución de problemas.
+    </Card>
+
 </CardGrid>
 
 ---
 
-## Lenguajes disponibles en FRC
+## ¿Nuevo en programación?
+
+Puedes empezar aunque no sepas programar. Muchos miembros comienzan aprendiendo las cosas más básicas, y pequeñas tareas.
+Apoyarse en miembros con más experiencia es clave, y no hay preguntas tontas.
+
+<Aside type="tip" title="Recomendación">
+Si tu equipo no tiene un estándar definido, Java es la mejor opción para comenzar en FRC.
+</Aside>
+
+---
+
+## Recursos externos para aprender (Español)
 
 <CardGrid>
-  <Card title="Java" icon="seti:java">
-    Opción más común en equipos nuevos y veteranos.
-  </Card>
+  <LinkCard
+    title="Java desde cero"
+    href="https://youtu.be/JOAqpdM36wI?si=dn3dxxUwdWG66wuj"
+  >
+    Cursos completos en español para bases sólidas.
+  </LinkCard>
 
-  <Card title="C++" icon="seti:cpp">
-    Alto rendimiento y mayor complejidad técnica.
-  </Card>
+  <LinkCard
+    title="C++ desde cero"
+    href="https://youtu.be/jS6wb263CIM?si=SzjALLFRMNRakjmV"
+  >
+    Ideal si quieres alto rendimiento y más profundidad técnica.
+  </LinkCard>
 
-    <Card title="Python" icon="seti:labview">
-    Lenguaje implementado recientemente.
-  </Card>
+  <LinkCard
+    title="Python desde cero"
+    href="https://youtu.be/Kp4Mvapo5kc?si=V2U5HLyTRVBXkobv"
+  >
+    Excelente para aprender lógica rápidamente.
+  </LinkCard>
 
-  <Card title="LabVIEW" icon="seti:labview">
-    Menos utilizado actualmente.
-  </Card>
+  <LinkCard
+    title="Git y GitHub"
+    href="https://youtu.be/niPExbK8lSw?si=JSSy2EZNVuP7w1YS"
+  >
+    Fundamental para colaborar como equipo.
+  </LinkCard>
 </CardGrid>
 
 ---
 
-## Ruta sugerida para nuevos miembros
+## Ruta sugerida de aprendizaje
 
 <Tabs>
 
-<TabItem label="Inicio">
+<TabItem label="Nuevo">
 
 <Steps>
 
-1. Aprender lógica básica de programación  
-2. Conocer Java básico  
-3. Instalar WPILib  
-4. Entender estructura de proyecto FRC  
-5. Ejecutar deploy al robot  
+1. Instalar herramientas  
+2. Aprender variables, if y loops  
+3. Entender estructura de proyecto
+4. Ejecutar deploy básico  
+5. Probar simulación o robot
 
 </Steps>
-<LinkButton
-  href="https://docs.astro.build"
-  variant="secondary"
-  icon="external"
-  iconPlacement="start"
->
-  Descarga el manual para Rookies
-</LinkButton>
+
 </TabItem>
 
 <TabItem label="Intermedio">
@@ -99,8 +116,8 @@ Un robot competitivo necesita buena mecánica, buena estrategia y software confi
 1. Command-Based  
 2. Subsystems y Commands  
 3. Sensores  
-4. Autonomous básico  
-5. Git y trabajo colaborativo  
+4. Autónomo básico  
+5. Git colaborativo  
 
 </Steps>
 
@@ -112,9 +129,9 @@ Un robot competitivo necesita buena mecánica, buena estrategia y software confi
 
 1. PID Control  
 2. PathPlanner  
-3. Vision Processing  
+3. Vision  
 4. Logging avanzado  
-5. Optimización y arquitectura  
+5. Arquitectura limpia  
 
 </Steps>
 
@@ -124,101 +141,64 @@ Un robot competitivo necesita buena mecánica, buena estrategia y software confi
 
 ---
 
-## Lo que normalmente se trabaja en temporada
-
-- Base de manejo  
-- Integración con hardware nuevo  
-- Ajuste de controles para drivers  
-- Código de mecanismos  
-- Rutinas autónomas  
-- Pruebas en campo  
-- Corrección de fallas rápidas  
-- Versionado de cambios  
-
----
-
 ## Buenas prácticas
 
-- Código ordenado y entendible  
-- Nombres claros en variables y clases  
+- Código entendible  
 - Cambios pequeños y probados  
-- Uso de Git  
+- Nombres claros  
+- Uso constante de Git  
 - Respaldos frecuentes  
-- Documentar decisiones importantes  
+- Documentar decisiones  
 - Probar antes del evento  
 
-<Aside type="tip" title="Recomendación">
-Es mejor un sistema simple y estable que uno complejo e inconsistente.
+<Aside type="tip" title="Consejo">
+Es mejor un sistema simple y confiable que uno complejo e inestable.
 </Aside>
 
 ---
 
-## Errores comunes
+## Explorar documentación
 
-- Programar sin probar físicamente  
-- Cambiar muchas cosas antes de competir  
-- Depender de una sola persona  
-- No usar control de versiones  
-- Código duplicado y desordenado  
-- No registrar errores del robot  
-
----
-## Explorar programación
-
-<CardGrid >
+<CardGrid>
   <LinkCard
-    title="Rookie Roadmap"
-    href="/frc/programming/rookie-roadmap/"
-  >
-    Ruta recomendada para comenzar desde cero.
-  </LinkCard>
-
-    <LinkCard
     title="Instalación y herramientas"
     href="/frc/programming/installation-tools/"
   >
-    Instalacion de software, configuración de laptop y herramientas esenciales.
+    Todo lo necesario para preparar una laptop FRC.
   </LinkCard>
 
   <LinkCard
-    title="WPILib Básico"
+    title="WPILib"
     href="/frc/programming/wpilib-basics/"
   >
-    Estructura base del framework oficial de FRC.
+    Aprende el ecosistema oficial de FRC.
   </LinkCard>
 
   <LinkCard
     title="Command-Based"
     href="/frc/programming/command-based/"
   >
-    Organización moderna con subsystems y commands.
+    Organización moderna del código.
   </LinkCard>
 
   <LinkCard
     title="Autónomos"
     href="/frc/programming/autonomous/"
   >
-    Rutinas automáticas y primeros puntos del match.
+    Paths, secuencias y lógica automática.
   </LinkCard>
 
   <LinkCard
     title="Sensores"
     href="/frc/programming/sensors/"
   >
-    Encoders, gyro, switches y retroalimentación.
+    Retroalimentación para robots inteligentes.
   </LinkCard>
 
   <LinkCard
     title="Git para equipos"
     href="/frc/programming/git/"
   >
-    Trabajo colaborativo y control de versiones.
-  </LinkCard>
-
-  <LinkCard
-    title="Buenas prácticas"
-    href="/frc/programming/best-practices/"
-  >
-    Código limpio, estable y fácil de mantener.
+    Trabajo colaborativo profesional.
   </LinkCard>
 </CardGrid>

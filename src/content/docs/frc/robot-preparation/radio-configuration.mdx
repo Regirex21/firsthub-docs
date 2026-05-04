@@ -1,0 +1,293 @@
+---
+title: Radio Configuration
+description: Configura la radio del robot FRC para comunicación estable entre laptop y robot.
+---
+
+import { CardGrid, LinkCard, Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+La radio es el puente principal entre el robot y la Driver Station. Una mala configuración provoca desconexiones, lag o pérdida total de control.
+
+Esta guía está basada en el flujo oficial utilizado en FRC para radios modernas como la VH-109.
+
+<Aside type="note" title="Importante">
+En competencia, la configuración final de radio normalmente la realizan los CSA's o Robot Inspectors. Esta guía está pensada para pruebas, taller y pretemporada.
+</Aside>
+
+---
+
+## Estado recomendado
+
+<Badge text="USB / Ethernet para configurar" variant="tip" />  
+<Badge text="Wi-Fi para pruebas controladas en taller" variant="note" />  
+
+---
+
+## Qué necesitas
+
+- Radio oficial del robot  
+- Fuente de energía estable  
+- Laptop con navegador actualizado  
+- Número oficial de equipo  
+- Cable Ethernet recomendado  
+
+---
+
+## Topología básica
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: Laptop → Radio → roboRIO
+</div>
+
+
+---
+
+## Paso 1: Entrar a la página de configuración
+
+<Steps>
+
+1. Conecta la laptop a la radio por Ethernet.
+2. Energiza la radio.
+3. Espera el arranque completo.
+4. Abre tu navegador web.
+5. Ingresa la dirección indicada por el fabricante (ej. radio.local).
+
+</Steps>
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: navegador en radio.local / interfaz web de la radio
+</div>
+
+<Aside type="tip" title="Consejo">
+Si no abre la página, desactiva otras redes Wi-Fi activas temporalmente.
+</Aside>
+
+---
+
+## Paso 2: Actualizar firmware
+
+Mantener firmware reciente mejora estabilidad y compatibilidad.
+
+<Steps>
+
+1. Entra a la sección **Firmware Update**.
+2. Descarga o selecciona el archivo correcto.
+3. Presiona **Upload**.
+4. Espera varios minutos sin desconectar energía.
+5. Permite reinicio automático.
+
+</Steps>
+
+<Aside type="caution" title="No interrumpas el proceso">
+Si desconectas energía durante el update, la radio puede quedar inutilizable temporalmente.
+</Aside>
+
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: pantalla Firmware Upload
+</div>
+
+---
+
+## Paso 3: Configurar modo Robot
+
+Para uso normal del robot.
+
+<Steps>
+
+1. Abre **Robot Radio Configuration**.
+2. Selecciona **Robot Radio Mode**.
+3. Ingresa tu **Team Number**.
+4. Define SSID si aplica.
+5. Guarda configuración.
+6. Espera reinicio de la radio.
+
+</Steps>
+
+<Badge text="Modo principal para pruebas del robot" variant="tip" />
+
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: formulario Robot Radio Configuration (Team Number, SSID)
+</div>
+
+---
+
+### Paso 4: Configurar modo Access Point
+
+El modo **Access Point** permite que la radio actúe como punto de acceso Wi-Fi para conexión directa.
+
+<Aside type="note" title="Uso">
+Este modo se utiliza principalmente para configuración o pruebas específicas. No es el modo típico de operación en competencia.
+</Aside>
+
+<Steps>
+
+1. Entra a la configuración de la radio.  
+2. Selecciona **Access Point Mode**.  
+3. Configura el **SSID** (nombre de red).  
+4. Define la clave **WPA/SAE**.  
+5. Guarda los cambios.  
+6. Conecta tu laptop a la red creada por la radio.  
+
+</Steps>
+
+<Aside type="tip" title="Importante">
+La clave WPA/SAE debe coincidir con la configuración definida en la radio para permitir la conexión.
+</Aside>
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: configuración Access Point Mode
+</div>
+
+---
+
+## Activar WiFi 2.4GHz en la VH-109
+
+La radio VH-109 incluye un modo standalone que se activa mediante **DIP switch 3**.
+
+En este modo, la radio crea su propia red 2.4GHz, permitiendo conexión directa sin hardware adicional.
+
+### Pasos
+
+<Steps>
+
+1. Localiza los **DIP switches** en la radio VH-109 (puede requerir retirar la etiqueta).  
+2. Activa el **switch 3 (ON)**.  
+3. Conecta dispositivos a la red 2.4GHz generada por la radio.  
+4. Usa la clave WPA/SAE configurada previamente.  
+
+</Steps>
+
+<Aside type="caution" title="Advertencia">
+Vivid Hosting no recomienda usar este modo para práctica regular. Solo debe utilizarse en casos específicos.
+</Aside>
+
+### Ventajas
+
+- Configuración simple  
+- No requiere hardware adicional  
+- Permite conexión inmediata  
+
+### Desventajas
+
+- Alta interferencia en 2.4GHz  
+- Menor rendimiento que 5GHz  
+- Puede degradarse en entornos como escuelas  
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: DIP switch VH-109
+</div>
+---
+
+---
+
+## VH-109 PoE Wall Adapter
+
+La radio VH-109 utiliza una entrada de **12V mediante barrel jack**.
+
+También puede utilizarse un adaptador PoE dependiendo de la configuración del robot.
+
+<Aside type="tip" title="Recomendación oficial">
+Se recomienda alimentar la radio directamente con 12V si es posible, en lugar de depender de PoE.
+</Aside>
+
+<Aside type="note" title="Consideración">
+Si usas PoE, asegúrate de contar con el equipo adecuado, ya que puede no ser práctico para todas las configuraciones.
+</Aside>
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: conexión alimentación VH-109
+</div>
+
+---
+
+---
+
+## Uso de radio antigua para pruebas
+
+Si tu equipo cuenta con una radio de temporadas anteriores, puede utilizarse como solución temporal.
+
+<Aside type="note" title="Importante">
+Esto es solo para pruebas o preparación. En competencia se debe utilizar la VH-109.
+</Aside>
+
+### Recomendaciones
+
+- Reserva espacio en el robot para la VH-109  
+- Alimenta la radio correctamente (VRM o módulo regulador)  
+- Usa un switch si necesitas más puertos Ethernet  
+
+### Ventajas
+
+- Conectividad similar a temporadas anteriores  
+
+### Desventajas
+
+- Puede requerir hardware adicional  
+- Menor rendimiento comparado con VH-109  
+- Puede afectar resultados de pruebas  
+
+<CardGrid>
+  <LinkCard
+    title="Configuración OpenMesh OM5P"
+    href="/frc/robot-preparation/openmesh-om5p/"
+  >
+    Configuración de radios legacy utilizadas en temporadas anteriores.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Solución rápida si no entra a la página
+
+<Steps>
+
+1. Desconecta Wi-Fi de la laptop.
+2. Usa solo Ethernet hacia la radio.
+3. Reinicia navegador.
+4. Reinicia radio.
+5. Prueba otro cable Ethernet.
+6. Revisa IP manual si es necesario.
+
+</Steps>
+
+---
+
+## Recursos oficiales
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Docs - Radio Setup"
+    href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/index.html"
+  >
+    Guía oficial del control system FRC.
+  </LinkCard>
+
+  <LinkCard
+    title="Vivid Hosting VH-109 Docs"
+    href="https://support.vivid-hosting.net/"
+  >
+    Documentación oficial de la radio VH-109.
+  </LinkCard>
+
+  <LinkCard
+    title="Driver Station"
+    href="/frc/robot-preparation/driver-station-test/"
+  >
+    Verifica conexión después de configurar la radio.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Siguiente paso
+
+<CardGrid>
+  <LinkCard
+    title="Programming Hub"
+    href="/frc/programming/"
+  >
+    Conecta todo y continúa con deploy y código.
+  </LinkCard>
+</CardGrid>
+

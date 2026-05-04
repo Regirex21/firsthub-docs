@@ -1,0 +1,160 @@
+---
+title: Robot Preparation
+description: Paso 3 del proceso Zero to Robot. Configura roboRIO, radio y comunicación inicial del robot.
+---
+
+import { CardGrid, LinkCard, Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Esta etapa consiste en preparar el robot para que pueda encender, conectarse con la laptop y recibir código correctamente.
+
+Antes de avanzar a programación, el sistema base debe estar estable: roboRIO lista, radio configurada y red funcionando.
+
+<Aside type="note" title="Objetivo de esta fase">
+No se busca rendimiento todavía. Primero se busca comunicación confiable y hardware listo para pruebas.
+</Aside>
+
+---
+
+## Incluye esta sección
+
+<CardGrid>
+  <LinkCard
+    title="Imagen de roboRIO 2"
+    href="/frc/robot-preparation/roborio-imaging/"
+  >
+    Instala o actualiza la imagen oficial en roboRIO 2.
+  </LinkCard>
+
+  <LinkCard
+    title="Imagen de roboRIO 1"
+    href="/frc/robot-preparation/roborio1-imaging/"
+  >
+    Soporte para equipos que aún utilizan hardware anterior.
+  </LinkCard>
+
+  <LinkCard
+    title="Programación de Radio"
+    href="/frc/robot-preparation/radio-configuration/"
+  >
+    Configura la radio con tu team number y modo correcto.
+  </LinkCard>
+
+  <LinkCard
+    title="OpenMesh OM5P"
+    href="/frc/robot-preparation/openmesh-om5p/"
+  >
+    Guía para radios legacy aún vistas en algunos equipos.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Ruta recomendada
+
+<Tabs>
+
+<TabItem label="Robot nuevo">
+
+<Steps>
+
+1. Revisar cableado principal  
+2. Confirmar batería cargada  
+3. Imagen a roboRIO  
+4. Configurar radio  
+5. Probar conexión en Driver Station  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Robot usado">
+
+<Steps>
+
+1. Revisar firmware viejo  
+2. Reset de configuraciones previas  
+3. Reimaginar roboRIO  
+4. Reconfigurar radio  
+5. Validar CAN y sensores  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Antes de evento">
+
+<Steps>
+
+1. Verificar batería  
+2. Confirmar team number  
+3. Revisar radio estable  
+4. Test rápido de enable  
+5. Laptop lista con Driver Station  
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## ¿Qué debes validar al terminar?
+
+- El robot enciende correctamente  
+- roboRIO aparece en Driver Station  
+- La radio transmite red estable  
+- La laptop detecta el robot  
+- El código puede desplegarse  
+- No hay errores críticos de comunicación  
+
+<Aside type="tip" title="Consejo real">
+Si el robot no conecta, normalmente el problema está en red, energía o configuración, no en el código.
+</Aside>
+
+---
+
+## Recursos externos oficiales
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Docs"
+    href="https://docs.wpilib.org/"
+  >
+    Documentación oficial del control system FRC.
+  </LinkCard>
+
+  <LinkCard
+    title="NI roboRIO"
+    href="https://www.ni.com/"
+  >
+    Información del controlador roboRIO.
+  </LinkCard>
+
+  <LinkCard
+    title="REV Robotics Docs"
+    href="https://docs.revrobotics.com/"
+  >
+    Hardware moderno usado en muchos robots FRC.
+  </LinkCard>
+
+  <LinkCard
+    title="CTRE Docs"
+    href="https://v6.docs.ctr-electronics.com/"
+  >
+    Talon FX, CANcoder y dispositivos CTRE.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Errores comunes
+
+- Team number incorrecto  
+- Imagen desactualizada  
+- Radio sin programar  
+- Ethernet defectuoso  
+- Batería baja  
+- Breaker apagado  
+- Driver Station mal configurada  
+---

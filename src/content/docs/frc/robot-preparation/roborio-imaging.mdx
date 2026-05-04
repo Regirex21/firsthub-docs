@@ -1,0 +1,235 @@
+---
+title: roboRIO 2 Imaging
+description: Guía para preparar e instalar la imagen en una roboRIO 2 usando microSD.
+---
+
+import { CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+
+La roboRIO 2 utiliza una tarjeta microSD con la imagen del sistema necesaria para operar en FRC.
+
+A diferencia de otros dispositivos, normalmente la imagen se escribe directamente en la microSD y después se inserta en la roboRIO.
+
+<Aside type="note" title="Importante">
+La herramienta estándar de roboRIO Imaging no suele escribir directamente a la roboRIO 2. El proceso recomendado es preparar la microSD.
+</Aside>
+
+---
+
+## Video guía
+<div style="padding:1rem;border:1px solid var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+  Video próximamente
+</div>
+
+---
+
+## Qué necesitas
+
+* Laptop con WPILib instalado
+* Tarjeta microSD (recomendado 2GB o más)
+* Adaptador microSD a USB si tu laptop no tiene lector
+* Imagen oficial de temporada
+* Energía estable para la roboRIO
+
+---
+
+## Recomendaciones de uso
+
+* Inserta completamente la microSD antes de encender
+* No retires la tarjeta con la roboRIO energizada
+* Usa tarjetas confiables y en buen estado
+* Guarda una microSD extra de respaldo
+
+<Aside type="caution" title="Antes de comenzar">
+Antes de instalar la imagen en tu roboRIO, debes haber completado la instalación de las FRC Game Tools. También debes tener la alimentación de la roboRIO correctamente conectada al CTRE Power Distribution Panel (PDP) o al REV Power Distribution Hub (PDH). Asegúrate de que los cables de alimentación hacia la roboRIO estén firmes y que el conector esté bien sujeto a la roboRIO (revisa los 4 tornillos en total).
+
+</Aside>
+
+---
+
+## Paso 1: Descargar imagen oficial
+
+<CardGrid>
+  <LinkCard
+    title="WPILib Docs"
+    href="https://docs.wpilib.org/"
+  >
+    Busca la imagen oficial correspondiente a la temporada actual.
+  </LinkCard>
+
+<LinkCard
+title="FRC Game Tools"
+href="/frc/programming/installation-tools/game-tools/"
+
+>
+
+```
+Verifica que tus herramientas estén actualizadas.
+```
+
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Paso 2: Escribir imagen en la microSD
+
+La imagen se transfiere a la tarjeta microSD usando una utilidad especializada de escritura, a veces llamada *flasher* o *burner*.
+
+Existen varias herramientas compatibles, y la mayoría de programas capaces de grabar imágenes booteables para Raspberry Pi u otras placas similares también pueden crear una microSD funcional para roboRIO 2.
+
+Los archivos compatibles normalmente tienen un nombre similar a:
+
+`FRC_roboRIO2_YEAR_VERSION.img.zip`
+
+<div style="padding:1rem;border:1px solid var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+  imagen placeholder: ejemplo de archivo de imagen oficial
+</div>
+
+Puedes localizarlos desde la herramienta oficial de roboRIO Imaging, usando la opción de tarjeta SD y entrando a la carpeta **SD Images**.
+
+Se recomienda utilizar siempre la versión más reciente disponible.
+
+Si utilizas macOS o Linux, probablemente necesitarás copiar primero el archivo de imagen a esa computadora antes de grabarlo.
+
+Un adaptador microSD a USB funciona muy bien para este proceso.
+
+## Herramientas recomendadas
+
+<CardGrid>
+  <LinkCard
+    title="balenaEtcher"
+    href="https://etcher.balena.io/"
+  >
+    Utilidad sencilla y recomendada para grabar imágenes en tarjetas microSD.
+  </LinkCard>
+
+  <LinkCard
+    title="Raspberry Pi Imager"
+    href="https://www.raspberrypi.com/software/"
+  >
+    Herramienta alternativa compatible para escribir imágenes manualmente.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Escribir la imagen con balenaEtcher
+
+<Steps>
+
+1. Descarga e instala **balenaEtcher**.  
+2. Abre la aplicación.  
+3. Selecciona **Flash from file**.  
+4. Busca el archivo de imagen que copiarás a la microSD.  
+5. Selecciona **Select target**.  
+6. Elige la tarjeta microSD correcta.  
+7. Presiona **Flash**.  
+8. Espera a que el proceso termine por completo.  
+
+</Steps>
+
+---
+
+## Escribir la imagen con Raspberry Pi Imager
+
+<Steps>
+
+1. Descarga e instala **Raspberry Pi Imager**.  
+2. Abre la aplicación.  
+3. Selecciona **Choose OS**.  
+4. Elige **Use Custom**.  
+5. Selecciona el archivo de imagen de roboRIO.  
+6. Selecciona **Choose Storage**.  
+7. Elige la tarjeta microSD correcta.  
+8. Presiona **Write**.  
+9. Espera a que finalice el proceso.  
+
+</Steps>
+
+---
+
+<Aside type="caution" title="Importante en Windows">
+Después de escribir la imagen, Windows puede pedir formatear la unidad. No la formatees, de lo contrario tendrás que grabar la imagen nuevamente.
+</Aside>
+---
+
+## Paso 3: Insertar microSD en roboRIO
+
+<Steps>
+
+1. Con la roboRIO apagada, inserta la microSD.
+2. Verifica que quede bien colocada.
+3. Energiza el robot.
+4. Espera el arranque completo.
+
+</Steps>
+
+
+---
+
+## Configurar el Team Number de la roboRIO
+
+El proceso de grabar la imagen en la microSD **no asigna automáticamente el número de equipo**. Después de preparar la tarjeta, será necesario configurar manualmente el Team Number.
+
+<Steps>
+
+1. Inserta la microSD en la roboRIO.  
+2. Enciende el robot y conecta la roboRIO a la laptop.  
+3. Abre **roboRIO Imaging Tool**.  
+4. Selecciona **Edit Startup Settings**.  
+5. Localiza el campo **Team Number**.  
+6. Ingresa el número oficial de tu equipo.  
+7. Presiona **Apply**.  
+8. Reinicia la roboRIO si es necesario.  
+
+</Steps>
+
+---
+
+## ¿Para qué sirve?
+
+- Asocia el robot con la red del equipo.  
+- Permite conexión correcta desde Driver Station.  
+- Facilita detección automática del robot.  
+- Evita conflictos con configuraciones anteriores.  
+
+<Aside type="tip" title="Dato">
+La sección **Edit Startup Settings** también permite cambiar el número de equipo posteriormente si la roboRIO perteneció antes a otro equipo.
+</Aside>
+
+---
+
+## Método alternativo
+
+También puedes configurar el Team Number usando la utilidad:
+
+**RoboRIO Team Number Setter**
+
+## Cómo confirmar que funcionó
+
+* La roboRIO arranca normalmente
+* Driver Station detecta el robot
+* No hay errores críticos
+* Puedes conectar por USB o red
+* El deploy funciona correctamente
+
+---
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+  Imagen futura: roboRIO 2 etiquetada
+</div>
+
+
+---
+
+## Siguiente paso
+
+<CardGrid>
+  <LinkCard
+    title="Programación de Radio"
+    href="/frc/robot-preparation/radio-configuration/"
+  >
+    Configura la red para comunicar laptop y robot.
+  </LinkCard>
+</CardGrid>
+

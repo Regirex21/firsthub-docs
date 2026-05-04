@@ -1,0 +1,187 @@
+---
+title: OpenMesh OM5P Radio
+description: Configuración de radios OpenMesh OM5P utilizadas en temporadas anteriores de FRC.
+---
+
+import { CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+
+Las radios OpenMesh (OM5P-AC / OM5P-AN) fueron utilizadas en temporadas anteriores de FRC. Actualmente se consideran hardware legacy, pero aún pueden utilizarse para pruebas.
+
+<Aside type="caution" title="Importante">
+Estas radios ya no se utilizan en competencia oficial. Solo deben usarse para pruebas o desarrollo.
+</Aside>
+
+---
+
+## Modelos compatibles
+
+- OM5P-AC  
+- OM5P-AN  
+
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: radios OpenMesh OM5P
+</div>
+
+---
+
+## Qué necesitas
+
+* Radio OpenMesh
+* Laptop con FRC Radio Configuration Utility
+* Cable Ethernet
+* Fuente de energía (PoE o VRM)
+
+---
+
+## Preparar la radio
+
+Antes de configurar, asegúrate de que la radio esté en estado limpio.
+
+<Steps>
+
+1. Conecta la radio a la laptop por Ethernet
+2. Energiza la radio
+3. Espera a que inicie completamente
+
+</Steps>
+
+<Aside type="note" title="IP por defecto">
+Algunas radios pueden estar en IP 192.168.1.1 si no han sido configuradas previamente.
+</Aside>
+
+---
+
+## Instalar la herramienta de configuración
+
+La configuración se realiza con la herramienta oficial:
+
+**FRC Radio Configuration Utility**
+
+<CardGrid>
+  <LinkCard
+    title="FRC Game Tools"
+    href="/frc/programming/installation-tools/game-tools/"
+  >
+    Instala la utilidad de configuración de radios.
+  </LinkCard>
+</CardGrid>
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: icono FRC Radio Configuration Utility
+</div>
+
+
+---
+
+## Ejecutar la herramienta
+
+<Steps>
+
+1. Abre **FRC Radio Configuration Utility**
+2. Selecciona la interfaz de red correcta
+3. Conecta la radio por Ethernet
+4. Espera a que sea detectada
+
+</Steps>
+
+---
+
+## Configurar la radio
+
+<Steps>
+
+1. Selecciona tu radio en la herramienta
+2. Ingresa tu **Team Number**
+3. Selecciona el modelo correcto (OM5P-AC / OM5P-AN)
+4. Elige modo de configuración (Bridge recomendado)
+5. Presiona **Load Firmware** si es necesario
+6. Presiona **Configure**
+
+</Steps>
+
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: pantalla principal Radio Config Utility
+</div>
+
+---
+
+## Opciones importantes
+
+* **Team Number**: define la red del robot
+* **Bridge Mode**: modo estándar para operación
+* **Firmware**: debe estar actualizado
+
+<Aside type="tip" title="Recomendación">
+Siempre usa Bridge Mode para pruebas, es el comportamiento más cercano a competencia.
+</Aside>
+
+---
+
+## Proceso de configuración
+
+Durante la configuración:
+
+* La herramienta cargará firmware
+* Configurará red automáticamente
+* Reiniciará la radio
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: progreso de configuración
+</div>
+
+---
+
+## Confirmación
+
+Cuando termina correctamente:
+
+* Aparece mensaje de éxito
+* La radio reinicia
+* La red queda configurada con el team number
+
+<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
+Placeholder imagen: configuración completada
+</div>
+
+
+---
+
+## Problemas comunes
+
+* Radio no detectada
+* Interfaz de red incorrecta
+* Cable Ethernet defectuoso
+* Drivers faltantes
+* Firewall bloqueando la herramienta
+* Firmware incompatible
+
+<Aside type="tip" title="Diagnóstico">
+Si la herramienta no detecta la radio, revisa primero la interfaz de red seleccionada.
+</Aside>
+
+---
+
+## Limitaciones de OpenMesh
+
+* No utilizada en competencia actual
+* Menor rendimiento que radios modernas
+* Configuración más manual
+* No replica completamente el Field Control System
+
+---
+
+## Siguiente paso
+
+<CardGrid>
+  <LinkCard
+    title="Radio moderna (VH-109)"
+    href="/frc/robot-preparation/radio-configuration/"
+  >
+    Configuración actual utilizada en FRC.
+  </LinkCard>
+</CardGrid>
+
+
+
