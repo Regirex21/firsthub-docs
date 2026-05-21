@@ -4,6 +4,8 @@ description: Cómo descargar y preparar instaladores de FRC para usarlos sin int
 ---
 
 import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+import gametools from '../../../../../assets/FRC/frc_gametools_descarga.png';
+import wpi from '../../../../../assets/FRC/github_wpi.png';
 
 La instalación offline permite preparar todas las herramientas de FRC con anticipación para usarlas en computadoras sin internet o con conexión inestable.
 
@@ -34,10 +36,6 @@ Al terminar esta guía tendrás una USB o carpeta local con todo lo necesario pa
     Evitar perder tiempo descargando archivos.
   </Card>
 </CardGrid>
-
-```text
-[IMAGEN PLACEHOLDER: USB con etiqueta FIRSTHub Install Pack]
-```
 
 ---
 
@@ -78,12 +76,17 @@ Al terminar esta guía tendrás una USB o carpeta local con todo lo necesario pa
   />
 </CardGrid>
 
-```text
-[IMAGEN PLACEHOLDER: Página de GitHub Releases de WPILib]
-```
-```text
-[IMAGEN PLACEHOLDER: Página de descarga oficial de FRC Game Tools con botón de descarga destacado]
-```
+<div style="display:flex; gap:1rem;">
+  <img
+    src={gametools.src}
+    style="width:500px;"
+  />
+
+  <img
+    src={wpi.src}
+    style="width:500px;"
+  />
+</div>
 ---
 
 ## Preparación Paso a Paso
@@ -111,35 +114,9 @@ Al terminar esta guía tendrás una USB o carpeta local con todo lo necesario pa
 | Drivers    | NI-Drivers.exe         |
 
 Estos nombres deben ser coherentes con la temporada y fáciles de identificar rápidamente.
----
-
-## Errores Comunes
-
-<Tabs>
-
-<TabItem label="Versión incorrecta">
-
-Descargar archivos de otro año puede romper compatibilidad.
-
-</TabItem>
-
-<TabItem label="USB desordenada">
-
-Pierdes tiempo buscando instaladores en evento.
-
-</TabItem>
-
-</Tabs>
 
 ---
 
-## Recomendación FIRSTHub
-
-<Aside type="tip" title="Consejo">
-Cada equipo serio debería tener un kit offline listo. Resolver instalaciones bajo presión en temporada puede resultar contraproducente.
-</Aside>
-
----
 
 ## Checklist Final
 

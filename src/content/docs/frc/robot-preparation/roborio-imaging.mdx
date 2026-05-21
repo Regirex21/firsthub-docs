@@ -4,6 +4,7 @@ description: Guía para preparar e instalar la imagen en una roboRIO 2 usando mi
 ---
 
 import { CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+import nombreImagenRoborio2 from '../../../../assets/FRC/nombre_imagen_roborio_2.png';
 
 La roboRIO 2 utiliza una tarjeta microSD con la imagen del sistema necesaria para operar en FRC.
 
@@ -81,9 +82,10 @@ Los archivos compatibles normalmente tienen un nombre similar a:
 
 `FRC_roboRIO2_YEAR_VERSION.img.zip`
 
-<div style="padding:1rem;border:1px solid var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-  imagen placeholder: ejemplo de archivo de imagen oficial
-</div>
+<img
+  src={nombreImagenRoborio2.src}
+  alt="Ejemplo de archivo de imagen oficial"
+/>
 
 Puedes localizarlos desde la herramienta oficial de roboRIO Imaging, usando la opción de tarjeta SD y entrando a la carpeta **SD Images**.
 
@@ -212,14 +214,6 @@ También puedes configurar el Team Number usando la utilidad:
 * No hay errores críticos
 * Puedes conectar por USB o red
 * El deploy funciona correctamente
-
----
-
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-  Imagen futura: roboRIO 2 etiquetada
-</div>
-
-
 ---
 
 ## Siguiente paso

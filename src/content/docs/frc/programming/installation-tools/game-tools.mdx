@@ -4,6 +4,8 @@ description: Instalación de FRC Game Tools para desarrollo, Driver Station y he
 ---
 
 import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+import gametools from '../../../../../assets/FRC/frc_gametools_descarga.png';
+import driverstation from '../../../../../assets/FRC/driver_station.png';
 
 FRC Game Tools es el paquete oficial que instala las herramientas esenciales para participar en la temporada de FIRST Robotics Competition en Windows.
 
@@ -76,9 +78,10 @@ Busca la versión correspondiente a la temporada actual.
   />
 </CardGrid>
 
-```text id="8i9o6q"
-[IMAGEN PLACEHOLDER: Página de descarga oficial de FRC Game Tools con botón de descarga destacado]
-```
+<img
+  src={gametools.src}
+  style="width: 100%; max-width: 600px;"
+  />
 ---
 
 ## 2. Ejecutar como administrador
@@ -132,9 +135,9 @@ Debes ver:
 
 Sin errores al iniciar.
 
-```text id="8i9o6q"
-[IMAGEN PLACEHOLDER: Pantalla de inicio del Driver Station mostrando estado de conexión y controles]
-```
+<img
+src={driverstation.src}
+/>
 
 ---
 

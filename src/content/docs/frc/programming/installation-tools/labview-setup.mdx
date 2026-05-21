@@ -4,6 +4,8 @@ description: Instalación de LabVIEW y configuración inicial para programar rob
 ---
 
 import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+import labview from '../../../../../assets/FRC/labview.jpg';
+import labview2023 from '../../../../../assets/FRC/labview_2023.png';
 
 LabVIEW es uno de los entornos oficiales soportados en FIRST Robotics Competition para desarrollar robots FRC mediante programación gráfica.
 
@@ -43,9 +45,10 @@ Al terminar esta guía deberías poder abrir LabVIEW, crear un proyecto FRC y pr
   </Card>
 </CardGrid>
 
-```text
-[IMAGEN PLACEHOLDER: Pantalla principal de LabVIEW mostrando entorno visual]
-```
+<img
+src={labview.src}
+style="width: 100%"
+/>
 
 ---
 
@@ -92,12 +95,6 @@ Si tu equipo empieza desde cero, Java suele ofrecer mejor continuidad competitiv
 
 ---
 
-```text
-[IMAGEN PLACEHOLDER: Página oficial de WPILib con sección LabVIEW Setup]
-```
-
----
-
 ## Instalación Paso a Paso
 
 <Steps>
@@ -111,10 +108,6 @@ Si tu equipo empieza desde cero, Java suele ofrecer mejor continuidad competitiv
 
 </Steps>
 
-```text
-[IMAGEN PLACEHOLDER: Instalador de LabVIEW mostrando progreso]
-```
-
 ---
 
 ## Verificar Instalación
@@ -126,9 +119,10 @@ Si tu equipo empieza desde cero, Java suele ofrecer mejor continuidad competitiv
 
 <Badge text="Checklist completado" />
 
-```text
-[IMAGEN PLACEHOLDER: Menú de creación de proyecto FRC en LabVIEW]
-```
+<img
+src={labview2023.src}
+style="width: 100%"
+/>
 
 ---
 
@@ -151,10 +145,6 @@ Si tu equipo empieza desde cero, Java suele ofrecer mejor continuidad competitiv
 <Aside type="note" title="Flujo habitual">
 Build Specifications → FRC Robot Boot-Up Deployment → Build → Run as Startup
 </Aside>
-
-```text
-[IMAGEN PLACEHOLDER: Ventana Build Specifications de LabVIEW]
-```
 
 ---
 

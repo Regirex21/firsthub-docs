@@ -4,7 +4,9 @@ description: Instalación de imagen en roboRIO 1 usando la herramienta oficial d
 ---
 
 import { Aside, Steps, CardGrid, LinkCard } from '@astrojs/starlight/components';
-
+import roborio1 from '../../../../assets/FRC/NI_roborio_1.png';
+import imagingtool from '../../../../assets/FRC/roborio_imaging_tool.png';
+import imagingprocess from '../../../../assets/FRC/imaging_process.png';
 
 <Aside type="caution" title="Advertencia">
 Antes de instalar la imagen en tu roboRIO, debes haber completado la instalación de las FRC Game Tools. También debes tener la roboRIO correctamente conectada al sistema de distribución de energía y asegurarte de que esté energizada.
@@ -20,9 +22,9 @@ Las instrucciones para roboRIO 2.0 son diferentes. Esta página es solo para rob
 
 ### Conexión USB
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: puertos USB de roboRIO 1
-</div>
+<img
+  src={roborio1.src}
+/>
 
 
 ---
@@ -35,9 +37,9 @@ Los drivers de la roboRIO se instalan automáticamente al instalar las FRC Game 
 
 ## Abrir la herramienta de Imaging
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: iconos de roboRIO Imaging Tool en Windows
-</div>
+<img
+  src={imagingtool.src}
+/>
 
 
 La herramienta de imaging se puede encontrar dentro de las FRC Game Tools instaladas en tu computadora.
@@ -88,9 +90,9 @@ Este proceso tomará varios minutos y no debe interrumpirse.
 
 ## Progreso del imaging
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: barra de progreso del imaging
-</div>
+<img
+  src={imagingprocess.src}
+/>
 
 ---
 

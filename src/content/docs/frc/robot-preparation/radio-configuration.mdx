@@ -4,6 +4,10 @@ description: Configura la radio del robot FRC para comunicación estable entre l
 ---
 
 import { CardGrid, LinkCard, Aside, Steps, Badge } from '@astrojs/starlight/components';
+import mapeoradio from '../../../../assets/FRC/mapeo_radio.png';
+import paginaradio from '../../../../assets/FRC/pagina_radio.png';
+import configradio from '../../../../assets/FRC/config_radio.png';
+import radioback from '../../../../assets/FRC/radio_back.png';
 
 La radio es el puente principal entre el robot y la Driver Station. Una mala configuración provoca desconexiones, lag o pérdida total de control.
 
@@ -34,9 +38,9 @@ En competencia, la configuración final de radio normalmente la realizan los CSA
 
 ## Topología básica
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: Laptop → Radio → roboRIO
-</div>
+<img
+  src={mapeoradio.src}
+/>
 
 
 ---
@@ -82,9 +86,9 @@ Si desconectas energía durante el update, la radio puede quedar inutilizable te
 </Aside>
 
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: pantalla Firmware Upload
-</div>
+<img
+  src={paginaradio.src}
+  />
 
 ---
 
@@ -106,9 +110,9 @@ Para uso normal del robot.
 <Badge text="Modo principal para pruebas del robot" variant="tip" />
 
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: formulario Robot Radio Configuration (Team Number, SSID)
-</div>
+<img
+  src={configradio.src}
+  />
 
 ---
 
@@ -134,10 +138,6 @@ Este modo se utiliza principalmente para configuración o pruebas específicas. 
 <Aside type="tip" title="Importante">
 La clave WPA/SAE debe coincidir con la configuración definida en la radio para permitir la conexión.
 </Aside>
-
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: configuración Access Point Mode
-</div>
 
 ---
 
@@ -174,9 +174,9 @@ Vivid Hosting no recomienda usar este modo para práctica regular. Solo debe uti
 - Menor rendimiento que 5GHz  
 - Puede degradarse en entornos como escuelas  
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: DIP switch VH-109
-</div>
+<img
+  src={radioback.src}
+  />
 ---
 
 ---
@@ -195,11 +195,7 @@ Se recomienda alimentar la radio directamente con 12V si es posible, en lugar de
 Si usas PoE, asegúrate de contar con el equipo adecuado, ya que puede no ser práctico para todas las configuraciones.
 </Aside>
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: conexión alimentación VH-109
-</div>
 
----
 
 ---
 

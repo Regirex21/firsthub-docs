@@ -4,6 +4,7 @@ description: Configuración de radios OpenMesh OM5P utilizadas en temporadas ant
 ---
 
 import { CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+import om5pradio from '../../../../assets/FRC/om5p.jpg';
 
 Las radios OpenMesh (OM5P-AC / OM5P-AN) fueron utilizadas en temporadas anteriores de FRC. Actualmente se consideran hardware legacy, pero aún pueden utilizarse para pruebas.
 
@@ -19,10 +20,10 @@ Estas radios ya no se utilizan en competencia oficial. Solo deben usarse para pr
 - OM5P-AN  
 
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: radios OpenMesh OM5P
-</div>
-
+<img
+  src={om5pradio.src}
+  style="width: 40%;"
+/>
 ---
 
 ## Qué necesitas
@@ -67,10 +68,6 @@ La configuración se realiza con la herramienta oficial:
   </LinkCard>
 </CardGrid>
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: icono FRC Radio Configuration Utility
-</div>
-
 
 ---
 
@@ -100,11 +97,6 @@ Placeholder imagen: icono FRC Radio Configuration Utility
 
 </Steps>
 
-
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: pantalla principal Radio Config Utility
-</div>
-
 ---
 
 ## Opciones importantes
@@ -127,10 +119,6 @@ Durante la configuración:
 * Configurará red automáticamente
 * Reiniciará la radio
 
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: progreso de configuración
-</div>
-
 ---
 
 ## Confirmación
@@ -140,11 +128,6 @@ Cuando termina correctamente:
 * Aparece mensaje de éxito
 * La radio reinicia
 * La red queda configurada con el team number
-
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: configuración completada
-</div>
-
 
 ---
 

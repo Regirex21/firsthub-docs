@@ -4,6 +4,8 @@ description: Instalación de WPILib y configuración inicial para programar robo
 ---
 
 import { Card, CardGrid, Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+import wpi from '../../../../../assets/FRC/wpi_download.png';
+import wpi_install from '../../../../../assets/FRC/wpi_installer.png';
 
 WPILib es el entorno principal usado en FIRST Robotics Competition para programar robots en Java y C++.
 
@@ -70,9 +72,10 @@ Usa siempre la versión actual publicada por WPILib.
     description="Descarga oficial"
   />
 </CardGrid>
-```text id="8i9o6q"
-[IMAGEN PLACEHOLDER: Repo de github de WPILib con sección de releases destacada]
-```
+
+<img
+src={wpi.src}
+/>
 
 ---
 
@@ -90,5 +93,7 @@ Usa siempre la versión actual publicada por WPILib.
 
 </Steps>
 
-```text id="8i9o6q"
-[IMAGEN PLACEHOLDER: instalador de WPILib abierto]
+<img
+src={wpi_install.src}
+style="width: 70%"
+/>
