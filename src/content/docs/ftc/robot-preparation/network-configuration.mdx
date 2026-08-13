@@ -1,0 +1,127 @@
+---
+title: Configuración de Red
+description: Configura la red WiFi del Control Hub - SSID, canal y contraseña.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+<Aside type="note" title="Fuente">
+Contenido traducido de <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_control_hub/Managing-a-Control-Hub.html">Managing a Control Hub</a> (ftc-docs.firstinspires.org).
+</Aside>
+
+---
+
+## Acceder a la configuración
+
+<Steps>
+
+1. Conecta tu laptop o Chromebook a la red **Program & Manage** del Control Hub.
+2. Entra a `192.168.43.1:8080`.
+3. En la página de Robot Controller Connection Info, haz clic en el enlace **Manage**.
+
+</Steps>
+
+---
+
+## Cambiar el nombre (SSID)
+
+El nombre por defecto del Control Hub empieza con **FTC-** y termina con cuatro caracteres asignados de fábrica. Según el Competition Manual (regla RS01), este nombre debe cambiarse.
+
+<Aside type="note" title="Formato del nombre">
+El nombre del Robot Controller debe seguir el formato `<team number>-RC` (por ejemplo `12345-RC`). El sufijo debe escribirse en mayúsculas: `-RC`, no `-rc`.
+</Aside>
+
+<Steps>
+
+1. Cambia el nombre en el campo **Robot Controller Name**.
+2. Haz clic en el botón **Change Name**.
+3. Confirma el cambio en el cuadro de diálogo.
+4. Presiona **Apply Wi-Fi Settings** cuando termines.
+
+</Steps>
+
+<Aside type="caution" title="Esto cambia la red WiFi">
+Cambiar el nombre de un Control Hub cambia el nombre de la red WiFi del Hub. Una vez cambiado el nombre, tendrás que conectar tus dispositivos (Driver Station y laptop de programación) a la nueva red.
+</Aside>
+
+---
+
+## Cambiar la contraseña
+
+El Control Hub tiene una contraseña de fábrica que debe cambiarse antes de usarlo.
+
+<Steps>
+
+1. En la sección **Access Point Password** de la página Manage, especifica tu nueva contraseña.
+2. Confírmala en el segundo campo.
+3. Presiona **Change Password**.
+
+</Steps>
+
+<Aside type="caution" title="Guárdala en un lugar seguro">
+Memoriza tu nueva contraseña o guárdala en un lugar seguro para no olvidarla.
+</Aside>
+
+Después del cambio, tus dispositivos deberán reconectarse usando la nueva contraseña.
+
+---
+
+## Cambiar el canal WiFi
+
+El Control Hub selecciona automáticamente un canal de operación por defecto. La selección manual del canal puede ser necesaria para evitar interferencia.
+
+<Aside type="note" title="Contexto oficial">
+Por ejemplo, en una competencia grande un FTA (Field Technical Advisor) podría pedirte cambiar a un canal designado para evitar interferencia inalámbrica presente en el venue. De forma similar, un FTA podría pedirte cambiar a un canal específico porque está monitoreando ese canal para detectar interferencia u otras disrupciones inalámbricas.
+</Aside>
+
+<Steps>
+
+1. En la página Manage, usa el selector desplegable para elegir el canal deseado. El Control Hub soporta tanto la banda de 2.4 GHz como la de 5 GHz.
+2. Presiona el botón **Change Channel**.
+3. Cuando ocurre el cambio de canal, el Driver Station podría desconectarse momentáneamente del Control Hub. Debería, sin embargo, reconectarse eventualmente a la red WiFi del Control Hub.
+4. Verifica en Driver Station que el nuevo canal aparezca junto al nombre de la red.
+
+</Steps>
+
+---
+
+## Restablecer el Control Hub
+
+Si olvidas el nombre o la contraseña de red, un restablecimiento físico regresa el Control Hub a sus valores de fábrica.
+
+<Aside type="note" title="Qué sí y qué no se restablece">
+Restablecer un Control Hub restaura su nombre de red y contraseña por defecto. Sin embargo, los archivos de configuración y OpModes existentes no deberían verse afectados por el restablecimiento.
+</Aside>
+
+<Steps>
+
+1. Apaga el Control Hub y espera 5 segundos.
+2. Presiona y mantén presionado el botón del Control Hub.
+3. Enciéndelo mientras mantienes el botón presionado.
+4. Observa el LED mientras el Control Hub reinicia. Eventualmente, el LED cambiará de azul sólido a un patrón de parpadeo multicolor.
+5. Cuando el restablecimiento inicia, el LED debería parpadear en este orden: morado, amarillo, azul y luego rojo. Este patrón debería repetirse cinco veces en rápida sucesión.
+6. Suelta el botón cuando el patrón termine (aproximadamente 30 segundos en total).
+
+</Steps>
+
+<Badge text="WiFi Direct / Access Point" />
+
+---
+
+## Recursos oficiales
+
+<LinkCard
+  title="Managing a Control Hub - FTC Docs"
+  href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_control_hub/Managing-a-Control-Hub.html"
+  description="Documentación oficial de nombre, contraseña, canal y reset."
+/>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Driver Station"
+  href="/ftc/robot-preparation/driver-station/"
+  description="Usa el Driver Hub ya configurado para correr tu primer OpMode."
+/>

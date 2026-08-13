@@ -1,0 +1,513 @@
+---
+title: Drivetrain Python
+description: Crea, configura y despliega un drivetrain diferencial moderno utilizando Python y RobotPy.
+---
+
+import { Aside, Steps, Tabs, TabItem, CardGrid, LinkCard, Badge, FileTree } from '@astrojs/starlight/components';
+
+En esta guía crearás un drivetrain diferencial moderno utilizando Python y RobotPy, siguiendo el mismo flujo que la versión en Java pero adaptado a la sintaxis y herramientas de Python.
+
+El objetivo es aprender:
+
+- Cómo crear un proyecto FRC con RobotPy
+- Cómo funciona un drivetrain diferencial
+- Cómo utilizar leaders y followers
+- Cómo controlar el robot con un control Xbox
+- Cómo configurar motores brushless
+- Cómo desplegar código al roboRIO
+- Cómo probar el robot desde Driver Station
+
+<Aside type="tip" title="Importante">
+RobotPy no es la ruta más común en equipos FRC, pero es una opción respaldada oficialmente por WPILib. Si tu equipo ya tiene experiencia en Python, es una excelente alternativa a Java.
+</Aside>
+
+---
+
+## ¿Qué es un Differential Drivetrain?
+
+Un Differential Drivetrain utiliza lados izquierdo y derecho independientes para mover el robot, igual que en la versión Java de esta guía.
+
+La mayoría de robots FRC tipo tanque utilizan:
+
+- 2 motores izquierdos
+- 2 motores derechos
+- Leaders y followers
+- Control arcade con control Xbox
+- Motores brushless conectados por CAN
+
+<Aside type="note" title="Importante">
+En esta guía utilizaremos Arcade Drive:
+- Stick izquierdo = adelante y atrás
+- Stick derecho = giro
+</Aside>
+
+---
+
+## Antes de comenzar
+
+Asegúrate de tener:
+
+- Python y RobotPy instalados
+- VS Code configurado
+- roboRIO configurado
+- Driver Station funcionando
+- Control Xbox conectado
+- Motores y controladores correctamente cableados
+
+<CardGrid>
+  <LinkCard title="Python Setup" href="/frc/programming/installation-tools/python-setup/">
+    Instala Python y RobotPy antes de continuar.
+  </LinkCard>
+
+  <LinkCard title="Driver Station" href="/frc/robot-preparation/driver-station/">
+    Verifica que Driver Station detecte tu robot.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Crear un nuevo proyecto
+
+Abre una terminal en la carpeta donde quieras crear el proyecto y ejecuta el comando de inicialización de RobotPy.
+
+<Tabs>
+  <TabItem label="Windows">
+
+```bash
+py -3 -m robotpy init
+```
+
+  </TabItem>
+
+  <TabItem label="macOS / Linux">
+
+```bash
+python3 -m robotpy init
+```
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Estructura del proyecto
+
+RobotPy genera dos archivos principales en la carpeta del proyecto:
+
+<FileTree>
+- robot.py
+- pyproject.toml
+</FileTree>
+
+`robot.py` contiene la clase principal del robot. `pyproject.toml` define las dependencias del proyecto, incluyendo la versión de RobotPy y las librerías de fabricantes que agregues.
+
+<Aside type="note" title="Agregar la librería de REV">
+Para usar motores SparkMax necesitas agregar `robotpy[rev]` a las dependencias en `pyproject.toml` y luego sincronizar el entorno:
+
+```bash
+py -3 -m robotpy sync
+```
+</Aside>
+
+---
+
+## ¿Qué vamos a construir?
+
+Crearemos un drivetrain con:
+
+- 4 motores brushless
+- Leaders y followers
+- Differential Drive
+- Control Xbox
+- Arcade Drive
+
+La estructura será similar a esta:
+
+```txt
+Left Side
+├── Left Leader
+└── Left Follower
+
+Right Side
+├── Right Leader
+└── Right Follower
+```
+
+---
+
+## CAN IDs
+
+<Aside type="caution" title="CAN IDs reservados">
+En un robot FRC normalmente algunos CAN IDs ya están ocupados por dispositivos del sistema de control.
+
+Comúnmente:
+
+- CAN ID 0 = roboRIO
+- CAN ID 1 = PDH o PDP
+
+Por eso normalmente se recomienda comenzar motores desde IDs más altos como 10, 11, 12 y 13.
+</Aside>
+
+Cada controlador de motor necesita un CAN ID único. En este ejemplo utilizaremos los mismos IDs que la versión Java:
+
+| Motor | CAN ID |
+|---|---|
+| Left Leader | 10 |
+| Left Follower | 11 |
+| Right Leader | 12 |
+| Right Follower | 13 |
+
+---
+
+## Importando librerías
+
+```python
+import wpilib
+import rev
+
+from wpilib.drive import DifferentialDrive
+```
+
+<Aside type="tip" title="¿Qué hacen estas librerías?">
+`wpilib` provee las clases base del robot (TimedRobot, XboxController, DifferentialDrive). `rev` provee soporte para los motores SparkMax.
+</Aside>
+
+<Aside type="caution" title="REVLib cambia esta API cada temporada">
+Desde REVLib 2025, la clase `rev.CANSparkMax` quedó obsoleta en favor de `rev.SparkMax`, y motores como `.setInverted()` o `.follow()` ya no se llaman directamente sobre el motor: se configuran armando un objeto `rev.SparkMaxConfig` y aplicándolo con `.configure(config, resetMode, persistMode)`. Muchos ejemplos que circulan en internet todavía usan el patrón antiguo, que no funciona con versiones recientes de RobotPy/REVLib. Verifica siempre contra la [documentación oficial de RobotPy REV](https://robotpy.readthedocs.io/projects/rev/en/stable/) antes de copiar código de otra fuente.
+</Aside>
+
+---
+
+## Declarando la clase del robot
+
+```python
+class MyRobot(wpilib.TimedRobot):
+
+    def robotInit(self):
+
+        # Left side motors
+        self.leftLeader = rev.SparkMax(
+            10, rev.SparkLowLevel.MotorType.kBrushless)
+
+        self.leftFollower = rev.SparkMax(
+            11, rev.SparkLowLevel.MotorType.kBrushless)
+
+        # Right side motors
+        self.rightLeader = rev.SparkMax(
+            12, rev.SparkLowLevel.MotorType.kBrushless)
+
+        self.rightFollower = rev.SparkMax(
+            13, rev.SparkLowLevel.MotorType.kBrushless)
+```
+
+---
+
+## ¿Qué son Leaders y Followers?
+
+En un drivetrain FRC moderno normalmente existen motores leaders y motores followers.
+
+El motor leader recibe comandos directamente desde el código. El follower copia automáticamente el comportamiento del leader del mismo lado.
+
+Esto permite:
+
+- Simplificar el código
+- Mantener sincronizados los motores
+- Reducir errores
+
+---
+
+## Configurando el control Xbox
+
+```python
+self.controller = wpilib.XboxController(0)
+```
+
+<Aside type="note" title="Puerto USB">
+El número 0 representa el primer control detectado por Driver Station.
+</Aside>
+
+---
+
+## Configurando Differential Drive
+
+```python
+self.drive = DifferentialDrive(self.leftLeader, self.rightLeader)
+```
+
+<Aside type="tip" title="¿Qué hace DifferentialDrive?">
+DifferentialDrive convierte entradas de velocidad y rotación en movimiento para el drivetrain, igual que en Java.
+</Aside>
+
+---
+
+## Configurando Followers e inversión
+
+Dentro de `robotInit()`, después de crear los motores, se configuran con objetos `SparkMaxConfig`:
+
+```python
+leftFollowerConfig = rev.SparkMaxConfig()
+leftFollowerConfig.follow(self.leftLeader)
+self.leftFollower.configure(
+    leftFollowerConfig,
+    rev.ResetMode.kResetSafeParameters,
+    rev.PersistMode.kPersistParameters)
+
+rightFollowerConfig = rev.SparkMaxConfig()
+rightFollowerConfig.follow(self.rightLeader)
+self.rightFollower.configure(
+    rightFollowerConfig,
+    rev.ResetMode.kResetSafeParameters,
+    rev.PersistMode.kPersistParameters)
+
+rightLeaderConfig = rev.SparkMaxConfig()
+rightLeaderConfig.inverted(True)
+self.rightLeader.configure(
+    rightLeaderConfig,
+    rev.ResetMode.kResetSafeParameters,
+    rev.PersistMode.kPersistParameters)
+```
+
+<Aside type="note" title="¿Por qué invertir un lado?">
+Los motores de ambos lados están montados en direcciones opuestas. Sin inversión, un lado avanzará mientras el otro retrocede, lo cual puede dañar las cajas de engranes.
+</Aside>
+
+---
+
+## Configurando Arcade Drive
+
+Ahora agregaremos control manual dentro de `teleopPeriodic()`.
+
+```python
+def teleopPeriodic(self):
+
+    speed = -self.controller.getLeftY()
+    rotation = self.controller.getRightX()
+
+    self.drive.arcadeDrive(speed, rotation)
+```
+
+- `-self.controller.getLeftY()` lee el stick izquierdo para avanzar y retroceder.
+- `self.controller.getRightX()` lee el stick derecho para girar.
+- `self.drive.arcadeDrive(speed, rotation)` convierte ambos valores en movimiento para el drivetrain.
+
+---
+
+## ¿Cómo funciona Arcade Drive?
+
+Con este sistema:
+
+- Stick izquierdo → adelante y atrás
+- Stick derecho → giro o pivote
+
+Si avanzas y giras al mismo tiempo, el robot girará suavemente mientras avanza. Este es uno de los métodos de control más utilizados en FRC.
+
+---
+
+## Código completo del robot
+
+```python
+import wpilib
+import rev
+
+from wpilib.drive import DifferentialDrive
+
+
+class MyRobot(wpilib.TimedRobot):
+
+    def robotInit(self):
+
+        # Left side motors
+        self.leftLeader = rev.SparkMax(
+            10, rev.SparkLowLevel.MotorType.kBrushless)
+
+        self.leftFollower = rev.SparkMax(
+            11, rev.SparkLowLevel.MotorType.kBrushless)
+
+        # Right side motors
+        self.rightLeader = rev.SparkMax(
+            12, rev.SparkLowLevel.MotorType.kBrushless)
+
+        self.rightFollower = rev.SparkMax(
+            13, rev.SparkLowLevel.MotorType.kBrushless)
+
+        # Followers
+        leftFollowerConfig = rev.SparkMaxConfig()
+        leftFollowerConfig.follow(self.leftLeader)
+        self.leftFollower.configure(
+            leftFollowerConfig,
+            rev.ResetMode.kResetSafeParameters,
+            rev.PersistMode.kPersistParameters)
+
+        rightFollowerConfig = rev.SparkMaxConfig()
+        rightFollowerConfig.follow(self.rightLeader)
+        self.rightFollower.configure(
+            rightFollowerConfig,
+            rev.ResetMode.kResetSafeParameters,
+            rev.PersistMode.kPersistParameters)
+
+        # Invert right side
+        rightLeaderConfig = rev.SparkMaxConfig()
+        rightLeaderConfig.inverted(True)
+        self.rightLeader.configure(
+            rightLeaderConfig,
+            rev.ResetMode.kResetSafeParameters,
+            rev.PersistMode.kPersistParameters)
+
+        # Xbox controller
+        self.controller = wpilib.XboxController(0)
+
+        # Differential drivetrain
+        self.drive = DifferentialDrive(self.leftLeader, self.rightLeader)
+
+    def teleopPeriodic(self):
+
+        # Forward and backward
+        speed = -self.controller.getLeftY()
+
+        # Rotation
+        rotation = self.controller.getRightX()
+
+        # Drive robot
+        self.drive.arcadeDrive(speed, rotation)
+```
+
+## Métodos importantes
+
+<Tabs>
+  <TabItem label="robotInit">
+    <p>
+      Se ejecuta una sola vez cuando el programa del robot inicia. Se utiliza para preparar
+      el robot antes de comenzar a operar, inicializando motores, sensores, controles y
+      cualquier configuración necesaria para el resto del código.
+    </p>
+  </TabItem>
+
+  <TabItem label="teleopPeriodic">
+    <p>
+      Se ejecuta continuamente mientras el robot está en modo Teleoperated. Aquí normalmente
+      se procesa la entrada de joysticks y controles para permitir que el driver maneje el
+      robot manualmente durante el partido.
+    </p>
+  </TabItem>
+
+  <TabItem label="autonomousPeriodic">
+    <p>
+      Se ejecuta repetidamente durante el modo Autonomous. Se utiliza para programar
+      movimientos y acciones automáticas que el robot realiza sin intervención del conductor.
+    </p>
+  </TabItem>
+
+  <TabItem label="disabledInit">
+    <p>
+      Se ejecuta cuando el robot entra en estado deshabilitado. Generalmente se utiliza para
+      detener sistemas, reiniciar variables o asegurar que el robot permanezca en un estado
+      seguro.
+    </p>
+  </TabItem>
+</Tabs>
+
+---
+
+## Desplegar código al robot
+
+<Steps>
+
+1. Conecta el roboRIO por Ethernet o USB.
+2. Abre una terminal en la carpeta del proyecto.
+3. Ejecuta el comando de deploy.
+
+</Steps>
+
+```bash
+python -m robotpy deploy
+```
+
+<Aside type="tip" title="¿Qué hace deploy?">
+El comando sincroniza las dependencias, transfiere `robot.py` al roboRIO y lo deja ejecutándose automáticamente.
+</Aside>
+
+---
+
+## Verificar comunicación
+
+Abre Driver Station y verifica:
+
+- Communications = verde
+- Robot Code = verde
+- Joysticks = verde
+
+---
+
+## Habilitar el robot
+
+1. Selecciona `Teleoperated`
+2. Presiona `Enable`
+3. Mueve el joystick
+
+El robot debería responder inmediatamente.
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="Deploy failed">
+    <ul>
+      <li>Verifica conexión al roboRIO</li>
+      <li>Revisa el Team Number en <code>pyproject.toml</code></li>
+      <li>Ejecuta <code>py -3 -m robotpy sync</code> antes de reintentar</li>
+      <li>Verifica firewall de Windows</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="ModuleNotFoundError: rev">
+    <ul>
+      <li>Falta agregar <code>robotpy[rev]</code> en <code>pyproject.toml</code></li>
+      <li>Ejecuta <code>py -3 -m robotpy sync</code> para instalar la dependencia</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot gira raro">
+    <ul>
+      <li>Revisa inversión de motores</li>
+      <li>Verifica CAN IDs</li>
+      <li>Confirma followers correctamente configurados</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Un lado no funciona">
+    <ul>
+      <li>Follower no configurado</li>
+      <li>Motor desconectado</li>
+      <li>CAN ID incorrecto</li>
+      <li>Breaker apagado</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot no se mueve">
+    <ul>
+      <li>Robot deshabilitado</li>
+      <li>Joystick no detectado</li>
+      <li>Driver Station sin comunicación</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora puedes continuar con:
+
+- Corriendo el programa
+- Driver Station
+- Command-Based Programming
+- Sensores
+- Autonomous
+- Dashboards
+
+<Aside type="note" title="Importante">
+Este proyecto utiliza una estructura básica para aprendizaje. Más adelante aprenderás arquitecturas más avanzadas utilizadas en robots competitivos, como MagicBot.
+</Aside>
+
+<Badge text="RobotPy" />

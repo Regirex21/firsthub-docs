@@ -1,0 +1,134 @@
+---
+title: Instalación y herramientas
+description: Centro de instalación de software para preparar una computadora y un teléfono de FTC.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, CardGrid, Badge } from '@astrojs/starlight/components';
+
+Esta sección reúne todo lo necesario para preparar una computadora y un dispositivo Android para FIRST Tech Challenge.
+
+A diferencia de FRC, en FTC no existe una única ruta de programación: el Control Hub soporta tres formas distintas de escribir código, y cada una necesita una preparación diferente.
+
+<Aside type="note" title="Objetivo">
+Al terminar esta sección deberías saber qué ruta le conviene a tu equipo, tener las herramientas necesarias instaladas y estar listo para programar tu primer OpMode.
+</Aside>
+
+---
+
+## Tres rutas para programar en FTC
+
+<Tabs>
+<TabItem label="Blocks">
+
+Editor visual basado en bloques, integrado directamente en el Control Hub. Se usa desde el navegador, sin instalar nada en la computadora.
+
+- No requiere instalación
+- Ideal para empezar sin experiencia previa
+- Perfecto para mentorías con estudiantes nuevos
+- Limitado para lógica muy compleja
+
+</TabItem>
+
+<TabItem label="OnBot Java">
+
+Editor de Java basado en navegador, también integrado en el Control Hub. Escribes Java real, pero sin instalar un IDE.
+
+- No requiere instalación
+- Java real, con menos fricción que Android Studio
+- Buen punto intermedio entre Blocks y Android Studio
+- Menos herramientas de depuración que un IDE completo
+
+</TabItem>
+
+<TabItem label="Android Studio">
+
+IDE completo de Android para escribir el proyecto `FtcRobotController` en Java. Requiere instalación en la computadora.
+
+- Requiere instalar Android Studio y el proyecto del SDK
+- Mejor control de versiones, depuración y estructura de código
+- Ideal para equipos que ya programan o que planean escalar
+- Curva de entrada más alta
+
+</TabItem>
+</Tabs>
+
+<Aside type="tip" title="¿Por qué Android Studio es la única con página de instalación?">
+Blocks y OnBot Java corren directamente en el Control Hub: solo necesitas conectarte a su red y abrir el navegador (eso lo veremos en Preparación del Robot). Android Studio es la única ruta que requiere instalar software en tu computadora, por eso es la única con una guía de instalación dedicada aquí.
+</Aside>
+
+---
+
+## ¿Cuál ruta elegir?
+
+| Perfil de equipo | Ruta recomendada |
+|---|---|
+| Rookie sin experiencia en código | Blocks |
+| Equipo nuevo con interés en aprender Java | OnBot Java |
+| Equipo con experiencia previa en Java | Android Studio |
+| Equipo que planea escalar a FRC más adelante | Android Studio |
+
+<Aside type="note" title="No es una decisión permanente">
+Puedes empezar en Blocks y migrar a Java más adelante. Muchos equipos cambian de ruta conforme crecen.
+</Aside>
+
+---
+
+## Guías de esta sección
+
+<CardGrid>
+  <LinkCard
+    title="Android Studio Setup"
+    href="/ftc/programming/installation-tools/android-studio-setup/"
+    description="Instalación de Android Studio y el proyecto FtcRobotController."
+  />
+
+  <LinkCard
+    title="Driver Station App Setup"
+    href="/ftc/programming/installation-tools/driver-station-app-setup/"
+    description="Instala la app oficial de Driver Station en tu teléfono."
+  />
+
+  <LinkCard
+    title="Instalación offline"
+    href="/ftc/programming/installation-tools/offline-preparation/"
+    description="Prepara todo con anticipación para eventos con mal internet."
+  />
+
+  <LinkCard
+    title="Siguientes pasos"
+    href="/ftc/programming/installation-tools/next-steps/"
+    description="Qué hacer después de instalar todo."
+  />
+</CardGrid>
+
+---
+
+## Orden recomendado para equipos nuevos
+
+<Steps>
+
+1. Decidir la ruta de programación (Blocks, OnBot Java o Android Studio)
+2. Si eligieron Android Studio, instalarlo junto con el proyecto FtcRobotController
+3. Instalar la app de Driver Station en el teléfono o Driver Hub
+4. Verificar que Driver Station abra correctamente
+5. Continuar con Preparación del Robot para configurar el Control Hub
+
+</Steps>
+
+---
+
+## Requisitos recomendados
+
+| Elemento | Recomendado |
+|---|---|
+| Sistema operativo | Windows, macOS o Linux actualizado |
+| RAM | 8 GB mínimo (16 GB si usarás Android Studio) |
+| Espacio libre | 10 GB+ |
+| Internet | Estable para la primera instalación |
+| Cable USB de datos | Sí, no de solo carga |
+
+<Aside type="tip" title="Consejo">
+Si tu equipo tiene varias laptops, prepara los instaladores en una USB siguiendo la guía de Instalación offline antes del primer taller.
+</Aside>
+
+<Badge text="FTC" />

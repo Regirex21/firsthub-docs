@@ -1,0 +1,100 @@
+---
+title: Programación del robot
+description: Aprende a crear, desplegar y ejecutar tu primer programa de robot en FTC.
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+En esta sección aprenderás a crear y ejecutar tu primer OpMode para un robot de FTC, usando Java o Blocks.
+
+Aquí encontrarás los pasos básicos para:
+
+- Crear un OpMode de drivetrain
+- Configurar los motores en el Control Hub
+- Leer el gamepad para controlar el robot
+- Compilar o guardar tu OpMode
+- Ejecutarlo y probarlo desde Driver Station
+
+<Aside type="tip" title="Recomendación">
+Si tu equipo ya decidió su ruta en Instalación y Herramientas, ve directo a la guía de Java o Blocks correspondiente. Si aún no lo decidieron, ambas guías construyen exactamente el mismo robot, así que puedes leer las dos antes de elegir.
+</Aside>
+
+---
+
+## Antes de comenzar
+
+Asegúrate de haber completado:
+
+- Instalación y herramientas (Android Studio si usarás Java, o acceso a Blocks/OnBot Java)
+- Configuración del Control Hub
+- Instalación de la app Driver Station
+- Conexión básica entre Driver Station y el Control Hub
+
+<CardGrid>
+  <LinkCard
+    title="Driver Station App Setup"
+    href="/ftc/programming/installation-tools/driver-station-app-setup/"
+  >
+    Instala la app que usarás para probar el robot.
+  </LinkCard>
+
+  <LinkCard
+    title="Preparación del Robot"
+    href="/ftc/robot-preparation/"
+  >
+    Configura el Control Hub antes de programar.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Crear tu primer programa
+
+Selecciona la herramienta que quieres usar para crear tu drivetrain inicial. Ambas construyen el mismo robot: un drivetrain mecanum de 4 motores.
+
+<CardGrid>
+  <LinkCard
+    title="Java"
+    href="/ftc/programming/robot-programming/drivetrain-java/"
+  >
+    Crea un OpMode de drivetrain mecanum usando el SDK oficial, vía OnBot Java o Android Studio.
+  </LinkCard>
+
+  <LinkCard
+    title="Blocks"
+    href="/ftc/programming/robot-programming/drivetrain-blocks/"
+  >
+    Construye el mismo drivetrain de forma visual, arrastrando bloques.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Ejecutar el programa
+
+Después de crear tu OpMode, el siguiente paso es compilarlo (o guardarlo) y probarlo en el robot.
+
+<CardGrid>
+  <LinkCard
+    title="Corriendo el programa"
+    href="/ftc/programming/robot-programming/corriendo-el-programa/"
+  >
+    Build & Run según tu ruta, selección del OpMode y primeras pruebas en Driver Station.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## ¿Qué aprenderás después?
+
+Más adelante podrás continuar con temas como:
+
+- Autónomo básico con temporizadores
+- Sensores: encoders, IMU, sensores de color y distancia
+- Visión: detección de AprilTags y TensorFlow
+- Road Runner para trayectorias
+- FTC Dashboard para tuning en tiempo real
+
+<Aside type="note" title="Importante">
+Esta sección está enfocada en el primer drivetrain funcional. Los temas avanzados de autónomo, sensores y visión tendrán secciones dedicadas más adelante.
+</Aside>

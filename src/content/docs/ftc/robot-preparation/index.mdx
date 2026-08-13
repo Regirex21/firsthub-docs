@@ -1,0 +1,161 @@
+---
+title: Preparación del Robot
+description: Configura Control Hub, Driver Hub y la comunicación inicial del robot en FTC.
+---
+
+import { CardGrid, LinkCard, Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Esta etapa consiste en preparar el Control Hub y el Driver Hub para que puedan encender, conectarse entre sí y recibir código correctamente.
+
+Antes de avanzar a programación, el sistema base debe estar estable: Control Hub actualizado, red inalámbrica configurada y Driver Hub emparejado.
+
+<Aside type="note" title="Objetivo de esta fase">
+No se busca rendimiento todavía. Primero se busca comunicación confiable entre Control Hub y Driver Hub, y un hardware listo para pruebas.
+</Aside>
+
+---
+
+## Incluye esta sección
+
+<CardGrid>
+  <LinkCard
+    title="Control Hub Setup"
+    href="/ftc/robot-preparation/control-hub-setup/"
+  >
+    Encendido inicial y actualización de firmware del Control Hub.
+  </LinkCard>
+
+  <LinkCard
+    title="Driver Hub Setup"
+    href="/ftc/robot-preparation/driver-hub-setup/"
+  >
+    Emparejamiento del Driver Hub con el Control Hub.
+  </LinkCard>
+
+  <LinkCard
+    title="Configuración de Red"
+    href="/ftc/robot-preparation/network-configuration/"
+  >
+    SSID, canal y contraseña de la red del Control Hub.
+  </LinkCard>
+
+  <LinkCard
+    title="Driver Station"
+    href="/ftc/robot-preparation/driver-station/"
+  >
+    Uso del Driver Hub para habilitar y controlar el robot.
+  </LinkCard>
+
+  <LinkCard
+    title="Sistema Legacy (2 teléfonos)"
+    href="/ftc/robot-preparation/phone-based-legacy/"
+  >
+    Configuración para equipos que aún usan Robot Controller Phone y Driver Station Phone.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Ruta recomendada
+
+<Tabs>
+
+<TabItem label="Robot nuevo">
+
+<Steps>
+
+1. Revisar cableado principal  
+2. Confirmar batería cargada  
+3. Actualizar firmware del Control Hub  
+4. Emparejar Driver Hub  
+5. Configurar red inalámbrica  
+6. Probar conexión en Driver Station  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Robot usado">
+
+<Steps>
+
+1. Revisar firmware desactualizado  
+2. Reset de configuraciones previas  
+3. Reactualizar o reimagenar Control Hub  
+4. Re-emparejar Driver Hub  
+5. Validar sensores y configuración de motores  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Antes de evento">
+
+<Steps>
+
+1. Verificar batería  
+2. Confirmar SSID y contraseña de red  
+3. Revisar canal WiFi para evitar interferencia  
+4. Test rápido de INIT y START  
+5. Driver Hub o teléfono listo con Driver Station  
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## ¿Qué debes validar al terminar?
+
+- El Control Hub enciende correctamente
+- El Driver Hub aparece emparejado
+- La red inalámbrica es estable y con nombre propio del equipo
+- El Driver Station detecta el robot
+- El código puede desplegarse
+- No hay errores críticos de comunicación
+
+<Aside type="tip" title="Consejo real">
+Si el robot no conecta, normalmente el problema está en red, emparejamiento o energía, no en el código.
+</Aside>
+
+---
+
+## Recursos externos oficiales
+
+<CardGrid>
+  <LinkCard
+    title="FTC Docs"
+    href="https://ftc-docs.firstinspires.org/"
+  >
+    Documentación oficial del control system de FTC.
+  </LinkCard>
+
+  <LinkCard
+    title="REV Robotics Docs"
+    href="https://docs.revrobotics.com/"
+  >
+    Fabricante del Control Hub y Driver Hub.
+  </LinkCard>
+
+  <LinkCard
+    title="FtcRobotController (GitHub)"
+    href="https://github.com/FIRST-Tech-Challenge/FtcRobotController"
+  >
+    SDK oficial utilizado por Android Studio y OnBot Java.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Errores comunes
+
+- SSID o contraseña de red incorrecta
+- Firmware del Control Hub desactualizado
+- Driver Hub sin emparejar
+- Batería baja o conector suelto
+- App Driver Station desactualizada
+- Canal WiFi saturado en el evento
+
+---

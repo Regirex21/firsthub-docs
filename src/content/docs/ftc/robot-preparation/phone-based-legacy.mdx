@@ -1,0 +1,86 @@
+---
+title: Sistema Legacy (Dos Teléfonos)
+description: Configuración legacy con Robot Controller Phone y Driver Station Phone.
+---
+
+import { Aside, Steps, LinkCard, Badge } from '@astrojs/starlight/components';
+
+<Aside type="note" title="Fuente">
+Contenido traducido de <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_smartphone_rc/Managing-a-Smartphone-Robot-Controller.html">Managing a Smartphone Robot Controller</a> (ftc-docs.firstinspires.org).
+</Aside>
+
+Antes del Control Hub, un teléfono Android hacía de **Robot Controller**, montado en el robot. Esta guía traduce el proceso oficial para ese sistema.
+
+<Aside type="caution" title="Sistema legacy">
+Este sistema sigue siendo una opción legal en el reglamento actual (dos teléfonos Android, o un Control Hub más un teléfono Android), pero no es la ruta que documentamos como recomendada en el resto de esta sección. Úsalo solo si tu equipo ya cuenta con este hardware de temporadas anteriores.
+</Aside>
+
+---
+
+## Instalar la app Robot Controller
+
+<Aside type="caution" title="Ya no está en Google Play">
+Desde 2021, las apps de FTC (v6.1 y superiores) ya no están disponibles en Google Play. Instálala con REV Hardware Client, o descargando el APK de Robot Controller desde el repositorio FtcRobotController en GitHub y transfiriéndolo (side-loading) al teléfono.
+</Aside>
+
+---
+
+## Red WiFi del teléfono Robot Controller
+
+El teléfono Robot Controller crea su propia red WiFi, la red **Program & Manage**. Puedes acceder a la página Robot Controller Connection Info entrando a `192.168.49.1:8080` mientras estás conectado a esa red.
+
+---
+
+## Cambiar el nombre del Robot Controller
+
+Debes cambiar el nombre del Robot Controller para cumplir con el reglamento de competencia.
+
+<Steps>
+
+1. Dentro de la app, entra a **Settings**.
+2. Selecciona **Robot Controller Name**.
+3. Especifica el nuevo nombre.
+
+</Steps>
+
+<Aside type="note" title="Formato del nombre">
+El mismo formato aplica que con un Control Hub: `<team number>-RC` (por ejemplo `12345-RC`).
+</Aside>
+
+<Aside type="caution" title="Esto cambia la red WiFi">
+Una vez cambiado el nombre del Robot Controller, deberás reconectar tus dispositivos (Driver Station y laptop de programación) a la nueva red.
+</Aside>
+
+---
+
+## Cambiar el canal WiFi
+
+El canal se puede cambiar desde **Advanced Settings**, si un FTA lo solicita para mitigar interferencia — el mismo motivo por el que se cambia el canal en un Control Hub.
+
+<LinkCard
+  title="Configuración de Red"
+  href="/ftc/robot-preparation/network-configuration/"
+  description="Mismo concepto de canal, documentado en detalle para Control Hub."
+/>
+
+<Badge text="Legacy" />
+
+---
+
+## Recursos oficiales
+
+<LinkCard
+  title="Managing a Smartphone Robot Controller - FTC Docs"
+  href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_smartphone_rc/Managing-a-Smartphone-Robot-Controller.html"
+  description="Documentación oficial de este sistema."
+/>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Programación del robot"
+  href="/ftc/programming/robot-programming/"
+  description="El código de tu OpMode es el mismo, sin importar el hardware de control."
+/>

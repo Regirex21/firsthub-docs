@@ -1,0 +1,325 @@
+---
+title: Drivetrain LabVIEW
+description: Crea y configura un drivetrain diferencial utilizando LabVIEW y la plantilla oficial Arcade Drive de FRC.
+---
+
+import { Aside, Steps, Tabs, TabItem, CardGrid, Card, LinkCard, Badge } from '@astrojs/starlight/components';
+
+En esta guía configurarás un drivetrain diferencial en LabVIEW utilizando la plantilla oficial **FRC roboRIO Robot Project** con Arcade Drive, la forma recomendada por WPILib para comenzar un proyecto nuevo.
+
+El objetivo es aprender:
+
+- Cómo crear un proyecto FRC con la plantilla Arcade Drive
+- Cómo está organizada la estructura de VIs generada
+- Cómo configurar los motores en Begin.vi
+- Cómo mapear el control Xbox al Arcade Drive VI
+- Cómo ejecutar el programa de forma temporal
+- Cómo hacer deploy permanente al roboRIO
+
+<Aside type="tip" title="Diferencia clave frente a Java y Python">
+A diferencia de Java y Python, LabVIEW genera automáticamente un drivetrain funcional al crear el proyecto. Aquí no se escribe código desde cero: se configura y adapta la plantilla oficial.
+</Aside>
+
+---
+
+## ¿Qué es un Differential Drivetrain?
+
+Un Differential Drivetrain utiliza lados izquierdo y derecho independientes para mover el robot, igual que en las versiones Java y Python de esta guía.
+
+<Aside type="note" title="Importante">
+La plantilla oficial de LabVIEW utiliza Arcade Drive por defecto:
+- Stick izquierdo = adelante y atrás
+- Stick derecho = giro
+</Aside>
+
+---
+
+## Antes de comenzar
+
+Asegúrate de tener:
+
+- LabVIEW para FRC instalado
+- roboRIO configurado
+- Driver Station funcionando
+- Control Xbox conectado
+- Motores y controladores correctamente cableados
+
+<CardGrid>
+  <LinkCard title="LabVIEW Setup" href="/frc/programming/installation-tools/labview-setup/">
+    Instala LabVIEW y las herramientas de FRC antes de continuar.
+  </LinkCard>
+
+  <LinkCard title="Driver Station" href="/frc/robot-preparation/driver-station/">
+    Verifica que Driver Station detecte tu robot.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Crear el proyecto FRC roboRIO Robot Project
+
+<Steps>
+
+1. Abre LabVIEW y selecciona **FRC roboRIO Robot Project** en la pantalla de inicio.
+2. Escribe el nombre del proyecto.
+3. Elige la carpeta donde se guardará.
+4. Ingresa tu Team Number.
+5. En Drive Type selecciona **Arcade Drive**.
+6. Presiona **Finish**.
+
+</Steps>
+
+<Aside type="tip" title="Recomendación oficial">
+Si no estás seguro de qué tipo de drive usar, WPILib recomienda seleccionar Arcade Drive.
+</Aside>
+
+---
+
+## Estructura del proyecto generado
+
+Al terminar, el Project Explorer mostrará una estructura similar a esta:
+
+```txt
+Project Explorer
+└── Robot Project
+    ├── Robot Main.vi
+    ├── Begin.vi
+    ├── Teleop.vi
+    ├── Autonomous.vi
+    ├── Periodic Tasks.vi
+    ├── Finish.vi
+    └── Build Specifications
+        └── FRC Robot Boot-up Deployment
+```
+
+<CardGrid>
+  <Card title="Robot Main.vi">
+    Punto de entrada del programa. Se ejecuta en el roboRIO.
+  </Card>
+
+  <Card title="Begin.vi">
+    Se ejecuta una sola vez al iniciar. Aquí se declaran los motores.
+  </Card>
+
+  <Card title="Teleop.vi">
+    Se ejecuta durante Teleoperated. Aquí vive la lógica del drivetrain.
+  </Card>
+
+  <Card title="Build Specifications">
+    Contiene la configuración para el deploy permanente al roboRIO.
+  </Card>
+</CardGrid>
+
+---
+
+## Configurar los motores en Begin.vi
+
+Abre `Begin.vi`, haz clic derecho sobre el diagrama de bloques y navega a:
+
+```txt
+WPI Robotics Library >> Robot Drive >> Open 4 Motor.vi
+```
+
+Cada terminal del VI corresponde a una línea PWM. En este ejemplo utilizaremos:
+
+| Motor | PWM |
+|---|---|
+| Left Motor 1 | 0 |
+| Left Motor 2 | 1 |
+| Right Motor 1 | 2 |
+| Right Motor 2 | 3 |
+
+<Aside type="caution" title="Verifica el cableado real">
+Estas líneas PWM son solo un ejemplo. Deben coincidir exactamente con los números configurados en el Power Distribution Panel (PDP/PDH). LabVIEW no detecta automáticamente errores de cableado.
+</Aside>
+
+Para invertir el lado derecho, crea una constante booleana `TRUE` y conéctala a la terminal `invert` correspondiente en `Open 4 Motor.vi`.
+
+<Aside type="note" title="¿Por qué invertir un lado?">
+Los motores de ambos lados están montados en direcciones opuestas. Sin inversión, un lado avanzará mientras el otro retrocede, lo cual puede dañar las cajas de engranes.
+</Aside>
+
+---
+
+## ¿Cómo maneja LabVIEW varios motores por lado?
+
+A diferencia de Java y Python, donde un motor leader es seguido por uno o más followers vía CAN, en LabVIEW el VI `Open 4 Motor.vi` agrupa los motores de cada lado en un mismo refnum. El VI de drive envía la misma señal a todos los motores del grupo de forma simultánea.
+
+No existe un concepto de "leader/follower" en este flujo: cada motor recibe la orden en paralelo por PWM.
+
+<Aside type="note" title="¿Y si mi equipo usa motores CAN?">
+La WPI Robotics Library base trabaja principalmente con controladores PWM. Para motores CAN (SparkMax, Talon FX, etc.) se necesitan las paletas específicas del fabricante, instaladas mediante VIPM. Consulta la documentación oficial de REV o CTRE para LabVIEW antes de continuar con ese flujo.
+</Aside>
+
+---
+
+## Configurar el control Xbox
+
+Abre `Teleop.vi`, haz clic derecho y navega a:
+
+```txt
+WPI Robotics Library >> Joystick >> Get Joystick Values.vi
+```
+
+Usa una función **Index Array** para extraer el eje Y (avance) y el eje X (giro) del arreglo de valores del joystick.
+
+<Aside type="tip" title="Identifica los índices correctos">
+Confirma los índices de cada eje en la pestaña **USB Devices** de Driver Station antes de conectarlos.
+</Aside>
+
+---
+
+## Conectar el Arcade Drive VI
+
+Haz clic derecho en el diagrama de bloques de `Teleop.vi` y navega a:
+
+```txt
+WPI Robotics Library >> Robot Drive >> Arcade Drive VI
+```
+
+<Steps>
+
+1. Conecta el refnum de motores creado en Begin.vi a la terminal de entrada del Arcade Drive VI.
+2. Conecta el eje Y invertido del joystick a la terminal `moveValue`.
+3. Conecta el eje X del joystick a la terminal `rotateValue`.
+
+</Steps>
+
+<Aside type="tip" title="¿Qué hace Arcade Drive VI?">
+Convierte avance y rotación en velocidades individuales para cada lado del drivetrain, igual que `DifferentialDrive.arcadeDrive()` en Java o Python.
+</Aside>
+
+---
+
+## ¿Cómo funciona Arcade Drive?
+
+Con este sistema:
+
+- Stick izquierdo → adelante y atrás
+- Stick derecho → giro o pivote
+
+Si avanzas y giras al mismo tiempo, el robot girará suavemente mientras avanza. Este es uno de los métodos de control más utilizados en FRC.
+
+---
+
+## Ejecutar el programa temporalmente
+
+<Steps>
+
+1. Abre `Robot Main.vi` desde el Project Explorer.
+2. Presiona el botón Run (flecha blanca) para desplegar al roboRIO.
+3. Abre Driver Station y selecciona modo Teleoperated.
+4. Presiona `Enable` y mueve el joystick.
+5. Presiona el botón Abort en Robot Main.vi para detener la ejecución.
+
+</Steps>
+
+<Aside type="caution" title="Esto no es permanente">
+Un programa desplegado de esta forma no permanece en el roboRIO después de un ciclo de energía.
+</Aside>
+
+---
+
+## Deploy permanente
+
+<Aside type="note" title="Flujo oficial">
+Build Specifications → clic derecho en **FRC Robot Boot-up Deployment** → **Build** → clic derecho de nuevo → **Run as Startup**
+</Aside>
+
+El roboRIO iniciará automáticamente el código desplegado unos segundos después de encenderse.
+
+---
+
+## VIs importantes
+
+<Tabs>
+  <TabItem label="Begin.vi">
+    <p>
+      Se ejecuta una sola vez cuando el programa inicia. Aquí se declaran y configuran los
+      motores del drivetrain antes de que el robot comience a operar.
+    </p>
+  </TabItem>
+
+  <TabItem label="Teleop.vi">
+    <p>
+      Se ejecuta continuamente mientras el robot está en modo Teleoperated. Aquí vive la
+      lógica de Arcade Drive y la lectura del control Xbox.
+    </p>
+  </TabItem>
+
+  <TabItem label="Autonomous.vi">
+    <p>
+      Se ejecuta repetidamente durante el modo Autonomous, para programar movimientos y
+      acciones automáticas sin intervención del conductor.
+    </p>
+  </TabItem>
+
+  <TabItem label="Periodic Tasks.vi">
+    <p>
+      Contiene código que se ejecuta en cada uno de los modos del robot, útil para lógica
+      compartida como lectura de sensores.
+    </p>
+  </TabItem>
+</Tabs>
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="No aparece plantilla FRC">
+    <ul>
+      <li>Reinstala los componentes FRC correspondientes a la temporada actual</li>
+      <li>Confirma que la versión de LabVIEW sea la oficial de temporada</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="No detecta roboRIO">
+    <ul>
+      <li>Revisa conexión USB o Ethernet</li>
+      <li>Verifica que el roboRIO tenga la imagen correcta</li>
+      <li>Confirma comunicación en Driver Station</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Motor no gira">
+    <ul>
+      <li>Revisa la línea PWM en Open 4 Motor.vi</li>
+      <li>Verifica el breaker correspondiente</li>
+      <li>Confirma el cableado contra el PDP/PDH</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot gira raro">
+    <ul>
+      <li>Revisa el booleano invert del lado derecho</li>
+      <li>Confirma que las líneas PWM coincidan con el cableado real</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Joystick no responde">
+    <ul>
+      <li>Revisa el índice del eje en la pestaña USB Devices de Driver Station</li>
+      <li>Reconecta el control</li>
+      <li>Confirma el Index Array en Teleop.vi</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora puedes continuar con:
+
+- Corriendo el programa
+- Driver Station
+- Autonomous.vi
+- Sensores
+- Dashboards
+
+<Aside type="note" title="Importante">
+Este proyecto utiliza la plantilla básica de LabVIEW para aprendizaje. Más adelante puedes explorar VIs adicionales de la WPI Robotics Library según lo que necesite tu robot.
+</Aside>
+
+<Badge text="LabVIEW" />

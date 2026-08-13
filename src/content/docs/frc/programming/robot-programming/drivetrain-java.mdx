@@ -1,0 +1,675 @@
+---
+title: Drivetrain Java
+description: Crea, configura y despliega un drivetrain diferencial moderno utilizando Java y WPILib.
+---
+
+import { CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import nuevoProyecto from '../../../../../assets/FRC/nuevo_proyecto.png';
+import generar from '../../../../../assets/FRC/wpi_proyect_generator.png';
+import robot from '../../../../../assets/FRC/robot_java.png';
+
+En esta guía crearás un drivetrain diferencial moderno utilizando Java y WPILib.
+
+El objetivo es aprender:
+
+- Cómo crear un proyecto FRC
+- Cómo funciona un drivetrain diferencial
+- Cómo utilizar leaders y followers
+- Cómo controlar el robot con un control Xbox
+- Cómo configurar motores brushless
+- Cómo desplegar código al roboRIO
+- Cómo probar el robot desde Driver Station
+
+:::tip[Importante]
+Aunque este proyecto es básico, utiliza una estructura mucho más cercana a la utilizada por equipos FRC reales.
+:::
+
+---
+
+## ¿Qué es un Differential Drivetrain?
+
+Un Differential Drivetrain utiliza lados izquierdo y derecho independientes para mover el robot.
+
+La mayoría de robots FRC tipo tanque utilizan:
+
+- 2 motores izquierdos
+- 2 motores derechos
+- Leaders y followers
+- Control arcade con control Xbox
+- Motores brushless conectados por CAN
+
+:::note[Importante]
+Un drivetrain diferencial puede utilizar distintos estilos de control.
+
+En esta guía utilizaremos Arcade Drive:
+- Stick izquierdo = adelante y atrás
+- Stick derecho = giro
+:::
+
+---
+
+## Antes de comenzar
+
+Asegúrate de tener:
+
+- WPILib instalado
+- VS Code configurado
+- roboRIO configurado
+- Driver Station funcionando
+- Control Xbox conectado
+- Motores y controladores correctamente cableados
+
+<CardGrid>
+  <Card title="WPILib Setup">
+    Instala y configura correctamente WPILib antes de continuar.
+  </Card>
+
+  <Card title="Driver Station">
+    Aprende a utilizar Driver Station y verificar comunicación.
+  </Card>
+</CardGrid>
+
+---
+
+## Crear un nuevo proyecto
+
+Abre VS Code y presiona:
+
+```txt
+CTRL + SHIFT + P
+```
+
+Busca el comando:
+
+<img
+src={nuevoProyecto.src}
+alt=" WPILib: Create New Project"
+/>
+
+---
+
+## Configuración del proyecto
+
+Selecciona las siguientes opciones:
+
+<CardGrid>
+  <Card title="Project Type">
+    Template
+  </Card>
+
+  <Card title="Language">
+    Java
+  </Card>
+
+  <Card title="Base">
+    Timed Robot
+  </Card>
+
+  <Card title="Template">
+    Timed Robot
+  </Card>
+</CardGrid>
+
+:::note[¿Por qué usar Timed Robot?]
+Utilizaremos un proyecto vacío para entender mejor cómo funciona el drivetrain desde cero.
+:::
+
+---
+
+## Información del proyecto
+
+Completa:
+
+- Project Name
+- Team Number
+- Project Location
+
+<img
+src={generar.src}
+alt=" WPILib: Generate Project"
+style="width: 70%;"
+/>
+
+Después selecciona:
+
+```txt
+Generate Project
+```
+
+
+---
+
+## Abrir el proyecto
+
+Cuando el proyecto termine de generarse:
+
+1. VS Code abrirá automáticamente la carpeta
+2. WPILib comenzará a cargar dependencias
+3. Espera a que Gradle termine
+
+:::caution[Primera carga]
+La primera vez puede tardar varios minutos mientras se descargan librerías necesarias.
+:::
+
+---
+
+## Estructura del proyecto
+
+La estructura principal se verá similar a esta:
+
+```txt
+src/
+└── main/
+    └── java/
+        └── frc/
+            └── robot/
+                ├── Main.java
+                ├── Robot.java
+                └── Constants.java
+```
+
+---
+
+## Archivo principal del robot
+
+El archivo principal será:
+
+```txt
+src/main/java/frc/robot/Robot.java
+```
+
+<img
+src={robot.src}
+alt="robot.java"
+style="width: 70%;"
+/>
+
+---
+
+## ¿Qué vamos a construir?
+
+Crearemos un drivetrain con:
+
+- 4 motores brushless
+- Leaders y followers
+- Differential Drive
+- Control Xbox
+- Arcade Drive
+
+La estructura será similar a esta:
+
+```txt
+Left Side
+├── Left Leader
+└── Left Follower
+
+Right Side
+├── Right Leader
+└── Right Follower
+```
+
+---
+
+## CAN IDs
+
+
+:::caution[CAN IDs reservados]
+En un robot FRC normalmente algunos CAN IDs ya están ocupados por dispositivos del sistema de control.
+
+Comúnmente:
+
+- CAN ID 0 = roboRIO
+- CAN ID 1 = PDH o PDP
+
+Por eso normalmente se recomienda comenzar motores desde IDs más altos como:
+
+- 10
+- 11
+- 12
+- 13
+
+Esto ayuda a evitar conflictos y hace más fácil identificar dispositivos.
+:::
+Cada controlador de motor necesita un CAN ID único.
+
+En este ejemplo utilizaremos:
+
+| Motor | CAN ID |
+|---|---|
+| Left Leader | 10 |
+| Left Follower | 11 |
+| Right Leader | 12 |
+| Right Follower | 13 |
+
+:::caution[Importante]
+Nunca utilices dos dispositivos con el mismo CAN ID.
+:::
+
+---
+
+## Importando librerías
+
+Primero agregaremos las librerías necesarias.
+
+```java
+package frc.robot;
+
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+```
+
+:::tip[¿Qué hacen estas librerías?]
+Estas librerías permiten controlar motores, leer controles Xbox y utilizar herramientas de drivetrain incluidas en WPILib.
+Recuerda tener siempre las librerías actualizadas para evitar problemas de compatibilidad.
+:::
+
+:::caution[REVLib cambia esta API cada temporada]
+Desde REVLib 2025, `SparkMax` ya no se configura llamando métodos como `.setInverted()` o `.follow()` directamente sobre el motor — eso quedó obsoleto. Ahora se arma un objeto `SparkMaxConfig`, se le indican los ajustes deseados, y se aplica al motor con `.configure(config, ResetMode, PersistMode)`. Muchos ejemplos que circulan en internet (incluida documentación desactualizada de WPILib) todavía muestran el patrón antiguo, que no compila contra versiones recientes de REVLib. Verifica siempre contra la [documentación oficial de REVLib](https://docs.revrobotics.com/revlib/spark/configuring-a-spark) antes de copiar código de otra fuente.
+:::
+
+---
+
+## Declarando motores
+
+Ahora declararemos los motores del drivetrain.
+
+```java
+// Left side motors
+private final SparkMax leftLeader =
+    new SparkMax(10, MotorType.kBrushless);
+
+private final SparkMax leftFollower =
+    new SparkMax(11, MotorType.kBrushless);
+
+// Right side motors
+private final SparkMax rightLeader =
+    new SparkMax(12, MotorType.kBrushless);
+
+private final SparkMax rightFollower =
+    new SparkMax(13, MotorType.kBrushless);
+```
+
+---
+
+## ¿Qué son Leaders y Followers?
+
+En un drivetrain FRC moderno normalmente existen:
+
+- Motores leaders
+- Motores followers
+
+El motor leader recibe comandos directamente desde el código.
+
+El follower copia automáticamente el comportamiento del leader del mismo lado.
+
+Esto permite:
+
+- Simplificar el código
+- Mantener sincronizados los motores
+- Reducir errores
+
+---
+
+## Configurando el control Xbox
+
+Ahora agregaremos un control Xbox.
+
+```java
+private final XboxController controller =
+    new XboxController(0);
+```
+
+:::note[Puerto USB]
+El número 0 representa el primer control detectado por Driver Station.
+:::
+
+---
+
+## Configurando Differential Drive
+
+Ahora crearemos el drivetrain principal.
+
+```java
+private final DifferentialDrive drive =
+    new DifferentialDrive(leftLeader, rightLeader);
+```
+
+:::tip[¿Qué hace DifferentialDrive?]
+DifferentialDrive convierte entradas de velocidad y rotación en movimiento para el drivetrain.
+:::
+
+---
+
+## Configurando Followers
+
+Dentro de `robotInit()` configuraremos followers usando `SparkMaxConfig`.
+
+```java
+@Override
+public void robotInit() {
+
+    SparkMaxConfig leftFollowerConfig = new SparkMaxConfig();
+    leftFollowerConfig.follow(leftLeader);
+    leftFollower.configure(leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    SparkMaxConfig rightFollowerConfig = new SparkMaxConfig();
+    rightFollowerConfig.follow(rightLeader);
+    rightFollower.configure(rightFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+}
+```
+
+:::note[¿Qué hace `.configure()`?]
+`ResetMode.kResetSafeParameters` restablece los parámetros del controlador a sus valores por defecto antes de aplicar la nueva configuración, y `PersistMode.kPersistParameters` guarda esos ajustes en la memoria no volátil del SparkMax para que sobrevivan un ciclo de energía.
+:::
+
+---
+
+## Invirtiendo motores
+
+En la mayoría de drivetrains un lado debe invertirse.
+
+```java
+@Override
+public void robotInit() {
+
+    SparkMaxConfig leftFollowerConfig = new SparkMaxConfig();
+    leftFollowerConfig.follow(leftLeader);
+    leftFollower.configure(leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    SparkMaxConfig rightFollowerConfig = new SparkMaxConfig();
+    rightFollowerConfig.follow(rightLeader);
+    rightFollower.configure(rightFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    SparkMaxConfig rightLeaderConfig = new SparkMaxConfig();
+    rightLeaderConfig.inverted(true);
+    rightLeader.configure(rightLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+}
+```
+
+:::note[¿Por qué invertir un lado?]
+Los motores de ambos lados están montados en direcciones opuestas.
+Sin inversión, un lado avanzará mientras el otro retrocede.
+Eso puede dañar las cajas de engranes.
+:::
+
+---
+
+## Configurando Arcade Drive
+
+Ahora agregaremos control manual dentro de:
+
+```java
+teleopPeriodic()
+```
+
+---
+
+## Lectura de controles
+
+```java
+double speed =
+    -controller.getLeftY();
+
+double rotation =
+    controller.getRightX();
+```
+
+---
+
+## ¿Qué hace este código?
+
+```java
+-controller.getLeftY();
+```
+
+Lee el stick izquierdo para avanzar y retroceder.
+
+---
+
+```java
+controller.getRightX();
+```
+
+Lee el stick derecho para girar.
+
+---
+
+## Moviendo el robot
+
+```java
+drive.arcadeDrive(speed, rotation);
+```
+
+Esto convierte velocidad y rotación en movimiento para el drivetrain.
+
+---
+
+## ¿Cómo funciona Arcade Drive?
+
+Con este sistema:
+
+- Stick izquierdo → adelante y atrás
+- Stick derecho → giro o pivote
+
+Si avanzas y giras al mismo tiempo:
+- el robot girará suavemente mientras avanza
+
+Este es uno de los métodos de control más utilizados en FRC.
+
+---
+
+## Código completo del robot
+
+```java
+package frc.robot;
+
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+public class Robot extends TimedRobot {
+
+    // Left side motors
+    private final SparkMax leftLeader =
+        new SparkMax(10, MotorType.kBrushless);
+
+    private final SparkMax leftFollower =
+        new SparkMax(11, MotorType.kBrushless);
+
+    // Right side motors
+    private final SparkMax rightLeader =
+        new SparkMax(12, MotorType.kBrushless);
+
+    private final SparkMax rightFollower =
+        new SparkMax(13, MotorType.kBrushless);
+
+    // Xbox controller
+    private final XboxController controller =
+        new XboxController(0);
+
+    // Differential drivetrain
+    private final DifferentialDrive drive =
+        new DifferentialDrive(leftLeader, rightLeader);
+
+    @Override
+    public void robotInit() {
+
+        // Configure followers
+        SparkMaxConfig leftFollowerConfig = new SparkMaxConfig();
+        leftFollowerConfig.follow(leftLeader);
+        leftFollower.configure(leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+        SparkMaxConfig rightFollowerConfig = new SparkMaxConfig();
+        rightFollowerConfig.follow(rightLeader);
+        rightFollower.configure(rightFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+        // Invert right side
+        SparkMaxConfig rightLeaderConfig = new SparkMaxConfig();
+        rightLeaderConfig.inverted(true);
+        rightLeader.configure(rightLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    }
+
+    @Override
+    public void teleopPeriodic() {
+
+        // Forward and backward
+        double speed =
+            -controller.getLeftY();
+
+        // Rotation
+        double rotation =
+            controller.getRightX();
+
+        // Drive robot
+        drive.arcadeDrive(speed, rotation);
+    }
+}
+
+```
+## Métodos importantes
+
+<Tabs>
+  <TabItem label="robotInit">
+    <p>
+      Este método se ejecuta una sola vez cuando el programa del robot inicia.
+      Se utiliza para preparar el robot antes de comenzar a operar, inicializando
+      motores, sensores, controles y cualquier configuración necesaria para el resto del código.
+    </p>
+  </TabItem>
+
+  <TabItem label="teleopPeriodic">
+    <p>
+      Este método se ejecuta continuamente mientras el robot está en modo Teleoperated.
+      Aquí normalmente se procesa la entrada de joysticks y controles para permitir
+      que el driver maneje el robot manualmente durante el partido.
+    </p>
+  </TabItem>
+
+  <TabItem label="autonomousPeriodic">
+    <p>
+      Este método se ejecuta repetidamente durante el modo Autonomous.
+      Se utiliza para programar movimientos y acciones automáticas
+      que el robot realiza sin intervención del conductor.
+    </p>
+  </TabItem>
+
+  <TabItem label="disabledInit">
+    <p>
+      Este método se ejecuta cuando el robot entra en estado deshabilitado.
+      Generalmente se utiliza para detener sistemas, reiniciar variables
+      o asegurar que el robot permanezca en un estado seguro.
+    </p>
+  </TabItem>
+</Tabs>
+
+---
+
+## Desplegar código al robot
+
+Conecta el roboRIO por Ethernet o USB.
+
+Después:
+
+1. Abre el proyecto
+2. Presiona el ícono de WPILib
+3. Selecciona:
+
+```txt
+WPILib: Deploy Robot Code
+```
+
+:::tip[¿Qué hace deploy?]
+Deploy compila el código y lo envía al roboRIO para ejecutarse directamente en el robot.
+:::
+
+---
+
+## Verificar comunicación
+
+Abre Driver Station y verifica:
+
+- Communications = verde
+- Robot Code = verde
+- Joysticks = verde
+
+---
+
+## Habilitar el robot
+
+1. Selecciona `Teleoperated`
+2. Presiona `Enable`
+3. Mueve el joystick
+
+El robot debería responder inmediatamente.
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="Deploy failed">
+    <ul>
+      <li>Verifica conexión al roboRIO</li>
+      <li>Revisa Team Number</li>
+      <li>Reinicia VS Code</li>
+      <li>Verifica firewall de Windows</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot gira raro">
+    <ul>
+      <li>Revisa inversión de motores</li>
+      <li>Verifica CAN IDs</li>
+      <li>Confirma followers correctamente configurados</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Un lado no funciona">
+    <ul>
+      <li>Follower no configurado</li>
+      <li>Motor desconectado</li>
+      <li>CAN ID incorrecto</li>
+      <li>Breaker apagado</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot no se mueve">
+    <ul>
+      <li>Robot deshabilitado</li>
+      <li>Joystick no detectado</li>
+      <li>Driver Station sin comunicación</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora puedes continuar con:
+
+- Corriendo el programa
+- Driver Station
+- Command-Based Programming
+- Sensores
+- Autonomous
+- Dashboards
+
+:::note[Importante]
+Este proyecto utiliza una estructura básica para aprendizaje. Más adelante aprenderás arquitecturas más avanzadas utilizadas en robots competitivos.
+:::

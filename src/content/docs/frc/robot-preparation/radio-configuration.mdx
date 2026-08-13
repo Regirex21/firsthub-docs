@@ -1,5 +1,5 @@
 ---
-title: Radio Configuration
+title: Configuración de Radio
 description: Configura la radio del robot FRC para comunicación estable entre laptop y robot.
 ---
 
@@ -56,10 +56,6 @@ En competencia, la configuración final de radio normalmente la realizan los CSA
 5. Ingresa la dirección indicada por el fabricante (ej. radio.local).
 
 </Steps>
-
-<div style="padding:1rem;border:1px dashed var(--sl-color-gray-5);border-radius:12px;text-align:center;">
-Placeholder imagen: navegador en radio.local / interfaz web de la radio
-</div>
 
 <Aside type="tip" title="Consejo">
 Si no abre la página, desactiva otras redes Wi-Fi activas temporalmente.
@@ -143,9 +139,13 @@ La clave WPA/SAE debe coincidir con la configuración definida en la radio para 
 
 ## Activar WiFi 2.4GHz en la VH-109
 
-La radio VH-109 incluye un modo standalone que se activa mediante **DIP switch 3**.
+La radio VH-109 incluye un modo standalone de 2.4GHz controlado por **DIP switch 3**.
 
-En este modo, la radio crea su propia red 2.4GHz, permitiendo conexión directa sin hardware adicional.
+<Aside type="caution" title="No es un modo incondicional">
+Activar el switch 3 no fuerza la red 2.4GHz por sí solo: la radio solo la transmite como respaldo cuando **no** detecta una conexión válida a un punto de acceso Wi-Fi de 6GHz (802.11ax). Si el enlace principal de 6GHz está funcionando, la radio no la crea.
+</Aside>
+
+Cuando sí se activa, la radio crea su propia red 2.4GHz con el SSID `FRC-XXYY` (donde XXYY es el número de equipo), permitiendo conexión directa sin hardware adicional.
 
 ### Pasos
 
@@ -171,7 +171,7 @@ Vivid Hosting no recomienda usar este modo para práctica regular. Solo debe uti
 ### Desventajas
 
 - Alta interferencia en 2.4GHz  
-- Menor rendimiento que 5GHz  
+- Menor rendimiento que el enlace principal de 6GHz (Wi-Fi 6E / 802.11ax)  
 - Puede degradarse en entornos como escuelas  
 
 <img
@@ -181,9 +181,9 @@ Vivid Hosting no recomienda usar este modo para práctica regular. Solo debe uti
 
 ---
 
-## VH-109 PoE Wall Adapter
+## Adaptador de pared PoE para la VH-109
 
-La radio VH-109 utiliza una entrada de **12V mediante barrel jack**.
+La radio VH-109 utiliza una entrada de **12V mediante conectores Weidmuller** (terminal de tornillo, no barrel jack).
 
 También puede utilizarse un adaptador PoE dependiendo de la configuración del robot.
 
@@ -268,7 +268,7 @@ Esto es solo para pruebas o preparación. En competencia se debe utilizar la VH-
 
   <LinkCard
     title="Driver Station"
-    href="/frc/robot-preparation/driver-station-test/"
+    href="/frc/robot-preparation/driver-station/"
   >
     Verifica conexión después de configurar la radio.
   </LinkCard>
@@ -280,7 +280,7 @@ Esto es solo para pruebas o preparación. En competencia se debe utilizar la VH-
 
 <CardGrid>
   <LinkCard
-    title="Programming Hub"
+    title="Centro de Programación"
     href="/frc/programming/"
   >
     Conecta todo y continúa con deploy y código.

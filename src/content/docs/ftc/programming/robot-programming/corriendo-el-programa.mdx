@@ -1,0 +1,168 @@
+---
+title: Corriendo el Programa
+description: Despliega tu OpMode al robot, verifica comunicación en Driver Station y habilítalo para tus primeras pruebas.
+---
+
+import { Aside, Steps, Tabs, TabItem, CardGrid, LinkCard, Badge } from '@astrojs/starlight/components';
+
+Ya escribiste tu drivetrain en Java o Blocks. Esta página cubre el siguiente paso, común a ambas rutas: compilar (o guardar) tu OpMode, seleccionarlo desde Driver Station e inicializarlo para tus primeras pruebas.
+
+<Aside type="note" title="Antes de continuar">
+Esta guía asume que ya completaste una de las guías de drivetrain. Si aún no lo haces, empieza por una de estas:
+</Aside>
+
+<CardGrid>
+  <LinkCard title="Drivetrain Java" href="/ftc/programming/robot-programming/drivetrain-java/">
+    Drivetrain mecanum con el SDK oficial en Java.
+  </LinkCard>
+
+  <LinkCard title="Drivetrain Blocks" href="/ftc/programming/robot-programming/drivetrain-blocks/">
+    El mismo drivetrain construido visualmente.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Compilar y ejecutar según tu ruta
+
+<Tabs>
+  <TabItem label="OnBot Java">
+
+<Steps>
+
+1. Abre el editor OnBot Java desde el navegador, conectado a la red del Control Hub.
+2. Abre tu archivo `MecanumDrive.java`.
+3. Presiona el botón **Build** (ícono de llave inglesa).
+4. Espera el mensaje de compilación exitosa.
+
+</Steps>
+
+  </TabItem>
+
+  <TabItem label="Android Studio">
+
+<Aside type="note" title="Fuente">
+Traducido de <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/creating_op_modes/Creating-and-Running-an-Op-Mode-(Android-Studio).html">Creating and Running an Op Mode (Android Studio)</a> (ftc-docs.firstinspires.org).
+</Aside>
+
+<Steps>
+
+1. Conecta el Control Hub a tu laptop usando el puerto **USB tipo C** (no el puerto USB Mini).
+2. Abre el proyecto FtcRobotController en Android Studio.
+3. Verifica que el dispositivo correcto esté seleccionado junto a **TeamCode**, en la parte superior de Android Studio.
+4. Presiona el botón verde **Run** (▶) para compilar la app Robot Controller e instalarla en el Control Hub.
+
+</Steps>
+
+  </TabItem>
+
+  <TabItem label="Blocks">
+
+<Steps>
+
+1. Abre el editor Blocks desde el navegador.
+2. Abre tu OpMode.
+3. Presiona **Save Op Mode**.
+4. Espera el mensaje **"Save completed successfully"**.
+
+</Steps>
+
+<Aside type="note" title="Blocks no tiene un paso de Build separado">
+A diferencia de Java, guardar en Blocks ya deja el OpMode listo para usarse. No hay un botón de compilación adicional.
+</Aside>
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Seleccionar el OpMode en Driver Station
+
+<Steps>
+
+1. Verifica que Driver Station siga conectada al Robot Controller.
+2. Usa el dropdown de **TeleOp** para ver la lista de OpModes disponibles.
+3. Selecciona el OpMode por su nombre (el que pusiste en `@TeleOp(name="...")` o al crear el OpMode en Blocks).
+
+</Steps>
+
+---
+
+## INIT y START
+
+<Steps>
+
+1. Presiona **INIT**. Esto ejecuta el código hasta la línea `waitForStart()`.
+2. Presiona el botón de **START** (triángulo) para comenzar a correr el OpMode.
+3. Presiona el botón de **STOP** (cuadrado) cuando termines la prueba.
+
+</Steps>
+
+<Aside type="caution" title="Seguridad primero">
+En la primera prueba, coloca el robot elevado con las ruedas libres del suelo, mantén a las personas alejadas del área de movimiento y ten a alguien listo para presionar STOP de inmediato.
+</Aside>
+
+---
+
+## Primeras pruebas recomendadas
+
+- Confirma avance y retroceso con el stick izquierdo
+- Confirma movimiento lateral (strafe) con el stick izquierdo
+- Confirma giro con el stick derecho
+- Verifica que la dirección de movimiento coincida con lo esperado
+- Prueba STOP como parada de emergencia
+- Repite la prueba con el robot ya en el suelo
+
+<Badge text="Driver Station" />
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="OnBot Java">
+    <ul>
+      <li>Revisa errores marcados en rojo antes de intentar Build de nuevo</li>
+      <li>Confirma que guardaste el archivo antes de compilar</li>
+      <li>Recarga la página si el editor deja de responder</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Android Studio">
+    <ul>
+      <li>Confirma que estás usando el puerto USB tipo C del Control Hub, no el puerto USB Mini</li>
+      <li>Confirma que el Control Hub aparezca como dispositivo de deploy disponible</li>
+      <li>Revisa que no haya errores de Gradle antes de presionar Run</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Blocks">
+    <ul>
+      <li>Confirma que la laptop siga conectada a la red del Control Hub</li>
+      <li>Revisa que no haya bloques sueltos o sin conectar</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="OpMode no aparece en Driver Station">
+    <ul>
+      <li>Confirma que el Build o Save haya terminado sin errores</li>
+      <li>Verifica que el OpMode esté anotado como <code>@TeleOp</code> (o creado como TeleOp en Blocks)</li>
+      <li>Reinicia Driver Station si sigue sin aparecer</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora que tu robot enciende, comunica y responde, puedes continuar con:
+
+- Autónomo básico
+- Sensores (IMU, encoders)
+- Visión (AprilTags, TensorFlow)
+- Road Runner y FTC Dashboard
+
+<Aside type="note" title="Importante">
+Esta guía cubre el flujo mínimo para tener un robot funcionando y probado en pits. Los temas avanzados de autónomo y visión tendrán secciones dedicadas más adelante.
+</Aside>

@@ -1,0 +1,189 @@
+---
+title: Corriendo el Programa
+description: Despliega tu código al robot, verifica comunicación en Driver Station y habilítalo para tus primeras pruebas.
+---
+
+import { Aside, Steps, Tabs, TabItem, CardGrid, Card, LinkCard, Badge } from '@astrojs/starlight/components';
+
+Ya escribiste tu drivetrain en Java, Python o LabVIEW. Esta página cubre el siguiente paso, común a los tres lenguajes: desplegar el código al roboRIO, confirmar que todo esté comunicando correctamente y habilitar el robot para tus primeras pruebas.
+
+<Aside type="note" title="Antes de continuar">
+Esta guía asume que ya completaste una de las guías de drivetrain. Si aún no lo haces, empieza por una de estas:
+</Aside>
+
+<CardGrid>
+  <LinkCard title="Drivetrain Java" href="/frc/programming/robot-programming/drivetrain-java/">
+    Drivetrain diferencial con Java y WPILib.
+  </LinkCard>
+
+  <LinkCard title="Drivetrain Python" href="/frc/programming/robot-programming/drivetrain-python/">
+    Drivetrain diferencial con RobotPy.
+  </LinkCard>
+
+  <LinkCard title="Drivetrain LabVIEW" href="/frc/programming/robot-programming/drivetrain-labview/">
+    Drivetrain diferencial con la plantilla oficial de LabVIEW.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Desplegar código según tu lenguaje
+
+<Tabs>
+  <TabItem label="Java / C++">
+
+<Steps>
+
+1. Conecta el roboRIO por Ethernet o USB.
+2. Abre el proyecto en VS Code.
+3. Presiona el ícono de WPILib.
+4. Selecciona **WPILib: Deploy Robot Code**.
+
+</Steps>
+
+  </TabItem>
+
+  <TabItem label="Python">
+
+<Steps>
+
+1. Conecta el roboRIO por Ethernet o USB.
+2. Abre una terminal en la carpeta del proyecto.
+3. Ejecuta el comando de deploy.
+
+</Steps>
+
+```bash
+python -m robotpy deploy
+```
+
+  </TabItem>
+
+  <TabItem label="LabVIEW">
+
+Para pruebas rápidas, abre `Robot Main.vi` y presiona Run. Este método no es permanente.
+
+Para dejar el código en el robot después de reiniciar, usa Build Specifications:
+
+<Aside type="note" title="Flujo oficial">
+Build Specifications → clic derecho en **FRC Robot Boot-up Deployment** → **Build** → clic derecho de nuevo → **Run as Startup**
+</Aside>
+
+  </TabItem>
+</Tabs>
+
+---
+
+## ¿Qué hace exactamente el deploy?
+
+En los tres lenguajes, el deploy hace lo mismo a nivel conceptual: prepara tu código (compilándolo, empaquetándolo o sincronizando dependencias, según el lenguaje), lo transfiere al roboRIO a través de la red y lo deja ejecutándose para que Driver Station pueda comunicarse con él.
+
+<Badge text="roboRIO" />
+
+---
+
+## Verificar comunicación en Driver Station
+
+<CardGrid>
+  <Card title="Communications">
+    Verde = la laptop se comunica con el robot.
+  </Card>
+
+  <Card title="Robot Code">
+    Verde = el programa desplegado está corriendo sin errores.
+  </Card>
+
+  <Card title="Joysticks">
+    Verde = tu control Xbox fue detectado correctamente.
+  </Card>
+</CardGrid>
+
+<LinkCard
+  title="Guía completa de Driver Station"
+  href="/frc/robot-preparation/driver-station/"
+>
+  Si alguno de estos indicadores no aparece en verde, revisa el checklist detallado de conexión, red y configuración.
+</LinkCard>
+
+---
+
+## Habilitar el robot
+
+<Steps>
+
+1. Confirma que Communications y Robot Code estén en verde.
+2. Selecciona el modo `Teleoperated`.
+3. Presiona `Enable`.
+4. Mueve el joystick despacio para confirmar respuesta.
+
+</Steps>
+
+<Aside type="caution" title="Seguridad primero">
+En la primera prueba, coloca el robot elevado con las ruedas libres del suelo, mantén a las personas alejadas del área de movimiento y asegúrate de que alguien tenga acceso inmediato a `Disable`.
+</Aside>
+
+---
+
+## Primeras pruebas recomendadas
+
+- Confirma avance y retroceso con el stick izquierdo
+- Confirma giro con el stick derecho
+- Verifica que la dirección de movimiento coincida con lo esperado
+- Prueba `Disable` como parada de emergencia
+- Repite la prueba con el robot ya en el suelo
+
+---
+
+## Problemas comunes durante el deploy
+
+<Tabs>
+  <TabItem label="Java / C++">
+    <ul>
+      <li>Verifica conexión al roboRIO</li>
+      <li>Revisa el Team Number configurado en el proyecto</li>
+      <li>Reinicia VS Code</li>
+      <li>Verifica firewall de Windows</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Python">
+    <ul>
+      <li>Verifica conexión al roboRIO</li>
+      <li>Ejecuta <code>py -3 -m robotpy sync</code> antes de reintentar</li>
+      <li>Revisa dependencias faltantes en <code>pyproject.toml</code></li>
+      <li>Verifica firewall de Windows</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="LabVIEW">
+    <ul>
+      <li>Cierra otras instancias de LabVIEW antes de hacer Build</li>
+      <li>Acepta los diálogos de conflicto si aparecen al reconstruir</li>
+      <li>Confirma que Build Specifications no tenga errores antes de correr Build</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot Code en rojo">
+    <ul>
+      <li>El deploy no terminó de completarse</li>
+      <li>Hay un error en el programa que impide iniciarlo</li>
+      <li>El roboRIO se está reiniciando</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora que tu robot enciende, comunica y responde, puedes continuar con:
+
+- Command-Based Programming
+- Sensores
+- Autonomous
+- Dashboards
+- Debugging
+
+<Aside type="note" title="Importante">
+Esta guía cubre el flujo mínimo para tener un robot funcionando y probado en pits. Los temas avanzados de arquitectura y control tendrán secciones dedicadas más adelante.
+</Aside>

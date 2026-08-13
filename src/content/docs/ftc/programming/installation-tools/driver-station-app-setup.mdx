@@ -1,0 +1,130 @@
+---
+title: Configuración de la App Driver Station
+description: Instalación de la app oficial FTC Driver Station en un teléfono Android o Driver Hub.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+La app **Driver Station** es la que usas para conectarte al robot, seleccionar tu OpMode y habilitarlo durante pruebas y partidos.
+
+Esta guía instala esa app, sin importar si tu equipo usa un Driver Hub oficial o un teléfono Android como driver station.
+
+<Aside type="caution" title="Importante: ya no está en Google Play">
+Desde la versión 6.1 (2021), las apps oficiales de FTC (Driver Station y Robot Controller) **ya no están disponibles en Google Play**. Deben instalarse por uno de los dos métodos oficiales de esta guía.
+</Aside>
+
+---
+
+## Dos formas de instalar
+
+<Tabs>
+  <TabItem label="REV Hardware Client (recomendado)">
+
+REV Hardware Client (RHC) es la herramienta oficial de REV para actualizar el Control Hub, Driver Hub y las apps de FTC. Solo está disponible para Windows.
+
+<Steps>
+
+1. Instala REV Hardware Client en tu computadora Windows (si aún no lo tienes).
+2. Conecta el teléfono o Driver Hub a la computadora con un **cable USB de datos** (no uno de solo carga).
+3. Abre REV Hardware Client y espera a que detecte el dispositivo.
+4. Haz clic en el ícono del dispositivo conectado.
+5. Presiona el botón **Update**.
+
+</Steps>
+
+<Aside type="note" title="Versiones anteriores">
+RHC también te permite elegir una versión anterior desde un menú desplegable, en caso de que tu equipo necesite mantener compatibilidad con una versión específica.
+</Aside>
+
+  </TabItem>
+
+  <TabItem label="Side-loading (APK manual)">
+
+Si no tienes acceso a REV Hardware Client, puedes instalar la app manualmente descargando el archivo APK desde GitHub.
+
+<Steps>
+
+1. Entra al repositorio oficial `FtcRobotController` en GitHub.
+2. Ve a la sección Releases y selecciona la versión más reciente.
+3. Descarga el archivo **FtcDriverStation-release.apk** desde Assets.
+4. Conecta el teléfono a tu computadora con un cable USB de datos.
+5. Copia el archivo `.apk` a la carpeta Downloads del teléfono.
+6. Si ya existe una versión anterior de Driver Station, desinstálala primero.
+7. En el teléfono, abre la app Archivos (o tu administrador de archivos), entra a Downloads y toca el archivo `.apk`.
+8. Acepta los permisos que solicite el sistema para completar la instalación.
+
+</Steps>
+
+<LinkCard
+  title="FtcRobotController - Releases"
+  href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/releases"
+  description="Descarga FtcDriverStation-release.apk desde Assets."
+/>
+
+  </TabItem>
+</Tabs>
+
+<Aside type="caution" title="Mantén las versiones sincronizadas">
+Si actualizas la app Driver Station, actualiza también la app Robot Controller del Control Hub a la misma versión. Usar versiones distintas entre ambas puede causar errores de comunicación.
+</Aside>
+
+---
+
+## Nombrar tu Driver Station
+
+Según el reglamento de FTC, el Driver Station debe llevar un nombre con este formato:
+
+```txt
+<team number>-DS
+```
+
+Por ejemplo, el equipo 12345 debería nombrar su dispositivo `12345-DS`.
+
+---
+
+## Verificar instalación
+
+- La app Driver Station abre sin errores
+- El nombre del dispositivo sigue el formato `<team number>-DS`
+- La versión de Driver Station coincide con la versión de Robot Controller del Control Hub
+
+<Badge text="Driver Station" />
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="RHC no detecta el dispositivo">
+    <ul>
+      <li>Confirma que el cable sea de datos, no solo de carga</li>
+      <li>Prueba otro puerto USB</li>
+      <li>Revisa que el teléfono tenga la depuración USB permitida si el sistema lo solicita</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="No se puede instalar el APK">
+    <ul>
+      <li>Desinstala cualquier versión anterior antes de instalar la nueva</li>
+      <li>Confirma que el archivo se descargó completo</li>
+      <li>Revisa los permisos de instalación que pida tu versión de Android</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot Controller y Driver Station no comunican">
+    <ul>
+      <li>Verifica que ambas apps tengan la misma versión</li>
+      <li>Confirma que estás conectado a la red correcta del Control Hub</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Preparación del Robot"
+  href="/ftc/robot-preparation/"
+  description="Configura el Control Hub y empareja tu Driver Station con el robot."
+/>

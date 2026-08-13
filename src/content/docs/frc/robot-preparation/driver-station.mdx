@@ -1,0 +1,181 @@
+---
+title: Driver Station
+description: Configuración básica y uso de FRC Driver Station.
+---
+
+import ds_icon from '../../../../assets/FRC/DS_icon.png';
+import numero from '../../../../assets/FRC/ds_numero.png';
+import ds from '../../../../assets/FRC/driver_station.png';
+
+import { Card, CardGrid, Tabs, TabItem, LinkCard} from '@astrojs/starlight/components';
+
+
+La FRC Driver Station es la aplicación principal utilizada para comunicarse y controlar el robot durante pruebas y competencias.
+
+:::tip[¿Qué hace Driver Station?]
+La Driver Station funciona como intermediario entre la laptop y el robot. Desde aquí puedes habilitar el robot, monitorear el estado del sistema y controlar diferentes modos de operación.
+:::
+
+Con ella puedes:
+
+- Conectarte al robot
+- Ver el estado de comunicación
+- Habilitar y deshabilitar el robot
+- Revisar voltaje y errores
+- Seleccionar modos de operación
+
+---
+
+## Antes de comenzar
+
+Asegúrate de:
+
+- Tener instalado FRC Game Tools
+- Haber configurado el roboRIO
+- Estar conectado por Ethernet o USB
+- Tener el Team Number correcto
+
+:::note[Consejo]
+Conecta primero el roboRIO antes de abrir Driver Station para evitar problemas de detección.
+:::
+
+---
+
+## Abrir Driver Station
+
+Busca la aplicación `FRC Driver Station` en Windows y ejecútala.
+
+<img
+  src={ds_icon.src}
+  width="100"
+/>
+
+---
+
+## Configuración inicial
+
+### Team Number
+
+Haz clic en el ícono de configuración y escribe el número de tu equipo.
+
+<img
+  src={numero.src}
+
+/>
+
+:::tip[Importante]
+Si el Team Number es incorrecto, el robot no aparecerá conectado.
+:::
+
+---
+
+# Vista general
+
+La interfaz principal de Driver Station muestra el estado actual del robot y la conexión.
+
+<img
+  src={ds.src}
+  style="border-radius: 12px;"
+/>
+
+---
+
+# Indicadores principales
+
+<CardGrid>
+  <Card title="Communications">
+    Indica si la computadora puede comunicarse con el robot.
+
+    - Verde = conectado  
+    - Rojo = sin comunicación
+  </Card>
+
+  <Card title="Robot Code">
+    Indica si el programa del robot está ejecutándose correctamente.
+
+    - Verde = código funcionando  
+    - Rojo = error o código detenido
+  </Card>
+
+  <Card title="Joysticks">
+    Indica si los controles fueron detectados correctamente.
+  </Card>
+</CardGrid>
+
+---
+
+# Modos del robot
+
+<CardGrid>
+  <Card title="Teleoperated">
+    Permite controlar el robot manualmente utilizando joysticks o controles.
+  </Card>
+
+  <Card title="Autonomous">
+    Ejecuta el programa autónomo configurado en el robot.
+  </Card>
+
+  <Card title="Test">
+    Utilizado para pruebas específicas y debugging.
+  </Card>
+
+  <Card title="Disable">
+    Deshabilita todos los motores y actuadores del robot.
+  </Card>
+</CardGrid>
+
+:::caution[Seguridad]
+Nunca habilites el robot si alguien está trabajando físicamente en él.
+:::
+
+---
+
+# Habilitar el robot
+
+1. Verifica que:
+   - Communications esté en verde
+   - Robot Code esté en verde
+2. Selecciona el modo deseado
+3. Haz clic en `Enable`
+
+El robot debería comenzar a responder inmediatamente.
+
+:::tip[¿Qué sucede al habilitar el robot?]
+Cuando habilitas el robot, Driver Station comienza a enviar comandos al roboRIO y permite que el código controle motores y actuadores.
+:::
+
+---
+
+# Problemas comunes
+
+<Tabs>
+  <TabItem label="Robot no conecta">
+    <ul>
+      <li>Team Number correcto</li>
+      <li>Cable Ethernet conectado</li>
+      <li>roboRIO encendido</li>
+      <li>Firewall de Windows</li>
+      <li>Radio correctamente configurada</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot Code rojo">
+    <ul>
+      <li>El código no fue desplegado</li>
+      <li>Error en el programa</li>
+      <li>roboRIO reiniciándose</li>
+      <li>Proyecto compilado incorrectamente</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="No detecta controles">
+    <ul>
+      <li>Reconecta el control</li>
+      <li>Reinicia Driver Station</li>
+      <li>Verifica Windows Game Controllers</li>
+      <li>Cambia de puerto USB</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---

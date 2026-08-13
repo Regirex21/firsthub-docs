@@ -1,0 +1,115 @@
+---
+title: Configuración del Driver Hub
+description: Emparejamiento del Driver Hub con el Control Hub.
+---
+
+import { Aside, Steps, LinkCard, Tabs, TabItem, Badge } from '@astrojs/starlight/components';
+
+<Aside type="note" title="Fuente">
+Contenido traducido de <a href="https://docs.revrobotics.com/duo-control/menu/control-hub-gs/driver-station-pairing-to-control-hub">Connecting Driver Station to Control Hub</a> (docs.revrobotics.com), con el complemento de <a href="https://docs.revrobotics.com/duo-control/troubleshooting-the-control-system/driver-hub-troubleshooting">Driver Hub Troubleshooting</a>.
+</Aside>
+
+---
+
+## Antes de emparejar
+
+Conecta una batería Slim de 12V al conector XT30 etiquetado **BATTERY** en el Control Hub. El Control Hub está listo para emparejar cuando el LED se pone verde.
+
+---
+
+## Emparejar por primera vez
+
+<Steps>
+
+1. Abre la aplicación Driver Station desde la pantalla HOME.
+2. Toca los tres puntos en la esquina superior derecha para abrir el menú desplegable.
+3. Selecciona **Settings**.
+4. Elige **Pair with Robot Controller**.
+5. Selecciona **Wi-Fi Settings**.
+6. Selecciona el nombre de la red WiFi generada por tu Control Hub. El SSID por defecto empieza con **FIRST-** o **FTC-**.
+7. Ingresa la contraseña de esa red (por defecto es `password`) y presiona **CONNECT**.
+8. Regresa a la pantalla principal de Driver Station con la flecha de atrás.
+
+</Steps>
+
+Después de un par de segundos, la pantalla de Driver Station mostrará el nombre de la red, un tiempo de ping y el voltaje de la batería.
+
+<Aside type="note" title="Esto se hace una sola vez por par de hardware">
+El emparejamiento entre Driver Hub y Control Hub solo necesita hacerse una vez por cada conjunto de hardware. Si reemplazas tu Driver Hub o tu Control Hub, deberás repetir este proceso.
+</Aside>
+
+<Badge text="Driver Hub" />
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="El WiFi no enciende">
+
+Esto se presenta con mayor frecuencia como que el WiFi del Driver Hub deja de funcionar por completo, generalmente por daño físico del chip WiFi. REV recomienda su servicio de reparación o contactar soporte.
+
+  </TabItem>
+
+  <TabItem label="Se desconecta después de dormirse">
+
+Existe un problema conocido donde el driver de WiFi no reinicia correctamente cuando el Driver Hub despierta de un estado de suspensión. La solución actual es hacer un reinicio completo (hard reboot) cuando ocurran problemas de conexión.
+
+  </TabItem>
+
+  <TabItem label="Se desconecta al activar mecanismos">
+
+La causa raíz suele ser una caída de voltaje (brown out) por mecanismos de alto consumo que exigen demasiado a la batería. Indicadores: el voltaje muestra 9V o menos, los motores corren más lento, y ocurren sonidos de desconexión. Revisa el cuidado adecuado de la batería y asegúrate de tener una fuente de energía suficiente.
+
+  </TabItem>
+
+  <TabItem label='"App Not Installed" al abrir Driver Station'>
+
+La causa es una fecha/hora incorrecta en el Driver Hub. Corrige la fecha y hora, luego elimina el ícono de la app y arrastra uno nuevo desde el cajón de apps.
+
+  </TabItem>
+
+  <TabItem label="La app queda bloqueada por permisos de Android">
+
+Realiza un restablecimiento de fábrica: Settings → System → Reset Options → Erase all data.
+
+  </TabItem>
+
+  <TabItem label="Pérdida intermitente de energía de batería">
+
+Dos soluciones documentadas: (1) usar papel doblado o cinta en el borde delgado de la batería, opuesto a los contactos, o (2) aplicar cinta de espuma dentro del compartimento de la batería, opuesto al switch de contacto, para una conexión más firme.
+
+  </TabItem>
+
+  <TabItem label="Problemas de carga o descarga de batería">
+
+Verifica la orientación de la batería, usa el cargador original (no uno PD), realiza una recalibración de batería, e intenta el procedimiento de recuperación por "lockout" documentado por REV.
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Recursos oficiales
+
+<LinkCard
+  title="Connecting Driver Station to Control Hub - REV Robotics"
+  href="https://docs.revrobotics.com/duo-control/menu/control-hub-gs/driver-station-pairing-to-control-hub"
+  description="Documentación oficial del proceso de emparejamiento."
+/>
+
+<LinkCard
+  title="Driver Hub Troubleshooting - REV Robotics"
+  href="https://docs.revrobotics.com/duo-control/troubleshooting-the-control-system/driver-hub-troubleshooting"
+  description="Documentación oficial de problemas comunes."
+/>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Configuración de Red"
+  href="/ftc/robot-preparation/network-configuration/"
+  description="Cambia el nombre, contraseña y canal antes de llevar el robot a un evento."
+/>

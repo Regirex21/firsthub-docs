@@ -1,0 +1,176 @@
+---
+title: Centro de Programación
+description: Centro de documentación del área de programación para FIRST Tech Challenge.
+---
+
+import { CardGrid, LinkCard, Aside, Tabs, TabItem, Steps, Card } from '@astrojs/starlight/components';
+
+El área de programación desarrolla el software que controla el robot mediante **OpModes**: código que corre directamente en el Control Hub y se comanda de forma remota desde el Driver Hub.
+
+En FTC, el código conecta hardware y estrategia: manejo, mecanismos, sensores, autónomos, visión y diagnóstico en pits.
+
+<Aside type="note" title="Empieza aquí">
+Si eres nuevo, comienza por Instalación y Herramientas. Puedes avanzar sin dominar programación al inicio, pero para crecer necesitarás practicar Blocks o Java.
+</Aside>
+
+---
+
+## ¿Qué hace programación en FTC?
+
+<CardGrid>
+  <Card title="Drivetrain" icon="download">
+    Sistema de manejo tank o mecanum, controles y respuesta del robot.
+  </Card>
+
+  <Card title="Mecanismos" icon="download">
+    Intakes, brazos, garras y subsistemas del robot.
+  </Card>
+
+  <Card title="Autónomos" icon="download">
+    Rutinas automáticas para sumar puntos al inicio del match.
+  </Card>
+
+  <Card title="Sensores" icon="download">
+    Encoders, IMU, sensores de color y distancia.
+  </Card>
+
+  <Card title="Visión" icon="download">
+    Detección de props y elementos de juego con la cámara.
+  </Card>
+
+  <Card title="Diagnóstico" icon="download">
+    Telemetry, logs y resolución de problemas en pits.
+  </Card>
+</CardGrid>
+
+---
+
+## ¿Nuevo en programación?
+
+Puedes empezar aunque no sepas programar. Muchos equipos comienzan con Blocks, el editor visual, y avanzan a Java cuando necesitan más control.
+
+Apoyarse en miembros con más experiencia es clave, y no hay preguntas tontas.
+
+<Aside type="tip" title="Recomendación">
+Blocks es ideal para empezar rápido o para mentorías con estudiantes nuevos. Si tu equipo busca mayor profundidad técnica a largo plazo —o planea eventualmente pasar a FRC— Java es la mejor inversión.
+</Aside>
+
+---
+
+## Recursos oficiales
+
+<CardGrid>
+  <LinkCard
+    title="FTC Docs"
+    href="https://ftc-docs.firstinspires.org/"
+  >
+    Documentación técnica oficial del control system de FTC.
+  </LinkCard>
+
+  <LinkCard
+    title="FtcRobotController (GitHub)"
+    href="https://github.com/FIRST-Tech-Challenge/FtcRobotController"
+  >
+    Repositorio oficial del SDK utilizado en Android Studio y OnBot Java.
+  </LinkCard>
+
+  <LinkCard
+    title="REV Robotics Docs"
+    href="https://docs.revrobotics.com/"
+  >
+    Documentación de Control Hub, Driver Hub y hardware REV.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## Ruta sugerida de aprendizaje
+
+<Tabs>
+
+<TabItem label="Nuevo">
+
+<Steps>
+
+1. Instalar herramientas  
+2. Aprender la interfaz de Blocks o variables básicas en Java  
+3. Entender qué es un OpMode  
+4. Ejecutar un TeleOp de prueba  
+5. Probar el drivetrain en el robot  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Intermedio">
+
+<Steps>
+
+1. OpModes lineales vs. iterativos  
+2. Sensores y encoders  
+3. Autónomo básico con temporizadores  
+4. Introducción a visión (detección de props)  
+5. Git colaborativo  
+
+</Steps>
+
+</TabItem>
+
+<TabItem label="Avanzado">
+
+<Steps>
+
+1. Road Runner para trayectorias en autónomo  
+2. FTC Dashboard para tuning en tiempo real  
+3. Visión avanzada con TensorFlow  
+4. Arquitectura por subsistemas  
+5. PID control  
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Buenas prácticas
+
+- Código entendible
+- Cambios pequeños y probados
+- Nombres claros
+- Uso constante de Git
+- Respaldos frecuentes
+- Documentar decisiones
+- Probar antes del evento
+
+<Aside type="tip" title="Consejo">
+Es mejor un OpMode simple y confiable que uno complejo e inestable.
+</Aside>
+
+---
+
+## Explorar documentación
+
+<CardGrid>
+  <LinkCard
+    title="Instalación y herramientas"
+    href="/ftc/programming/installation-tools/"
+  >
+    Todo lo necesario para preparar una laptop y un teléfono de FTC.
+  </LinkCard>
+
+  <LinkCard
+    title="Preparación del Robot"
+    href="/ftc/robot-preparation/"
+  >
+    Control Hub, Driver Hub y red inalámbrica.
+  </LinkCard>
+
+  <LinkCard
+    title="Programación del robot"
+    href="/ftc/programming/robot-programming/"
+  >
+    Crea tu primer drivetrain en Java o Blocks.
+  </LinkCard>
+</CardGrid>

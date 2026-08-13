@@ -1,0 +1,108 @@
+---
+title: Driver Station
+description: Uso del Driver Hub y la app Driver Station para controlar el robot.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+<Aside type="note" title="Fuente">
+Contenido traducido de <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_smartphone_ds/Managing-a-Smartphone-Driver-Station.html">Managing a Driver Hub</a> y de <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/creating_op_modes/Creating-and-Running-an-Op-Mode-(Android-Studio).html">Creating and Running an Op Mode</a> (ftc-docs.firstinspires.org).
+</Aside>
+
+El REV Driver Hub viene precargado con la app Driver Station (DS). Los procedimientos descritos aquí para un REV Driver Hub también aplican al usar un teléfono Android como DS.
+
+---
+
+## Verificar la conexión
+
+Después de emparejar, la pantalla de Driver Station muestra el nombre de la red, un tiempo de ping y el voltaje de la batería.
+
+---
+
+## Nombrar tu Driver Station
+
+Para cumplir con el Competition Manual, el nombre del Driver Station debe cambiarse, configurando los dispositivos según el número de tu equipo:
+
+- El **ROBOT CONTROLLER** debe llamarse `<team number>-RC` (por ejemplo `12345-RC`)
+- El **DRIVER STATION** debe llamarse `<team number>-DS` (por ejemplo `12345-DS`)
+- Los dispositivos de repuesto pueden usar designadores de letra, por ejemplo `12345-A-DS`, `12345-B-DS`
+
+<Steps>
+
+1. En la app Driver Station, toca los tres puntos en la esquina superior derecha para mostrar el menú.
+2. Selecciona **Settings**.
+3. Toca **Driver Station Name** en la página DRIVER STATION SETTINGS.
+4. Especifica el nuevo nombre y presiona **OK** para aceptar los cambios.
+
+</Steps>
+
+<Aside type="caution" title="Ícono de advertencia por nombres no coincidentes">
+Si el nombre del Driver Station y el del Robot Controller no coinciden como se espera, aparece un ícono de advertencia (un signo de exclamación amarillo con círculo).
+</Aside>
+
+---
+
+## Actualizar la app Driver Station
+
+<Aside type="caution" title="Ya no está en Google Play">
+Desde 2021, todas las apps de FTC (v6.1 y superiores) ya no están disponibles en Google Play.
+</Aside>
+
+<Tabs>
+  <TabItem label="REV Hardware Client (recomendado)">
+
+Todos los equipos que usan Blocks, OnBot Java o Android Studio pueden usar REV Hardware Client para actualizar la app Driver Station en un teléfono DS. Se estima un tiempo de 7.5 minutos por dispositivo.
+
+REV Hardware Client también permite: conectar por WiFi al Control Hub, actualizar con un clic el software de todos los dispositivos conectados, pre-descargar sin tener los dispositivos conectados, respaldar y restaurar, instalar o cambiar entre las apps DS y RC, y acceder a la Robot Control Console.
+
+  </TabItem>
+
+  <TabItem label="Side-loading (APK manual)">
+
+Los releases de la app están disponibles en el GitHub de FtcRobotController. Descarga el archivo APK de Driver Station a una computadora, transfiérelo a la carpeta Downloads del teléfono DS, y abre ese archivo para instalar la app DS. Este proceso se llama "side-loading".
+
+  </TabItem>
+</Tabs>
+
+<Aside type="caution" title="Mantén las versiones sincronizadas">
+Si actualizas la app Driver Station (DS), también debes actualizar la app Robot Controller (RC) al mismo número de versión.
+</Aside>
+
+<Aside type="note" title="Ver la versión instalada">
+Selecciona la opción de menú **About** en Driver Station y verifica el número de **App Version**.
+</Aside>
+
+---
+
+## Seleccionar y correr un OpMode
+
+<Steps>
+
+1. Selecciona tu OpMode desde el dropdown de **TeleOp**.
+2. Presiona el botón **INIT** para inicializar.
+3. Presiona el botón triangular de **start** para comenzar la ejecución.
+4. Presiona el botón cuadrado de **stop** para terminar.
+
+</Steps>
+
+<Badge text="Driver Station" />
+
+---
+
+## Recursos oficiales
+
+<LinkCard
+  title="Managing a Driver Hub - FTC Docs"
+  href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_smartphone_ds/Managing-a-Smartphone-Driver-Station.html"
+  description="Documentación oficial de nombre y actualización de la app."
+/>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Corriendo el programa"
+  href="/ftc/programming/robot-programming/corriendo-el-programa/"
+  description="Flujo completo de Build/Run, selección de OpMode e INIT/START por ruta."
+/>

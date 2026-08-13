@@ -1,0 +1,116 @@
+---
+title: Preparación para Instalación Offline
+description: Cómo descargar y preparar instaladores de FTC para usarlos sin internet en talleres, escuelas o eventos.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+La instalación offline permite preparar todas las herramientas de FTC con anticipación para usarlas en computadoras y teléfonos sin internet o con conexión inestable.
+
+Es especialmente útil para equipos nuevos, talleres, laboratorios escolares y días de competencia.
+
+<Aside type="note" title="Qué lograrás">
+Al terminar esta guía tendrás una USB o carpeta local con todo lo necesario para instalar herramientas de FTC sin depender de internet.
+</Aside>
+
+---
+
+## ¿Cuándo conviene instalación offline?
+
+- Escuelas con redes restringidas o internet lento en campus
+- Talleres donde vas a preparar varias laptops o teléfonos el mismo día
+- Competencias, como respaldo si el WiFi del venue falla
+- Equipos nuevos que quieren evitar perder tiempo descargando archivos en el primer taller
+
+---
+
+## Qué deberías descargar antes
+
+- Instalador de **Android Studio** (solo si tu equipo usará esa ruta)
+- **Source code (zip)** de la versión actual de `FtcRobotController`
+- Instalador de **REV Hardware Client** (necesario para actualizar Control Hub y Driver Station)
+- El archivo **FtcDriverStation-release.apk**, por si necesitas instalar Driver Station sin RHC
+- Copia local o PDF de la documentación de FTC que tu equipo consulte con frecuencia
+
+<Aside type="tip" title="Firmware del Control Hub">
+REV Hardware Client descarga el firmware del Control Hub antes de aplicarlo. Si tu versión de RHC lo permite, descarga el firmware con anticipación mientras tengas internet, para no depender de conexión el día de la instalación.
+</Aside>
+
+---
+
+## Descarga oficial
+
+<LinkCard
+  title="Android Studio"
+  href="https://developer.android.com/studio"
+  description="Instalador oficial de Google."
+/>
+
+<LinkCard
+  title="FtcRobotController - Releases"
+  href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/releases"
+  description="Source code (zip) y FtcDriverStation-release.apk."
+/>
+
+<LinkCard
+  title="FTC Docs"
+  href="https://ftc-docs.firstinspires.org/"
+  description="Documentación oficial del control system de FTC."
+/>
+
+---
+
+## Preparación paso a paso
+
+<Steps>
+
+1. Desde una computadora con internet, descarga todos los instaladores y archivos actuales.
+2. Verifica que correspondan a la temporada correcta.
+3. Guarda cada archivo en carpetas ordenadas.
+4. Renombra archivos si es necesario para identificarlos rápido.
+5. Copia todo a una USB o disco externo.
+6. Prueba al menos una instalación completa en otra laptop antes del taller.
+
+</Steps>
+
+---
+
+## Nombres recomendados de archivos
+
+| Archivo | Nombre sugerido |
+|---|---|
+| Android Studio | AndroidStudio-2026.exe |
+| FtcRobotController | FtcRobotController-Source-2026.zip |
+| REV Hardware Client | REV-HardwareClient-2026.exe |
+| Driver Station APK | FtcDriverStation-release-2026.apk |
+
+Estos nombres deben ser coherentes con la temporada y fáciles de identificar rápidamente.
+
+---
+
+## Checklist final
+
+- USB preparada
+- Instaladores de la temporada correcta
+- Source code de FtcRobotController descargado
+- REV Hardware Client incluido
+- APK de Driver Station incluido
+- Instalación probada en al menos una laptop
+
+<Badge text="Offline Ready" />
+
+---
+
+## Recursos relacionados
+
+<LinkCard
+  title="Android Studio Setup"
+  href="/ftc/programming/installation-tools/android-studio-setup/"
+  description="Instalación completa del IDE y el proyecto FtcRobotController."
+/>
+
+<LinkCard
+  title="Driver Station App Setup"
+  href="/ftc/programming/installation-tools/driver-station-app-setup/"
+  description="Instalación de la app Driver Station vía RHC o APK."
+/>

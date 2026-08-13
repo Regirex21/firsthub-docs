@@ -1,0 +1,84 @@
+---
+title: Siguientes Pasos
+description: Qué hacer después de instalar las herramientas principales de FTC.
+---
+
+import {
+  Aside,
+  Steps,
+  Tabs,
+  TabItem,
+  LinkCard,
+  LinkButton,
+  Badge,
+  Code,
+} from '@astrojs/starlight/components';
+
+Ya elegiste tu ruta de programación e instalaste lo necesario, felicidades! Ahora empieza el trabajo real: conectar el Control Hub, crear tu primer OpMode y hacer que el robot responda.
+
+---
+
+## Ruta Recomendada
+
+<Steps>
+
+1. Confirmar que tu editor (Blocks, OnBot Java o Android Studio) abre correctamente.
+2. Conectarte a la red del Control Hub.
+3. Crear o abrir tu primer OpMode.
+4. Compilar o guardar sin errores.
+5. Hacer tu primer deploy al Control Hub.
+6. Probar un movimiento básico desde Driver Station.
+
+</Steps>
+
+---
+
+## Acciones que debes dominar según tu ruta
+
+<Code
+  lang="txt"
+  title="Acción principal por ruta"
+  code={`Blocks         → Save
+OnBot Java     → Build
+Android Studio → Run (▶)`}
+ />
+
+---
+
+## Según tu ruta
+
+<Tabs>
+
+<TabItem label="Blocks">
+
+- La forma más rápida de ver algo funcionando
+- No requiere instalar nada
+- Ideal para estudiantes nuevos en programación
+
+</TabItem>
+
+<TabItem label="OnBot Java">
+
+- Java real, corriendo directo en el Control Hub
+- Buen punto intermedio antes de Android Studio
+- No necesitas instalar un IDE
+
+</TabItem>
+
+<TabItem label="Android Studio">
+
+- Mayor control del proyecto completo
+- Mejor para equipos que ya programan
+- Requiere mantener Android Studio y el proyecto actualizados cada temporada
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Siguiente documentación recomendada
+
+<LinkButton href="/ftc/robot-preparation/">
+Continuar con Preparación del Robot →
+</LinkButton>

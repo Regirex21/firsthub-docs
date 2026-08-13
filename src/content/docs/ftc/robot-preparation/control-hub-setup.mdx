@@ -1,0 +1,121 @@
+---
+title: Configuración del Control Hub
+description: Encendido inicial y actualización de firmware y sistema operativo del Control Hub.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+Esta guía traduce el proceso oficial de FIRST y REV Robotics para encender el Control Hub y mantener actualizados su sistema operativo (Control Hub OS) y su firmware.
+
+<Aside type="note" title="Fuente">
+Contenido traducido de <a href="https://ftc-docs.firstinspires.org/en/latest/ftc_sdk/updating/controlhub_os/Updating-the-Control-Hub-OS.html">Updating the Control Hub OS</a> (ftc-docs) y <a href="https://docs.revrobotics.com/duo-control/managing-the-control-system/updating-firmware">Updating Firmware</a> (docs.revrobotics.com).
+</Aside>
+
+---
+
+## Encender el Control Hub
+
+Conecta una batería de 12V al conector XT30 etiquetado **BATTERY** en el Control Hub.
+
+El Control Hub está listo para emparejar (y para trabajar con él) cuando el LED cambia a verde.
+
+---
+
+## Verificar la versión actual del sistema operativo
+
+<Tabs>
+  <TabItem label="REV Hardware Client">
+
+Haz clic en el ícono grande del Hub. En la sección **Control Hub Operating System** verás si hay una diferencia entre tu versión actual y la más reciente disponible.
+
+  </TabItem>
+
+  <TabItem label="Manage Page">
+
+Conéctate a la red WiFi del Control Hub y accede a la pestaña **Manage** desde el navegador Chrome.
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Actualizar el Control Hub OS
+
+<Tabs>
+  <TabItem label="REV Hardware Client (Windows)">
+
+<Steps>
+
+1. Conecta el Control Hub directamente a una computadora con REV Hardware Client, usando un cable de datos USB-C.
+2. Confirma que existe una versión más reciente disponible.
+3. Presiona el botón azul **Update**.
+
+</Steps>
+
+  </TabItem>
+
+  <TabItem label="Manage Page (navegador)">
+
+<Steps>
+
+1. Descarga el archivo del OS correspondiente.
+2. Ve a la pestaña **Manage**.
+3. Selecciona el archivo descargado.
+4. Presiona **Update & Reboot**.
+
+</Steps>
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Actualizar el firmware del Hub
+
+<Aside type="note" title="Requisito previo (según la fuente)">
+Para usar REV Hardware Client en actualizaciones de firmware, la aplicación Robot Controller debe estar previamente actualizada a la versión 5.5.
+</Aside>
+
+<Steps>
+
+1. Enciende el Control Hub con una batería de 12V y espera a que el LED se ponga verde.
+2. Conéctalo a la computadora con un cable USB-A a USB-C (REV-11-1232).
+3. Abre REV Hardware Client y selecciona el Control Hub en la pestaña **Hardware**.
+4. En la pestaña **Update**, busca **Hub Firmware** y presiona **Download**.
+5. Cuando termine de descargar, presiona **Update**.
+
+</Steps>
+
+Cuando la actualización de firmware termina, el estado cambia a **Up-to-Date**.
+
+<Aside type="caution" title="Método alternativo: Robot Controller Console">
+Si actualizas desde la Robot Controller Console en vez de REV Hardware Client, la documentación advierte: espera a que el proceso termine; no desconectes el Hub ni reinicies el robot.
+</Aside>
+
+<Badge text="Control Hub" />
+
+---
+
+## Recursos oficiales
+
+<LinkCard
+  title="Updating the Control Hub OS - FTC Docs"
+  href="https://ftc-docs.firstinspires.org/en/latest/ftc_sdk/updating/controlhub_os/Updating-the-Control-Hub-OS.html"
+  description="Documentación oficial del proceso de actualización de OS."
+/>
+
+<LinkCard
+  title="Updating Firmware - REV Robotics"
+  href="https://docs.revrobotics.com/duo-control/managing-the-control-system/updating-firmware"
+  description="Documentación oficial del proceso de actualización de firmware."
+/>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Driver Hub Setup"
+  href="/ftc/robot-preparation/driver-hub-setup/"
+  description="Empareja tu Driver Hub con este Control Hub."
+/>

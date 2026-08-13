@@ -1,0 +1,156 @@
+---
+title: Configuración de Android Studio
+description: Instalación de Android Studio y el proyecto FtcRobotController para programar en Java.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+Android Studio es el IDE oficial de Google para desarrollo Android, y también el entorno recomendado por FIRST cuando un equipo necesita más control del que ofrece OnBot Java.
+
+Aquí instalarás Android Studio y el proyecto oficial `FtcRobotController`, la base de código que FIRST publica cada temporada.
+
+<Aside type="note" title="Qué lograrás">
+Al terminar esta guía deberías poder abrir el proyecto FtcRobotController en Android Studio y compilarlo sin errores.
+</Aside>
+
+---
+
+## Antes de instalar
+
+- Computadora con Windows, macOS o Linux
+- Verifica los [requisitos mínimos oficiales de Android Studio](https://developer.android.com/studio) antes de descargar
+- Espacio libre suficiente (Android Studio + SDK ocupan varios GB)
+- Permisos de administrador
+- Conexión a internet estable para la descarga inicial
+
+<Aside type="tip" title="¿Necesitas esto si usarás Blocks u OnBot Java?">
+No. Esta guía es solo para la ruta Android Studio. Si tu equipo usa Blocks u OnBot Java, todo corre en el navegador desde el Control Hub y puedes saltarte esta página.
+</Aside>
+
+---
+
+## Descargar Android Studio
+
+Android Studio se distribuye gratuitamente desde el sitio oficial de Android.
+
+<LinkCard
+  title="Android Studio - Descarga oficial"
+  href="https://developer.android.com/studio"
+  description="Sitio oficial de Google para desarrolladores Android."
+/>
+
+---
+
+## Instalación paso a paso
+
+<Steps>
+
+1. Ejecuta el instalador descargado.
+2. Sigue el asistente de instalación con las opciones recomendadas por defecto.
+3. Espera a que termine de descargar los componentes del SDK de Android.
+4. Abre Android Studio al finalizar.
+
+</Steps>
+
+<Aside type="caution" title="Advertencia oficial sobre JDK (Android Studio Ladybug o posterior)">
+La documentación oficial de FTC advierte: con la introducción de Android Studio Ladybug, el JDK incluido con Android Studio es incompatible con el workspace de FtcRobotController. Si instalas o actualizas a Ladybug (o una versión posterior con el mismo JDK empaquetado), necesitarás instalar JDK 17 por separado.
+</Aside>
+
+<Aside type="caution" title="Advertencia oficial sobre Gradle">
+Al abrir el proyecto FtcRobotController por primera vez en versiones recientes de Android Studio, es posible que aparezca un error durante el Gradle sync recomendando actualizar Gradle. La documentación oficial es explícita: **no actualices Gradle**. El proyecto está fijado a una versión específica que FIRST valida cada temporada.
+</Aside>
+
+<Aside type="note" title="Estas advertencias cambian cada temporada">
+Las versiones exactas de Android Studio, JDK y Gradle compatibles cambian con cada temporada del SDK. Antes de instalar, confirma la versión recomendada en la <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/installing_android_studio/Installing-Android-Studio.html">documentación oficial de FTC</a> en vez de asumir que las notas de arriba siguen vigentes.
+</Aside>
+
+---
+
+## Descargar el proyecto FtcRobotController
+
+El código base del robot no viene con Android Studio: se descarga por separado desde el repositorio oficial de FIRST en GitHub.
+
+<LinkCard
+  title="FtcRobotController - Releases"
+  href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/releases"
+  description="Descarga la versión oficial de la temporada actual."
+/>
+
+<Steps>
+
+1. Entra a la página de Releases del repositorio.
+2. Busca la versión correspondiente a la temporada actual (la más reciente, salvo que tu equipo tenga una razón específica para usar otra).
+3. En la sección Assets, descarga **Source code (zip)**.
+4. Extrae el archivo `.zip` a una carpeta de tu elección.
+
+</Steps>
+
+<Aside type="caution" title="Extrae el archivo antes de abrirlo">
+Android Studio necesita la carpeta ya extraída, no el archivo `.zip` directamente.
+</Aside>
+
+---
+
+## Abrir el proyecto en Android Studio
+
+<Steps>
+
+1. Abre Android Studio.
+2. Selecciona **Open** (en versiones anteriores aparece como **Import Project**).
+3. Navega hasta la carpeta que extrajiste y selecciónala.
+4. Espera a que Android Studio termine el Gradle sync.
+
+</Steps>
+
+<Aside type="tip" title="La primera sincronización tarda">
+La primera vez que abras el proyecto, Android Studio descargará dependencias adicionales. Puede tardar varios minutos dependiendo de tu conexión.
+</Aside>
+
+---
+
+## Verificar instalación
+
+- El proyecto abre sin errores de Gradle
+- El módulo `FtcRobotController` aparece en el panel de proyecto
+- Existen OpModes de ejemplo dentro del paquete `org.firstinspires.ftc.robotcontroller.external.samples`
+- El botón Run (▶) está disponible sin errores previos
+
+<Badge text="Android Studio" />
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="Gradle sync falla">
+    <ul>
+      <li>Verifica tu conexión a internet</li>
+      <li>Confirma que no aceptaste la sugerencia de actualizar Gradle</li>
+      <li>Revisa que estés usando la versión de Android Studio recomendada para la temporada actual</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Error relacionado con JDK">
+    <ul>
+      <li>Confirma si tu versión de Android Studio requiere JDK 17 por separado</li>
+      <li>Revisa la documentación oficial de FTC para la versión exacta recomendada</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="El proyecto no abre">
+    <ul>
+      <li>Confirma que seleccionaste la carpeta extraída, no el archivo .zip</li>
+      <li>Vuelve a descargar el Source code desde Releases si el archivo parece incompleto</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguiente paso
+
+<LinkCard
+  title="Driver Station App Setup"
+  href="/ftc/programming/installation-tools/driver-station-app-setup/"
+  description="Instala la app de Driver Station para probar tu código en el robot."
+/>

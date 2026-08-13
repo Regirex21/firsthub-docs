@@ -1,0 +1,465 @@
+---
+title: Drivetrain Java
+description: Crea un drivetrain mecanum usando OpMode, DcMotor y el gamepad en Java, siguiendo el SDK oficial de FTC.
+---
+
+import { Aside, Steps, Tabs, TabItem, CardGrid, LinkCard, Badge } from '@astrojs/starlight/components';
+
+En esta guía crearás un drivetrain mecanum (holonómico) usando Java y el SDK oficial de FTC, ya sea desde OnBot Java o Android Studio: el código es idéntico en ambos.
+
+El objetivo es aprender:
+
+- Qué es un OpMode y cómo funciona `LinearOpMode`
+- Qué es un drivetrain mecanum y por qué es tan común en FTC
+- Cómo configurar motores con `hardwareMap`
+- Cómo leer el gamepad
+- Cómo combinar ejes de movimiento para mover el robot en cualquier dirección
+- Cómo compilar y correr el OpMode
+- Cómo probarlo desde Driver Station
+
+<Aside type="tip" title="Basado en el sample oficial">
+Esta guía sigue de cerca `BasicOmniOpMode_Linear`, el ejemplo oficial que FIRST publica dentro del propio SDK (`FtcRobotController`), traducido y explicado paso a paso.
+</Aside>
+
+---
+
+## ¿Qué es un OpMode?
+
+Un **OpMode** es una clase que corre en el Control Hub y controla el robot durante un período: TeleOp (control manual) o Autonomous (rutina automática).
+
+`LinearOpMode` es el tipo de OpMode más común para empezar: se ejecuta de forma lineal, de arriba hacia abajo, con un bucle principal controlado por `opModeIsActive()`.
+
+<Aside type="note" title="Cómo se selecciona un OpMode">
+El nombre que le des en la anotación `@TeleOp(name="...")` es el que aparece en el dropdown de Driver Station para seleccionarlo.
+</Aside>
+
+---
+
+## ¿Qué es un Drivetrain Mecanum?
+
+Un drivetrain mecanum usa 4 ruedas con rodillos montados en ángulo, formando una X vista desde arriba. Esto le permite al robot moverse en cualquier dirección (adelante, atrás, lateral) sin girar las ruedas ni cambiar su orientación.
+
+Es uno de los drivetrains más usados en FTC, mucho más que en FRC.
+
+<Aside type="note" title="¿Y el drivetrain tank?">
+Un drivetrain tank (2 motores por lado, sin strafe) también es válido y más simple de programar. Esta guía usa mecanum porque es más representativo de lo que verás en la mayoría de robots FTC.
+</Aside>
+
+---
+
+## Antes de comenzar
+
+Asegúrate de tener:
+
+- OnBot Java accesible o Android Studio con el proyecto FtcRobotController abierto
+- Driver Station instalada y conectada al Control Hub
+- Control Hub configurado
+- Gamepad conectado
+- 4 motores mecanum cableados y conectados al Control Hub o Expansion Hub
+
+<CardGrid>
+  <LinkCard title="Android Studio Setup" href="/ftc/programming/installation-tools/android-studio-setup/">
+    Instala Android Studio si usarás esa ruta.
+  </LinkCard>
+
+  <LinkCard title="Preparación del Robot" href="/ftc/robot-preparation/">
+    Configura el Control Hub antes de continuar.
+  </LinkCard>
+</CardGrid>
+
+---
+
+## ¿Qué vamos a construir?
+
+Crearemos un OpMode con:
+
+- 4 motores DcMotor
+- Lectura del gamepad 1
+- Cálculo de potencia por motor combinando 3 ejes de movimiento
+- Normalización de potencias
+- Control desde TeleOp
+
+```txt
+Motores
+├── front_left_drive
+├── back_left_drive
+├── front_right_drive
+└── back_right_drive
+```
+
+---
+
+## Nombrar los motores en la configuración del Robot Controller
+
+Antes de escribir código, los motores deben existir en el archivo de configuración del Robot Controller, con nombres exactos.
+
+<Aside type="note" title="Fuente">
+Pasos traducidos de <a href="https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/getting_started/getting-started.html">Getting Started</a> y <a href="https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/configuring_dc_motor/configuring-dc-motor.html">Configuring a DC Motor</a> (ftc-docs.firstinspires.org).
+</Aside>
+
+<Steps>
+
+1. Toca los tres puntos verticales en la esquina superior derecha de la app Driver Station para abrir el menú.
+2. Selecciona **Configure Robot** para abrir la pantalla Configuration.
+3. Toca la palabra **Motors** para abrir la pantalla Motor Configuration.
+4. Repite esto para los 4 motores: usa el selector desplegable de cada puerto para elegir el tipo de motor, y usa el teclado en pantalla para escribir su nombre — usaremos `front_left_drive`, `back_left_drive`, `front_right_drive`, `back_right_drive`.
+5. Presiona **Done** para completar la configuración de cada motor.
+
+</Steps>
+
+<Aside type="caution" title="Guardar la configuración es un paso aparte">
+La documentación oficial trata "guardar la configuración" como un paso separado después de nombrar los dispositivos, no como parte del mismo formulario. Guarda el archivo de configuración antes de continuar.
+</Aside>
+
+<Aside type="caution" title="Los nombres son sensibles a mayúsculas">
+`hardwareMap.get()` busca el dispositivo por el nombre exacto configurado. Si no coincide (incluyendo mayúsculas), el OpMode fallará al iniciar con un error de hardware no encontrado.
+</Aside>
+
+---
+
+## Importando clases necesarias
+
+```java
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+```
+
+<Aside type="tip" title="¿Qué hacen estas clases?">
+`LinearOpMode` es la clase base de tu OpMode. `TeleOp` es la anotación que lo registra como modo de control manual. `DcMotor` representa un motor controlado por el Control Hub o Expansion Hub.
+</Aside>
+
+---
+
+## Declarando la clase del OpMode
+
+```java
+@TeleOp(name="Mecanum Drive", group="TeleOp")
+public class MecanumDrive extends LinearOpMode {
+
+    private DcMotor frontLeftDrive = null;
+    private DcMotor backLeftDrive = null;
+    private DcMotor frontRightDrive = null;
+    private DcMotor backRightDrive = null;
+
+    @Override
+    public void runOpMode() {
+
+    }
+}
+```
+
+`name` es el texto que verás en el dropdown de Driver Station. `group` te permite organizar varios OpModes relacionados.
+
+---
+
+## Obteniendo los motores desde hardwareMap
+
+Dentro de `runOpMode()`:
+
+```java
+frontLeftDrive  = hardwareMap.get(DcMotor.class, "front_left_drive");
+backLeftDrive   = hardwareMap.get(DcMotor.class, "back_left_drive");
+frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
+backRightDrive  = hardwareMap.get(DcMotor.class, "back_right_drive");
+```
+
+<Aside type="note" title="¿Qué hace hardwareMap?">
+Busca, por nombre, el dispositivo que configuraste en Configure Robot y te devuelve una referencia utilizable en código.
+</Aside>
+
+---
+
+## Invirtiendo motores
+
+```java
+frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
+backRightDrive.setDirection(DcMotor.Direction.FORWARD);
+```
+
+<Aside type="note" title="¿Por qué invertir un lado?">
+Los motores de ambos lados están montados en direcciones opuestas. Sin inversión, un lado avanzará mientras el otro retrocede.
+</Aside>
+
+---
+
+## Inicialización y espera de Start
+
+```java
+telemetry.addData("Status", "Initialized");
+telemetry.update();
+
+waitForStart();
+```
+
+<Aside type="tip" title="¿Qué hace waitForStart()?">
+Pausa la ejecución del OpMode hasta que el driver presiona el botón START en Driver Station, después de haber presionado INIT.
+</Aside>
+
+---
+
+## El bucle principal
+
+```java
+while (opModeIsActive()) {
+
+}
+```
+
+Este bucle se repite continuamente mientras el OpMode está corriendo, hasta que el driver presiona STOP.
+
+---
+
+## Leyendo el gamepad
+
+Dentro del bucle:
+
+```java
+double axial   = -gamepad1.left_stick_y;
+double lateral =  gamepad1.left_stick_x;
+double yaw     =  gamepad1.right_stick_x;
+```
+
+- `axial`: avance/retroceso. Se invierte porque el stick entrega valores negativos hacia arriba.
+- `lateral`: movimiento lateral (strafe), propio de un drivetrain mecanum.
+- `yaw`: rotación del robot.
+
+---
+
+## Calculando la potencia de cada motor
+
+```java
+double frontLeftPower  = axial + lateral + yaw;
+double frontRightPower = axial - lateral - yaw;
+double backLeftPower   = axial - lateral + yaw;
+double backRightPower  = axial + lateral - yaw;
+```
+
+<Aside type="tip" title="¿Por qué esta combinación?">
+Cada motor recibe una combinación lineal de los 3 ejes. Esa combinación es justamente lo que permite que un drivetrain mecanum se mueva en cualquier dirección sin girar las ruedas.
+</Aside>
+
+---
+
+## Normalizando las potencias
+
+```java
+double max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
+max = Math.max(max, Math.abs(backLeftPower));
+max = Math.max(max, Math.abs(backRightPower));
+
+if (max > 1.0) {
+    frontLeftPower  /= max;
+    frontRightPower /= max;
+    backLeftPower   /= max;
+    backRightPower  /= max;
+}
+```
+
+<Aside type="note" title="¿Por qué normalizar?">
+`setPower()` solo acepta valores entre -1 y 1. Al combinar 3 ejes al máximo, la suma puede superar ese rango. Normalizar evita saturar unos motores más que otros y mantiene la proporción entre ellos.
+</Aside>
+
+---
+
+## Enviando la potencia a los motores
+
+```java
+frontLeftDrive.setPower(frontLeftPower);
+frontRightDrive.setPower(frontRightPower);
+backLeftDrive.setPower(backLeftPower);
+backRightDrive.setPower(backRightPower);
+```
+
+---
+
+## Código completo del OpMode
+
+```java
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+@TeleOp(name="Mecanum Drive", group="TeleOp")
+public class MecanumDrive extends LinearOpMode {
+
+    private DcMotor frontLeftDrive = null;
+    private DcMotor backLeftDrive = null;
+    private DcMotor frontRightDrive = null;
+    private DcMotor backRightDrive = null;
+
+    @Override
+    public void runOpMode() {
+
+        // Get motors from hardware configuration
+        frontLeftDrive  = hardwareMap.get(DcMotor.class, "front_left_drive");
+        backLeftDrive   = hardwareMap.get(DcMotor.class, "back_left_drive");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
+        backRightDrive  = hardwareMap.get(DcMotor.class, "back_right_drive");
+
+        // Invert left side
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
+        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
+
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+
+            double axial   = -gamepad1.left_stick_y;
+            double lateral =  gamepad1.left_stick_x;
+            double yaw     =  gamepad1.right_stick_x;
+
+            double frontLeftPower  = axial + lateral + yaw;
+            double frontRightPower = axial - lateral - yaw;
+            double backLeftPower   = axial - lateral + yaw;
+            double backRightPower  = axial + lateral - yaw;
+
+            double max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
+            max = Math.max(max, Math.abs(backLeftPower));
+            max = Math.max(max, Math.abs(backRightPower));
+
+            if (max > 1.0) {
+                frontLeftPower  /= max;
+                frontRightPower /= max;
+                backLeftPower   /= max;
+                backRightPower  /= max;
+            }
+
+            frontLeftDrive.setPower(frontLeftPower);
+            frontRightDrive.setPower(frontRightPower);
+            backLeftDrive.setPower(backLeftPower);
+            backRightDrive.setPower(backRightPower);
+
+            telemetry.addData("Front left/Right", "%4.2f, %4.2f", frontLeftPower, frontRightPower);
+            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", backLeftPower, backRightPower);
+            telemetry.update();
+        }
+    }
+}
+```
+
+## Métodos y conceptos importantes
+
+<Tabs>
+  <TabItem label="runOpMode">
+    <p>
+      Método obligatorio de todo `LinearOpMode`. Contiene toda la lógica del OpMode: inicialización,
+      espera de Start y el bucle principal. Se ejecuta una sola vez cuando el driver selecciona y
+      corre el OpMode.
+    </p>
+  </TabItem>
+
+  <TabItem label="waitForStart">
+    <p>
+      Pausa la ejecución hasta que el driver presiona START en Driver Station. Todo lo que va antes
+      de esta línea corre durante INIT.
+    </p>
+  </TabItem>
+
+  <TabItem label="opModeIsActive">
+    <p>
+      Controla el bucle principal. Devuelve `true` mientras el OpMode sigue corriendo, y se vuelve
+      `false` en cuanto el driver presiona STOP.
+    </p>
+  </TabItem>
+
+  <TabItem label="hardwareMap">
+    <p>
+      Conecta tu código con el hardware físico configurado en Configure Robot. Es el equivalente en
+      FTC a declarar un CAN ID o una línea PWM en otros sistemas de control.
+    </p>
+  </TabItem>
+</Tabs>
+
+---
+
+## Compilar y correr el código
+
+<Steps>
+
+1. Guarda el archivo.
+2. Si usas OnBot Java: presiona **Build**. Si usas Android Studio: presiona **Run** (▶).
+3. Abre Driver Station.
+4. Selecciona `Mecanum Drive` en el dropdown de TeleOp.
+5. Presiona `INIT` y luego `START`.
+
+</Steps>
+
+<Aside type="tip" title="Detalle completo del proceso">
+El flujo de Build/Run, selección de OpMode e INIT/START está cubierto con más detalle (y por ruta) en la guía de Corriendo el Programa.
+</Aside>
+
+---
+
+## Verificar comunicación
+
+Abre Driver Station y verifica:
+
+- El Robot Controller aparece conectado
+- El OpMode `Mecanum Drive` aparece en el dropdown
+- No hay errores rojos al presionar INIT
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="Build failed">
+    <ul>
+      <li>Revisa errores de sintaxis señalados en rojo</li>
+      <li>Confirma que los nombres de los motores coincidan con Configure Robot</li>
+      <li>Reinicia OnBot Java o Android Studio</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Motor no encontrado al hacer INIT">
+    <ul>
+      <li>El nombre en <code>hardwareMap.get()</code> no coincide con Configure Robot</li>
+      <li>El motor no está guardado en la configuración activa</li>
+      <li>Revisa mayúsculas y guiones bajos exactos</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot gira raro o se mueve en diagonal sin querer">
+    <ul>
+      <li>Revisa la inversión de motores</li>
+      <li>Confirma que los 4 motores estén bien identificados (front/back, left/right)</li>
+      <li>Verifica que las ruedas mecanum estén orientadas correctamente (rodillos formando una X)</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot no se mueve">
+    <ul>
+      <li>OpMode no está en STARTED (revisa que hayas presionado START, no solo INIT)</li>
+      <li>Gamepad no detectado</li>
+      <li>Driver Station sin comunicación con el Robot Controller</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora puedes continuar con:
+
+- Corriendo el programa
+- Drivetrain Blocks, si quieres comparar ambas rutas
+- Autónomo básico
+- Sensores (IMU, encoders)
+- Visión (AprilTags, TensorFlow)
+
+<Aside type="note" title="Importante">
+Este OpMode usa una estructura básica para aprendizaje. Más adelante puedes explorar arquitecturas más avanzadas, como separar el drivetrain en su propia clase o usar librerías de terceros como FTCLib.
+</Aside>
+
+<Badge text="FTC SDK" />

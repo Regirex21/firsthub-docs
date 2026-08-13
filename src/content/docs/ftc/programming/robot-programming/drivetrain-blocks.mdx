@@ -1,0 +1,240 @@
+---
+title: Drivetrain Blocks
+description: Construye el mismo drivetrain mecanum de forma visual usando el editor Blocks de FTC.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, Badge } from '@astrojs/starlight/components';
+
+En esta guía construirás visualmente el mismo drivetrain mecanum de la guía de Java, usando el editor **Blocks** integrado en el Control Hub.
+
+<Aside type="tip" title="Mismo robot, mismo resultado, distinta herramienta">
+Cada bloque que arrastres corresponde a una línea de código Java equivalente. No es una versión "simplificada" del drivetrain: es exactamente el mismo comportamiento, expresado con otra sintaxis.
+</Aside>
+
+El objetivo es aprender:
+
+- Cómo abrir el editor Blocks desde el navegador
+- Cómo crear un nuevo OpMode en Blocks
+- Cómo usar los bloques de Hardware para controlar motores
+- Cómo leer el gamepad con bloques
+- Cómo replicar la misma matemática de mecanum que usamos en Java
+- Cómo guardar y correr tu OpMode
+
+---
+
+## Antes de comenzar
+
+Asegúrate de tener:
+
+- Control Hub configurado y encendido
+- Laptop o teléfono conectado a la red WiFi del Control Hub
+- Driver Station instalada
+- 4 motores mecanum cableados
+
+<LinkCard
+  title="Preparación del Robot"
+  href="/ftc/robot-preparation/"
+  description="Configura el Control Hub y su red antes de continuar."
+/>
+
+---
+
+## Abrir el editor Blocks
+
+<Steps>
+
+1. Conéctate a la red WiFi del Control Hub.
+2. Abre un navegador y entra a la dirección del Robot Controller: `192.168.43.1:8080` si usas Control Hub, o `192.168.49.1:8080` si usas un teléfono como Robot Controller.
+3. En la consola del Robot Controller, selecciona el enlace **Blocks**.
+
+</Steps>
+
+---
+
+## Configurar los motores primero
+
+Igual que en la versión Java, los motores deben existir en la configuración del robot antes de programarlos.
+
+<Steps>
+
+1. Desde Driver Station, entra a **Configure Robot**.
+2. Agrega 4 motores.
+3. Nómbralos exactamente: `front_left_drive`, `back_left_drive`, `front_right_drive`, `back_right_drive`.
+4. Guarda la configuración.
+
+</Steps>
+
+<Aside type="note" title="Usa los mismos nombres que en Java">
+Si ya seguiste la guía de Java con este mismo robot, reutiliza la misma configuración: los nombres deben coincidir para que ambas versiones controlen el mismo hardware.
+</Aside>
+
+---
+
+## Crear un nuevo OpMode en Blocks
+
+<Steps>
+
+1. Presiona el botón **Create New Op Mode** en la esquina superior izquierda.
+2. Escribe un nombre, por ejemplo `MecanumDriveBlocks`.
+3. Elige una plantilla en blanco.
+
+</Steps>
+
+Blocks genera automáticamente la estructura base:
+
+- Un bloque morado **"to runOpMode"** que contiene todo el programa
+- Un comentario **"Put initialization blocks here"** antes de esperar el Start
+- Un bloque **"call ...waitForStart"**
+- Un comentario **"Put run blocks here"**
+- Un bucle **"repeat while call ...opModeIsActive"**
+
+---
+
+## Declarar los motores (bloques de Hardware)
+
+A diferencia de Java, en Blocks no declaras variables de motor manualmente: cada motor que configuraste en Configure Robot aparece directamente como bloque en la categoría **Actuators > DcMotor**.
+
+Arrastra el bloque de cada motor (`front_left_drive`, `back_left_drive`, `front_right_drive`, `back_right_drive`) hacia el área de trabajo cuando lo necesites.
+
+---
+
+## Invertir motores
+
+Dentro del bloque de inicialización, arrastra:
+
+```txt
+set front_left_drive.Direction to REVERSE
+set back_left_drive.Direction to REVERSE
+set front_right_drive.Direction to FORWARD
+set back_right_drive.Direction to FORWARD
+```
+
+<Aside type="note" title="Misma razón que en Java">
+Los motores de ambos lados están montados en direcciones opuestas. Sin inversión, un lado avanzará mientras el otro retrocede.
+</Aside>
+
+---
+
+## Leer el gamepad
+
+Dentro del bucle `repeat while`, crea 3 variables (categoría **Variables > Create Variable**): `axial`, `lateral` y `yaw`.
+
+Asigna cada una usando bloques de la categoría **Gamepad**:
+
+- `axial` = un bloque de resta (0 − `gamepad1.LeftStickY`), para invertir el signo
+- `lateral` = `gamepad1.LeftStickX`
+- `yaw` = `gamepad1.RightStickX`
+
+<Aside type="tip" title="¿Por qué invertir axial?">
+Igual que en Java: el stick entrega valores negativos hacia arriba, así que se invierte para que empujar hacia adelante mueva el robot hacia adelante.
+</Aside>
+
+---
+
+## Calcular la potencia de cada motor
+
+<Aside type="caution" title="Adaptación propia, no traducción de un sample oficial">
+No existe (o no encontramos, tras verificarlo directamente contra el repositorio de `FIRST-Tech-Challenge/FtcRobotController`) un sample oficial de FIRST que muestre un drivetrain mecanum construido en Blocks. Esta tabla es una adaptación propia de la fórmula del sample oficial en Java (`BasicOmniOpMode_Linear`) a bloques de matemáticas — funcionalmente equivalente, pero no es traducción de una fuente oficial en Blocks.
+</Aside>
+
+Usa bloques de matemáticas (categoría **Math**) para combinar las 3 variables, replicando la misma fórmula de la versión Java:
+
+| Motor | Fórmula |
+|---|---|
+| front_left_drive | axial + lateral + yaw |
+| front_right_drive | axial − lateral − yaw |
+| back_left_drive | axial − lateral + yaw |
+| back_right_drive | axial + lateral − yaw |
+
+Guarda cada resultado en una nueva variable, por ejemplo `frontLeftPower`, `frontRightPower`, `backLeftPower`, `backRightPower`.
+
+<Aside type="note" title="Sin normalización, por simplicidad">
+La versión Java de esta guía normaliza las potencias para que ninguna supere 1.0. Replicar ese paso en Blocks requiere bloques adicionales de comparación; si tu robot se satura fácilmente al combinar ejes, ese es un buen siguiente paso una vez que domines lo básico.
+</Aside>
+
+---
+
+## Enviar la potencia a los motores
+
+Dentro del mismo bucle, para cada motor:
+
+```txt
+set front_left_drive.Power to frontLeftPower
+set front_right_drive.Power to frontRightPower
+set back_left_drive.Power to backLeftPower
+set back_right_drive.Power to backRightPower
+```
+
+---
+
+## Guardar el OpMode
+
+<Steps>
+
+1. Presiona el botón **Save Op Mode**.
+2. Espera el mensaje **"Save completed successfully"**.
+
+</Steps>
+
+<Badge text="Blocks" />
+
+---
+
+## Equivalencia Java vs Blocks
+
+| Concepto | Java | Blocks |
+|---|---|---|
+| Obtener el motor | `hardwareMap.get(DcMotor.class, "front_left_drive")` | Bloque `front_left_drive` en Actuators &gt; DcMotor |
+| Invertir | `setDirection(DcMotor.Direction.REVERSE)` | `set front_left_drive.Direction to REVERSE` |
+| Leer el stick | `gamepad1.left_stick_y` | `gamepad1.LeftStickY` |
+| Enviar potencia | `frontLeftDrive.setPower(frontLeftPower)` | `set front_left_drive.Power to frontLeftPower` |
+| Compilar | Build (OnBot Java) / Run (Android Studio) | Save Op Mode |
+
+---
+
+## Problemas comunes
+
+<Tabs>
+  <TabItem label="No aparecen los motores en Hardware">
+    <ul>
+      <li>Confirma que guardaste la configuración en Configure Robot</li>
+      <li>Recarga la página del editor Blocks</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Save Op Mode falla">
+    <ul>
+      <li>Verifica que la laptop siga conectada a la red del Control Hub</li>
+      <li>Revisa que no haya bloques sueltos o incompletos</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot gira raro">
+    <ul>
+      <li>Revisa la dirección de cada motor</li>
+      <li>Confirma que las fórmulas de cada motor coincidan con la tabla de equivalencia</li>
+    </ul>
+  </TabItem>
+
+  <TabItem label="Robot no responde">
+    <ul>
+      <li>Confirma que presionaste START, no solo INIT, en Driver Station</li>
+      <li>Revisa que el gamepad esté conectado</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+---
+
+## Siguientes pasos
+
+Ahora puedes continuar con:
+
+- Corriendo el programa
+- Drivetrain Java, si quieres comparar ambas rutas
+- Autónomo básico
+- Sensores (IMU, encoders)
+
+<Aside type="note" title="Migrar a Java más adelante">
+Cuando tu equipo esté listo para más control (estructuras de datos, métodos propios, librerías de terceros), migrar de Blocks a OnBot Java o Android Studio es un paso natural. El SDK subyacente es el mismo.
+</Aside>
