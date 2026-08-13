@@ -531,3 +531,63 @@ main > .content-panel:first-of-type h1 {
     gap:1.5rem;
   }
 }
+
+/* === Colores por categoría en el sidebar === */
+
+:root {
+  --color-inicio: #2dd4bf; /* teal, retoma el subrayado del logo */
+  --color-first: #a78bfa;  /* violeta, la organización paraguas */
+  --color-frc: #3b82f6;    /* azul */
+  --color-ftc: #fb923c;    /* naranja */
+}
+
+/* Grupo raíz de cada categoría, identificado por el href del primer link interno */
+.sidebar-content li:has(> a[href^="/"]):has(a[href^="/frc"]) > details > summary,
+.sidebar-content li:has(> details a[href^="/frc"]) > details > summary {
+  --category-color: var(--color-frc);
+}
+.sidebar-content li:has(> details a[href^="/ftc"]) > details > summary {
+  --category-color: var(--color-ftc);
+}
+.sidebar-content li:has(> details a[href^="/first"]) > details > summary {
+  --category-color: var(--color-first);
+}
+
+/* Link "Inicio" (no es un grupo desplegable, es un link directo) */
+.sidebar-content a[href="/"] {
+  --category-color: var(--color-inicio);
+}
+
+/* Aplicar el color: barra izquierda + texto + flecha */
+.sidebar-content li > details > summary[style],
+.sidebar-content li > details > summary {
+  position: relative;
+  border-left: 3px solid transparent;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.sidebar-content li > details > summary {
+  border-left-color: color-mix(in srgb, var(--category-color, transparent) 70%, transparent);
+}
+
+.sidebar-content li > details > summary:hover {
+  background-color: color-mix(in srgb, var(--category-color, transparent) 12%, transparent);
+}
+
+.sidebar-content li > details[open] > summary {
+  background-color: color-mix(in srgb, var(--category-color, transparent) 8%, transparent);
+}
+
+.sidebar-content li > details > summary .sl-flex,
+.sidebar-content li > details > summary svg {
+  color: var(--category-color, inherit);
+}
+
+.sidebar-content a[href="/"] {
+  border-left: 3px solid var(--category-color);
+  padding-left: 0.5rem;
+}
+
+.sidebar-content a[href="/"]:hover {
+  background-color: color-mix(in srgb, var(--category-color) 12%, transparent);
+}

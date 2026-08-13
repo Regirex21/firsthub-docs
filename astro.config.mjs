@@ -177,8 +177,8 @@ export default defineConfig({
                   label: 'Instalación y herramientas',
                   items: [
                     { label: 'Resumen', link: '/ftc/programming/installation-tools/' },
-                    { label: 'Android Studio Setup', link: '/ftc/programming/installation-tools/android-studio-setup/' },
-                    { label: 'Driver Station App Setup', link: '/ftc/programming/installation-tools/driver-station-app-setup/' },
+                    { label: 'Configuración de Android Studio', link: '/ftc/programming/installation-tools/android-studio-setup/' },
+                    { label: 'Configuración de la App Driver Station', link: '/ftc/programming/installation-tools/driver-station-app-setup/' },
                     { label: 'Instalación offline', link: '/ftc/programming/installation-tools/offline-preparation/' },
                     { label: 'Siguientes pasos', link: '/ftc/programming/installation-tools/next-steps/' },
                   ]
@@ -198,8 +198,8 @@ export default defineConfig({
                   label: 'Preparación del Robot',
                   items: [
                     { label: 'Resumen', link: '/ftc/robot-preparation/' },
-                    { label: 'Control Hub Setup', link: '/ftc/robot-preparation/control-hub-setup/' },
-                    { label: 'Driver Hub Setup', link: '/ftc/robot-preparation/driver-hub-setup/' },
+                    { label: 'Configuración del Control Hub', link: '/ftc/robot-preparation/control-hub-setup/' },
+                    { label: 'Configuración del Driver Hub', link: '/ftc/robot-preparation/driver-hub-setup/' },
                     { label: 'Configuración de Red', link: '/ftc/robot-preparation/network-configuration/' },
                     { label: 'Driver Station', link: '/ftc/robot-preparation/driver-station/' },
                     { label: 'Sistema Legacy (2 teléfonos)', link: '/ftc/robot-preparation/phone-based-legacy/' },
