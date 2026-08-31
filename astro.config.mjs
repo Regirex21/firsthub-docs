@@ -5,6 +5,10 @@ import starlight from '@astrojs/starlight';
 import firsthubLogo from './src/assets/firsthub_logo_full.svg';
 
 export default defineConfig({
+  site: 'https://firsthub.dev',
+  base: '/docs',
+  outDir: './dist/docs',
+
   integrations: [
     starlight({
       title: '',

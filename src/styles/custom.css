@@ -554,7 +554,7 @@ main > .content-panel:first-of-type h1 {
 }
 
 /* Link "Inicio" (no es un grupo desplegable, es un link directo) */
-.sidebar-content a[href="/"] {
+.sidebar-content a[href="/docs/"] {
   --category-color: var(--color-inicio);
 }
 
@@ -583,11 +583,11 @@ main > .content-panel:first-of-type h1 {
   color: var(--category-color, inherit);
 }
 
-.sidebar-content a[href="/"] {
+.sidebar-content a[href="/docs/"] {
   border-left: 3px solid var(--category-color);
   padding-left: 0.5rem;
 }
 
-.sidebar-content a[href="/"]:hover {
+.sidebar-content a[href="/docs/"]:hover {
   background-color: color-mix(in srgb, var(--category-color) 12%, transparent);
 }
