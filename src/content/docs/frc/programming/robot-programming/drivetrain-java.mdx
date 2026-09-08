@@ -3,7 +3,7 @@ title: Drivetrain Java
 description: Crea, configura y despliega un drivetrain diferencial moderno utilizando Java y WPILib.
 ---
 
-import { CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import { CardGrid, Card, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 import nuevoProyecto from '../../../../../assets/FRC/nuevo_proyecto.png';
 import generar from '../../../../../assets/FRC/wpi_proyect_generator.png';
 import robot from '../../../../../assets/FRC/robot_java.png';
@@ -20,9 +20,9 @@ El objetivo es aprender:
 - Cómo desplegar código al roboRIO
 - Cómo probar el robot desde Driver Station
 
-:::tip[Importante]
+<Aside type="tip" title="Importante">
 Aunque este proyecto es básico, utiliza una estructura mucho más cercana a la utilizada por equipos FRC reales.
-:::
+</Aside>
 
 ---
 
@@ -38,13 +38,13 @@ La mayoría de robots FRC tipo tanque utilizan:
 - Control arcade con control Xbox
 - Motores brushless conectados por CAN
 
-:::note[Importante]
+<Aside type="note" title="Importante">
 Un drivetrain diferencial puede utilizar distintos estilos de control.
 
 En esta guía utilizaremos Arcade Drive:
 - Stick izquierdo = adelante y atrás
 - Stick derecho = giro
-:::
+</Aside>
 
 ---
 
@@ -110,9 +110,9 @@ Selecciona las siguientes opciones:
   </Card>
 </CardGrid>
 
-:::note[¿Por qué usar Timed Robot?]
+<Aside type="note" title="¿Por qué usar Timed Robot?">
 Utilizaremos un proyecto vacío para entender mejor cómo funciona el drivetrain desde cero.
-:::
+</Aside>
 
 ---
 
@@ -147,9 +147,9 @@ Cuando el proyecto termine de generarse:
 2. WPILib comenzará a cargar dependencias
 3. Espera a que Gradle termine
 
-:::caution[Primera carga]
+<Aside type="caution" title="Primera carga">
 La primera vez puede tardar varios minutos mientras se descargan librerías necesarias.
-:::
+</Aside>
 
 ---
 
@@ -213,7 +213,7 @@ Right Side
 ## CAN IDs
 
 
-:::caution[CAN IDs reservados]
+<Aside type="caution" title="CAN IDs reservados">
 En un robot FRC normalmente algunos CAN IDs ya están ocupados por dispositivos del sistema de control.
 
 Comúnmente:
@@ -229,7 +229,7 @@ Por eso normalmente se recomienda comenzar motores desde IDs más altos como:
 - 13
 
 Esto ayuda a evitar conflictos y hace más fácil identificar dispositivos.
-:::
+</Aside>
 Cada controlador de motor necesita un CAN ID único.
 
 En este ejemplo utilizaremos:
@@ -241,9 +241,9 @@ En este ejemplo utilizaremos:
 | Right Leader | 12 |
 | Right Follower | 13 |
 
-:::caution[Importante]
+<Aside type="caution" title="Importante">
 Nunca utilices dos dispositivos con el mismo CAN ID.
-:::
+</Aside>
 
 ---
 
@@ -265,14 +265,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 ```
 
-:::tip[¿Qué hacen estas librerías?]
+<Aside type="tip" title="¿Qué hacen estas librerías?">
 Estas librerías permiten controlar motores, leer controles Xbox y utilizar herramientas de drivetrain incluidas en WPILib.
 Recuerda tener siempre las librerías actualizadas para evitar problemas de compatibilidad.
-:::
+</Aside>
 
-:::caution[REVLib cambia esta API cada temporada]
+<Aside type="caution" title="REVLib cambia esta API cada temporada">
 Desde REVLib 2025, `SparkMax` ya no se configura llamando métodos como `.setInverted()` o `.follow()` directamente sobre el motor — eso quedó obsoleto. Ahora se arma un objeto `SparkMaxConfig`, se le indican los ajustes deseados, y se aplica al motor con `.configure(config, ResetMode, PersistMode)`. Muchos ejemplos que circulan en internet (incluida documentación desactualizada de WPILib) todavía muestran el patrón antiguo, que no compila contra versiones recientes de REVLib. Verifica siempre contra la [documentación oficial de REVLib](https://docs.revrobotics.com/revlib/spark/configuring-a-spark) antes de copiar código de otra fuente.
-:::
+</Aside>
 
 ---
 
@@ -326,9 +326,9 @@ private final XboxController controller =
     new XboxController(0);
 ```
 
-:::note[Puerto USB]
+<Aside type="note" title="Puerto USB">
 El número 0 representa el primer control detectado por Driver Station.
-:::
+</Aside>
 
 ---
 
@@ -341,9 +341,9 @@ private final DifferentialDrive drive =
     new DifferentialDrive(leftLeader, rightLeader);
 ```
 
-:::tip[¿Qué hace DifferentialDrive?]
+<Aside type="tip" title="¿Qué hace DifferentialDrive?">
 DifferentialDrive convierte entradas de velocidad y rotación en movimiento para el drivetrain.
-:::
+</Aside>
 
 ---
 
@@ -366,9 +366,9 @@ public void robotInit() {
 }
 ```
 
-:::note[¿Qué hace `.configure()`?]
+<Aside type="note" title="¿Qué hace `.configure()`?">
 `ResetMode.kResetSafeParameters` restablece los parámetros del controlador a sus valores por defecto antes de aplicar la nueva configuración, y `PersistMode.kPersistParameters` guarda esos ajustes en la memoria no volátil del SparkMax para que sobrevivan un ciclo de energía.
-:::
+</Aside>
 
 ---
 
@@ -395,11 +395,11 @@ public void robotInit() {
 }
 ```
 
-:::note[¿Por qué invertir un lado?]
+<Aside type="note" title="¿Por qué invertir un lado?">
 Los motores de ambos lados están montados en direcciones opuestas.
 Sin inversión, un lado avanzará mientras el otro retrocede.
 Eso puede dañar las cajas de engranes.
-:::
+</Aside>
 
 ---
 
@@ -593,9 +593,9 @@ Después:
 WPILib: Deploy Robot Code
 ```
 
-:::tip[¿Qué hace deploy?]
+<Aside type="tip" title="¿Qué hace deploy?">
 Deploy compila el código y lo envía al roboRIO para ejecutarse directamente en el robot.
-:::
+</Aside>
 
 ---
 
@@ -670,6 +670,6 @@ Ahora puedes continuar con:
 - Autonomous
 - Dashboards
 
-:::note[Importante]
+<Aside type="note" title="Importante">
 Este proyecto utiliza una estructura básica para aprendizaje. Más adelante aprenderás arquitecturas más avanzadas utilizadas en robots competitivos.
-:::
+</Aside>

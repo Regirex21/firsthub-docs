@@ -234,12 +234,14 @@ construir la nueva** — no se construyen ambas por separado y se
 reconcilian después. Así fue como el orden de FRC y FTC divergió sin que
 nadie lo decidiera a propósito.
 
-> **Nota:** el reordenamiento específico de sidebar propuesto para
-> alinear FRC y FTC (Premios antes de Programación en ambos; Engineering
-> Portfolio junto a Premios en FTC) fue **propuesto pero todavía no
-> aprobado** al momento de escribir esto. No asumir que ya se aplicó —
-> confirmar el estado actual de `astro.config.mjs` antes de dar por
-> hecho el orden.
+> **Actualizado 2026-09-08:** el reordenamiento de sidebar para alinear
+> FRC y FTC (Premios antes de Programación en ambos; Engineering
+> Portfolio junto a Premios en FTC) fue **aprobado y aplicado** en
+> `astro.config.mjs`. FTC ahora sigue el orden: Hub → ¿Qué es? →
+> Temporada → Kickoff → Premios → Engineering Portfolio → Programación —
+> igual que FRC. Sigue siendo buena práctica confirmar el estado actual
+> del archivo antes de asumir el orden en auditorías futuras, por si
+> vuelve a divergir.
 
 ---
 

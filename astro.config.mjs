@@ -173,55 +173,6 @@ export default defineConfig({
             { label: 'Kickoff', link: '/ftc/kickoff/' },
 
             {
-              label: 'Programación',
-              items: [
-                { label: 'Centro de Programación', link: '/ftc/programming/' },
-
-                {
-                  label: 'Instalación y herramientas',
-                  items: [
-                    { label: 'Resumen', link: '/ftc/programming/installation-tools/' },
-                    { label: 'Configuración de Android Studio', link: '/ftc/programming/installation-tools/android-studio-setup/' },
-                    { label: 'Configuración de la App Driver Station', link: '/ftc/programming/installation-tools/driver-station-app-setup/' },
-                    { label: 'Instalación offline', link: '/ftc/programming/installation-tools/offline-preparation/' },
-                    { label: 'Siguientes pasos', link: '/ftc/programming/installation-tools/next-steps/' },
-                  ]
-                },
-
-                {
-                  label: 'Programación del robot',
-                  items: [
-                    { label: 'Resumen', link: '/ftc/programming/robot-programming/' },
-                    { label: 'Drivetrain Java', link: '/ftc/programming/robot-programming/drivetrain-java/' },
-                    { label: 'Drivetrain Blocks', link: '/ftc/programming/robot-programming/drivetrain-blocks/' },
-                    { label: 'Correr el programa', link: '/ftc/programming/robot-programming/corriendo-el-programa/' },
-                  ]
-                },
-
-                {
-                  label: 'Preparación del Robot',
-                  items: [
-                    { label: 'Resumen', link: '/ftc/robot-preparation/' },
-                    { label: 'Configuración del Control Hub', link: '/ftc/robot-preparation/control-hub-setup/' },
-                    { label: 'Configuración del Driver Hub', link: '/ftc/robot-preparation/driver-hub-setup/' },
-                    { label: 'Configuración de Red', link: '/ftc/robot-preparation/network-configuration/' },
-                    { label: 'Driver Station', link: '/ftc/robot-preparation/driver-station/' },
-                    { label: 'Sistema Legacy (2 teléfonos)', link: '/ftc/robot-preparation/phone-based-legacy/' },
-                  ]
-                },
-              ]
-            },
-
-            {
-              label: 'Engineering Portfolio',
-              items: [
-                { label: 'Resumen', link: '/ftc/portafolio-de-ingenieria/' },
-                { label: 'Requisitos oficiales', link: '/ftc/portafolio-de-ingenieria/requisitos-oficiales/' },
-                { label: 'Consejos y organización', link: '/ftc/portafolio-de-ingenieria/consejos-y-organizacion/' },
-              ]
-            },
-
-            {
               label: 'Premios',
               items: [
                 { label: 'Resumen', link: '/ftc/premios/' },
@@ -274,6 +225,55 @@ export default defineConfig({
                     { label: 'Compass Award', link: '/ftc/premios/premios-opcionales/compass-award/' },
                     { label: "Judges' Choice Award", link: '/ftc/premios/premios-opcionales/judges-choice-award/' },
                     { label: 'Volunteer Award', link: '/ftc/premios/premios-opcionales/volunteer-award/' },
+                  ]
+                },
+              ]
+            },
+
+            {
+              label: 'Engineering Portfolio',
+              items: [
+                { label: 'Resumen', link: '/ftc/portafolio-de-ingenieria/' },
+                { label: 'Requisitos oficiales', link: '/ftc/portafolio-de-ingenieria/requisitos-oficiales/' },
+                { label: 'Consejos y organización', link: '/ftc/portafolio-de-ingenieria/consejos-y-organizacion/' },
+              ]
+            },
+
+            {
+              label: 'Programación',
+              items: [
+                { label: 'Centro de Programación', link: '/ftc/programming/' },
+
+                {
+                  label: 'Instalación y herramientas',
+                  items: [
+                    { label: 'Resumen', link: '/ftc/programming/installation-tools/' },
+                    { label: 'Configuración de Android Studio', link: '/ftc/programming/installation-tools/android-studio-setup/' },
+                    { label: 'Configuración de la App Driver Station', link: '/ftc/programming/installation-tools/driver-station-app-setup/' },
+                    { label: 'Instalación offline', link: '/ftc/programming/installation-tools/offline-preparation/' },
+                    { label: 'Siguientes pasos', link: '/ftc/programming/installation-tools/next-steps/' },
+                  ]
+                },
+
+                {
+                  label: 'Programación del robot',
+                  items: [
+                    { label: 'Resumen', link: '/ftc/programming/robot-programming/' },
+                    { label: 'Drivetrain Java', link: '/ftc/programming/robot-programming/drivetrain-java/' },
+                    { label: 'Drivetrain Blocks', link: '/ftc/programming/robot-programming/drivetrain-blocks/' },
+                    { label: 'Correr el programa', link: '/ftc/programming/robot-programming/corriendo-el-programa/' },
+                  ]
+                },
+
+                {
+                  label: 'Preparación del Robot',
+                  items: [
+                    { label: 'Resumen', link: '/ftc/robot-preparation/' },
+                    { label: 'Configuración del Control Hub', link: '/ftc/robot-preparation/control-hub-setup/' },
+                    { label: 'Configuración del Driver Hub', link: '/ftc/robot-preparation/driver-hub-setup/' },
+                    { label: 'Configuración de Red', link: '/ftc/robot-preparation/network-configuration/' },
+                    { label: 'Driver Station', link: '/ftc/robot-preparation/driver-station/' },
+                    { label: 'Sistema Legacy (2 teléfonos)', link: '/ftc/robot-preparation/phone-based-legacy/' },
                   ]
                 },
               ]

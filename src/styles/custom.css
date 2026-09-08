@@ -69,7 +69,7 @@
   }
   .right-sidebar a.active,
   aside[aria-label="On this page"] a.active {
-    background: rgba(255,255,255,0.06);
+    background: var(--sl-color-accent-low);
     font-weight: 600;
     opacity: 1;
   }
@@ -141,7 +141,7 @@ aside[aria-label="Table of contents"] nav a {
 .right-sidebar nav[aria-label="On this page"] a.active,
 aside[aria-label="On this page"] nav a.active,
 aside[aria-label="Table of contents"] nav a.active {
-  background: rgba(255,255,255,0.04);
+  background: var(--sl-color-accent-low);
 }
 
 /* --- CONTENIDO PRINCIPAL --- */
