@@ -42,7 +42,7 @@ una misma página sin marcarlo explícitamente:
 | Sección | Notas |
 |---|---|
 | `ftc/robot-preparation/*` (5 subpáginas) | Reescritas específicamente para fidelidad estricta, cada una con cita directa |
-| `ftc/portafolio-de-ingenieria/requisitos-oficiales.mdx` | Verificado contra temporada vigente |
+| `ftc/portafolio-de-equipo/requisitos-oficiales.mdx` | Verificado contra temporada vigente |
 | `ftc/programming/robot-programming/drivetrain-java.mdx` | Basado en el sample oficial `BasicOmniOpMode_Linear.java`, verificado línea por línea |
 | `frc/premios/*`, `ftc/premios/*` | Auditado dos veces; ver tabla de pendientes abajo para los pocos casos de fuente parcial |
 | `first/que-es-first.mdx`, `first/valores-fundamentales.mdx`, `first/premios.mdx` | Citas directas de firstinspires.org |
@@ -61,7 +61,7 @@ una misma página sin marcarlo explícitamente:
 **Contenido propio, marcado explícitamente — no está sujeto a esta regla:**
 - `frc/kickoff.mdx`, `frc/events.mdx`, `frc/team-roles.mdx`
 - `ftc/kickoff.mdx`
-- `ftc/portafolio-de-ingenieria/consejos-y-organizacion.mdx`
+- `ftc/portafolio-de-equipo/consejos-y-organizacion.mdx`
 - Todos los hubs de navegación puros (`*/index.mdx` de programas y categorías) — organización nuestra, no traducción, salvo cuando citan un hecho puntual (ese hecho puntual sí necesita su propio Aside de fuente).
 
 Cuando se audite o toque cualquiera de estas páginas, no asumir que "ya está bien" solo porque está en la lista de arriba — la lista es un punto de partida, no una garantía permanente.

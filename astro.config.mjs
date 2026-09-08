@@ -231,11 +231,11 @@ export default defineConfig({
             },
 
             {
-              label: 'Engineering Portfolio',
+              label: 'Portafolio',
               items: [
-                { label: 'Resumen', link: '/ftc/portafolio-de-ingenieria/' },
-                { label: 'Requisitos oficiales', link: '/ftc/portafolio-de-ingenieria/requisitos-oficiales/' },
-                { label: 'Consejos y organización', link: '/ftc/portafolio-de-ingenieria/consejos-y-organizacion/' },
+                { label: 'Resumen', link: '/ftc/portafolio-de-equipo/' },
+                { label: 'Requisitos oficiales', link: '/ftc/portafolio-de-equipo/requisitos-oficiales/' },
+                { label: 'Consejos y organización', link: '/ftc/portafolio-de-equipo/consejos-y-organizacion/' },
               ]
             },
 

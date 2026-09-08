@@ -10,9 +10,9 @@ Todo el orden de trabajo asignado se completó. Build final limpio: **105 págin
 
 Estructura aprobada en vivo: hub + 2 subpáginas.
 
-- `ftc/portafolio-de-ingenieria/index.mdx`
-- `ftc/portafolio-de-ingenieria/requisitos-oficiales.mdx` — verificado el límite de 15 páginas + portada y el requisito de PDF para eventos remotos contra búsqueda real de la temporada 2025-2026 (DECODE).
-- `ftc/portafolio-de-ingenieria/consejos-y-organizacion.mdx` — marcada como contenido propio desde el inicio de la página.
+- `ftc/portafolio-de-equipo/index.mdx`
+- `ftc/portafolio-de-equipo/requisitos-oficiales.mdx` — verificado el límite de 15 páginas + portada y el requisito de PDF para eventos remotos contra búsqueda real de la temporada 2025-2026 (DECODE).
+- `ftc/portafolio-de-equipo/consejos-y-organizacion.mdx` — marcada como contenido propio desde el inicio de la página.
 
 Sidebar actualizado. Enganche con premios FTC completado más tarde en la noche (ver abajo).
 

@@ -26,7 +26,7 @@ En la ronda de auditoría anterior lo marqué como candidato a eliminar (razón:
 
 Al construir `ftc/premios/` esta misma noche, se completó el enganche pendiente:
 - Hub de premios FTC (`ftc/premios/index.mdx`) tiene el aviso destacado con link al Portfolio.
-- `Inspire Award` y `Think Award` tienen link de vuelta hacia `/ftc/portafolio-de-ingenieria/`.
+- `Inspire Award` y `Think Award` tienen link de vuelta hacia `/ftc/portafolio-de-equipo/`.
 
 Sin acción pendiente.
 
