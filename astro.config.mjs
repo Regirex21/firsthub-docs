@@ -5,7 +5,8 @@ import starlight from '@astrojs/starlight';
 import firsthubLogo from './src/assets/firsthub_logo_full.svg';
 
 export default defineConfig({
-  site: 'https://firsthub.dev',
+  // Mismo dominio principal que el sitio: el apex redirige a www con un 308.
+  site: 'https://www.firsthub.dev',
   base: '/docs',
   outDir: './dist/docs',
 
