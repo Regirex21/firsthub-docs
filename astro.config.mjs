@@ -53,6 +53,7 @@ export default defineConfig({
             { label: '¿Qué es FIRST?', link: '/first/que-es-first/' },
             { label: 'Valores Fundamentales', link: '/first/valores-fundamentales/' },
             { label: 'Premios', link: '/first/premios/' },
+            { label: 'Voluntarios', link: '/first/voluntarios/' },
           ],
         },
 
