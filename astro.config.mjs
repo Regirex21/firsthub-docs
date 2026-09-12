@@ -53,7 +53,17 @@ export default defineConfig({
             { label: '¿Qué es FIRST?', link: '/first/que-es-first/' },
             { label: 'Valores Fundamentales', link: '/first/valores-fundamentales/' },
             { label: 'Premios', link: '/first/premios/' },
-            { label: 'Voluntarios', link: '/first/voluntarios/' },
+          ],
+        },
+
+        {
+          label: 'Voluntarios',
+          items: [
+            { label: 'Voluntarios Hub', link: '/voluntarios/' },
+            { label: 'Roles', link: '/voluntarios/roles/' },
+            { label: 'Reconocimientos', link: '/voluntarios/reconocimientos/' },
+            { label: 'Requisitos', link: '/voluntarios/requisitos/' },
+            { label: 'Cómo postularte', link: '/voluntarios/como-postularte/' },
           ],
         },
 
