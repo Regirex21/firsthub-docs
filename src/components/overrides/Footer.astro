@@ -1,0 +1,61 @@
+---
+/* ================================================= */
+/* PIE DE LA DOCUMENTACIÓN                           */
+/* Reusa el pie de Starlight (paginación, "última    */
+/* actualización", enlace de edición) y le añade     */
+/* debajo los enlaces legales y el deslinde.         */
+/* Las URL van absolutas porque la documentación     */
+/* también se publica en firsthub-docs.vercel.app,   */
+/* donde /privacidad no existe.                      */
+/* ================================================= */
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default><slot /></Default>
+
+<div class="firsthub-legal">
+  <nav>
+    <a href="https://www.firsthub.dev/privacidad">Privacidad</a>
+    <a href="https://www.firsthub.dev/terminos">Términos</a>
+    <a href="https://www.firsthub.dev/licencia">Licencia</a>
+  </nav>
+
+  <p>
+    FIRSTHub es un proyecto comunitario independiente. No está afiliado,
+    patrocinado ni respaldado por <em>FIRST</em>. Las traducciones no sustituyen
+    a la documentación oficial: ante cualquier diferencia, manda el documento
+    original.
+  </p>
+</div>
+
+<style>
+  .firsthub-legal {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .firsthub-legal nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .firsthub-legal a {
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+  }
+
+  .firsthub-legal a:hover {
+    color: var(--sl-color-text-accent);
+    text-decoration: underline;
+  }
+
+  .firsthub-legal p {
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>
