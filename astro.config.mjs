@@ -12,7 +12,9 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: '',
+      // El logo ya dice FIRSTHub: replacesTitle evita repetirlo en el
+      // encabezado y el título deja de terminar en "|" en la pestaña.
+      title: 'FIRSTHub Docs',
 
       logo: {
         // @ts-ignore
@@ -20,6 +22,7 @@ export default defineConfig({
         // @ts-ignore
         dark: firsthubLogo,
         alt: 'FIRSTHub',
+        replacesTitle: true,
       },
 
       description:
@@ -30,6 +33,9 @@ export default defineConfig({
       components: {
         Head: './src/components/overrides/Head.astro',
         Footer: './src/components/overrides/Footer.astro',
+        SocialIcons: './src/components/overrides/SocialIcons.astro',
+        ThemeProvider: './src/components/overrides/ThemeProvider.astro',
+        ThemeSelect: './src/components/overrides/ThemeSelect.astro',
       },
 
       social: [
@@ -295,9 +301,10 @@ export default defineConfig({
         },
       ],
 
+      // Starlight ya agrega "src/content/docs/..." a esta base;
+      // antes la ruta se duplicaba y "Editar página" daba 404.
       editLink: {
-        baseUrl:
-          'https://github.com/Regirex21/firsthub-docs/edit/main/src/content/docs/',
+        baseUrl: 'https://github.com/Regirex21/firsthub-docs/edit/main/',
       },
     }),
   ],

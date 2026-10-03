@@ -1,0 +1,13 @@
+---
+/* ================================================= */
+/* TEMA: SOLO OSCURO                                 */
+/* FIRSTHub es oscuro en todas sus páginas. Fija el  */
+/* tema antes de pintar (sin parpadeo) y deja el     */
+/* objeto que Starlight espera, sin selector.        */
+/* ================================================= */
+---
+
+<script is:inline>
+  document.documentElement.dataset.theme = 'dark';
+  window.StarlightThemeProvider = { updatePickers() {} };
+</script>
