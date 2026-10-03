@@ -115,7 +115,8 @@ mantener un placeholder visible a propósito.
 - `ftc/robot-preparation/driver-station.mdx` — pantalla principal de Driver Station conectada al robot
 - `ftc/robot-preparation/network-configuration.mdx` — selector de canal en la página Manage
 - `ftc/robot-preparation/phone-based-legacy.mdx` — pantalla de configuración del teléfono Robot Controller
+- `ftc/robot-preparation/control-hub-ports.mdx` — diagrama del Control Hub señalando cada tipo de puerto. **Este sí quedó como placeholder visible (div punteado) a propósito**, a pedido explícito (2026-09-23).
 
 ---
 
-**Total: 56 imágenes pendientes** en 49 archivos.
+**Total: 57 imágenes pendientes** en 50 archivos.

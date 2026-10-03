@@ -74,6 +74,13 @@ export default defineConfig({
         },
 
         {
+          label: 'Herramientas',
+          items: [
+            { label: 'Git para equipos', link: '/herramientas/git/' },
+          ],
+        },
+
+        {
           label: 'FRC',
           items: [
             { label: 'FRC Hub', link: '/frc/' },
@@ -281,6 +288,7 @@ export default defineConfig({
                     { label: 'Drivetrain Java', link: '/ftc/programming/robot-programming/drivetrain-java/' },
                     { label: 'Drivetrain Blocks', link: '/ftc/programming/robot-programming/drivetrain-blocks/' },
                     { label: 'Correr el programa', link: '/ftc/programming/robot-programming/corriendo-el-programa/' },
+                    { label: 'Odometría con encoders', link: '/ftc/programming/robot-programming/odometria-con-encoders/' },
                   ]
                 },
 
@@ -289,6 +297,7 @@ export default defineConfig({
                   items: [
                     { label: 'Resumen', link: '/ftc/robot-preparation/' },
                     { label: 'Configuración del Control Hub', link: '/ftc/robot-preparation/control-hub-setup/' },
+                    { label: 'Puertos del Control Hub', link: '/ftc/robot-preparation/control-hub-ports/' },
                     { label: 'Configuración del Driver Hub', link: '/ftc/robot-preparation/driver-hub-setup/' },
                     { label: 'Configuración de Red', link: '/ftc/robot-preparation/network-configuration/' },
                     { label: 'Driver Station', link: '/ftc/robot-preparation/driver-station/' },

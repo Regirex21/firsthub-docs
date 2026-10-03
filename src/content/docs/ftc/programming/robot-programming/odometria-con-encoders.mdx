@@ -1,0 +1,160 @@
+---
+title: Odometría con encoders
+description: Cómo usar los encoders de los motores para saber cuánto avanzó el robot y moverlo una distancia exacta en FTC.
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<Aside type="note" title="Fuente">
+El código de esta página es un extracto textual del sample oficial <a href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/RobotAutoDriveByEncoder_Linear.java">RobotAutoDriveByEncoder_Linear.java</a> (repositorio FtcRobotController, © 2017 FIRST, licencia BSD). Las definiciones de encoder vienen de <a href="https://ftc-docs.firstinspires.org/en/latest/control_hard_compon/rc_components/encoders/encoders.html">Encoders (Rotation Counters)</a> y <a href="https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/myblocks/driving_example/driving-example.html">Driving Example</a> (ftc-docs). Las analogías y la sección de limitaciones son contenido propio de FIRSTHub y están marcadas como tal.
+</Aside>
+
+---
+
+## ¿Qué es la odometría?
+
+*Analogía (contenido propio):* si caminas con los ojos cerrados y cuentas tus pasos, sabes más o menos cuánto avanzaste aunque no veas nada. La odometría hace lo mismo con el robot: cuenta cuánto giraron sus ruedas para estimar cuánto se movió.
+
+En FTC, ese conteo lo dan los **encoders**. ftc-docs define un encoder como un dispositivo que mide el desplazamiento rotacional alrededor de un eje. Un encoder incremental envía un **"tick"** por cada fracción de vuelta del eje. La mayoría de los motores legales de FTC traen un encoder de cuadratura integrado, compatible con el REV Hub (Control Hub o Expansion Hub). Ve dónde se conectan en [Puertos del Control Hub](/docs/ftc/robot-preparation/control-hub-ports/).
+
+---
+
+## Encoders en las ruedas de tracción vs. dead wheels
+
+*Contenido propio:* hay dos formas comunes de medir con encoders cuánto avanzó el robot.
+
+- **Encoders en las ruedas de tracción:** usan el encoder que ya trae el motor. No requieren hardware extra.
+- **Dead wheels (ruedas muertas):** son ruedas pequeñas, **sin motor**, que solo ruedan sobre el piso y tienen su propio encoder.
+
+*Explicación (contenido propio):* las ruedas de tracción pueden **deslizarse** (al acelerar fuerte, al empujar a otro robot o sobre una superficie irregular). Cuando derrapan, el encoder cuenta vueltas que no se convirtieron en movimiento real. Una dead wheel no empuja al robot: solo sigue el movimiento, así que en principio se desliza mucho menos y su medición se acerca más a lo que el robot realmente se desplazó.
+
+<Aside type="caution" title="Contenido propio">
+Esta comparación es criterio de ingeniería general de FIRSTHub, no traducción. No encontramos una fuente oficial de FIRST (ftc-docs o FtcRobotController) que compare la precisión de dead wheels contra encoders de tracción.
+</Aside>
+
+---
+
+## Cómo se lee un encoder
+
+La posición acumulada del encoder se lee con `getCurrentPosition()`, que devuelve el número de ticks contados. En el sample oficial se usa así para mostrar la posición inicial en telemetría:
+
+```java
+        // Send telemetry message to indicate successful Encoder reset
+        telemetry.addData("Starting at",  "%7d :%7d",
+                          leftDrive.getCurrentPosition(),
+                          rightDrive.getCurrentPosition());
+        telemetry.update();
+```
+
+Antes de leerlo, el sample reinicia el conteo y activa el modo que usa el encoder:
+
+```java
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+```
+
+### Ticks (counts) por vuelta
+
+Los ticks por vuelta (*counts per revolution*) dependen de cada motor. ftc-docs indica que ese dato está en el **sitio web del fabricante**. Por eso el sample pide buscarlo ahí y no usar un número genérico.
+
+---
+
+## De ticks a pulgadas
+
+Según ftc-docs, convertir pulgadas en counts de encoder depende de los counts por rotación (CPR) del motor y del diámetro de las ruedas. Así lo calcula el sample oficial (extracto textual):
+
+```java
+    // Calculate the COUNTS_PER_INCH for your specific drive train.
+    // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
+    // For external drive gearing, set DRIVE_GEAR_REDUCTION as needed.
+    // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
+    // This is gearing DOWN for less speed and more torque.
+    // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
+    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
+```
+
+Qué significa cada constante:
+
+- `COUNTS_PER_MOTOR_REV`: ticks por vuelta del motor. **1440 es solo el ejemplo del sample** (motor TETRIX); usa el valor de tu motor según su fabricante.
+- `DRIVE_GEAR_REDUCTION`: reducción entre motor y rueda. Por ejemplo, un engrane de 12 dientes moviendo uno de 24 da 2.0; sin engranes externos, 1.0.
+- `WHEEL_DIAMETER_INCHES`: diámetro de la rueda. Multiplicado por π (3.1415) da la circunferencia, es decir, lo que avanza la rueda en una vuelta.
+- `COUNTS_PER_INCH`: ticks por vuelta de rueda entre pulgadas por vuelta = ticks por pulgada.
+
+---
+
+## Mover el robot X pulgadas
+
+El sample define un método `encoderDrive` que convierte pulgadas en una posición objetivo y deja que el controlador del motor llegue a ella con `RUN_TO_POSITION`. Este es el cálculo del objetivo (extracto textual):
+
+```java
+            // Determine new target position, and pass to motor controller
+            newLeftTarget = leftDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = rightDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            leftDrive.setTargetPosition(newLeftTarget);
+            rightDrive.setTargetPosition(newRightTarget);
+
+            // Turn On RUN_TO_POSITION
+            leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+```
+
+Y así se usa para recorrer una ruta (extracto textual):
+
+```java
+        // Step through each leg of the path,
+        // Note: Reverse movement is obtained by setting a negative distance (not speed)
+        encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+```
+
+Cada llamada recibe la velocidad, las pulgadas para el lado izquierdo y el derecho, y un tiempo límite en segundos. Para ir en reversa se usa una **distancia negativa**, no una velocidad negativa.
+
+En el giro (S2), cada lado recorre 12 pulgadas en sentidos opuestos. Esas 12 pulgadas no son un ángulo: cuántos grados gira el robot depende de qué tan ancho es, así que ese valor se ajusta probando.
+
+<Aside type="note" title="Detalles del sample original">
+- El comentario de la primera línea dice "47 Inches", pero el código pide 48. Así viene en el sample oficial y lo dejamos textual.
+- El sample es para un drivetrain de **dos motores** (`left_drive`, `right_drive`), no para el mecanum de 4 motores de nuestra <a href="/docs/ftc/programming/robot-programming/drivetrain-java/">guía de drivetrain</a>. No hay un sample oficial de manejo por encoders (como `encoderDrive`) para mecanum, así que no incluimos una adaptación. Sí hay samples oficiales de odometría con hardware dedicado, `SensorGoBildaPinpoint` (dead wheels) y `SensorSparkFunOTOS` (sensor óptico), que veremos en una guía avanzada.
+- El sample requiere que una potencia positiva mueva los motores hacia adelante y haga que los encoders **cuenten hacia arriba**.
+- Para ver el sample completo (con el ciclo de espera, el timeout y la telemetría), ábrelo en el repositorio oficial. Para usarlo, el sample indica copiarlo en Android Studio a la carpeta de código de tu equipo con otro nombre y quitar la línea `@Disabled`.
+</Aside>
+
+---
+
+## Limitación honesta
+
+<Aside type="caution" title="Contenido propio">
+Esta sección es criterio de FIRSTHub, no traducción de fuente oficial.
+</Aside>
+
+La odometría con encoders **no es 100% precisa**. Los errores pequeños (deslizamiento, rebotes, ruedas desgastadas) **se acumulan**: entre más lejos se mueve el robot, más se aleja la estimación de la posición real.
+
+Lo que la mejora, para guías más avanzadas:
+
+- **IMU:** mide la orientación del robot directamente. El Control Hub trae una integrada.
+- **Dead wheels:** ver la sección de arriba.
+- **Road Runner:** librería de la comunidad (no oficial de FIRST) para seguir trayectorias combinando estas mediciones. Queda fuera del alcance de esta guía.
+
+---
+
+## Ver también
+
+<CardGrid>
+  <LinkCard
+    title="Puertos del Control Hub"
+    href="/docs/ftc/robot-preparation/control-hub-ports/"
+    description="Dónde se conectan los encoders y demás sensores."
+  />
+  <LinkCard
+    title="Corriendo el programa"
+    href="/docs/ftc/programming/robot-programming/corriendo-el-programa/"
+    description="Cómo compilar y ejecutar tu OpMode."
+  />
+</CardGrid>

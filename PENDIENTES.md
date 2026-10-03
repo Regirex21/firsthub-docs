@@ -89,3 +89,23 @@ Ambas páginas incluyen su propio Aside de advertencia. Se recomienda revisar el
 Nota informativa, no pendiente de decisión: confirmé que "Woodie Flowers Finalist Award" (por evento) y "Woodie Flowers Award" / "Championship WFA" (uno solo, elegido entre los finalistas de la temporada, entregado en el FIRST Championship) son dos niveles del mismo premio, no dos premios distintos con nombres inconsistentes como pensaba en la auditoría anterior. Documenté ambos dentro de `woodie-flowers-finalist.mdx`, sin crear un archivo aparte para la versión Championship.
 
 ---
+
+## 7. Puertos del Control Hub y Odometría con encoders — FTC-only por decisión, NO es hueco de FRC
+
+**Páginas:** `ftc/robot-preparation/control-hub-ports.mdx` y `ftc/programming/robot-programming/odometria-con-encoders.mdx` (creadas 2026-09-23).
+
+**Divergencia estructural decidida (CLAUDE.md §6):** ambas páginas son específicas del hardware y del SDK de FTC (Control Hub de REV, `DcMotor`/`RUN_TO_POSITION` del FtcRobotController). No tienen equivalente en FRC y **no se deben crear páginas espejo en FRC**. Quien audite la paridad FRC/FTC no debe leer su ausencia en FRC como trabajo faltante.
+
+---
+
+## 8. ⚠️ PENDIENTE DE VERIFICACIÓN — precisión de dead wheels vs. encoders de tracción
+
+**Página afectada:** `ftc/programming/robot-programming/odometria-con-encoders.mdx`, sección "Encoders en las ruedas de tracción vs. dead wheels".
+
+**Qué falta confirmar:** una fuente oficial de FIRST que compare la precisión de las dead wheels contra los encoders de los motores de tracción, o que explique el deslizamiento como causa del error.
+
+**Qué se encontró:** ftc-docs (AprilTag Introduction) solo lista "drive motor encoders, REV Hub IMU, deadwheel encoders…" como sensores de navegación válidos, sin compararlos. La explicación del deslizamiento en la página es criterio de ingeniería general, marcada en el cuerpo con el marcador literal. Si se encuentra fuente oficial, se sustituye; si no, se decide si se queda como contenido propio marcado.
+
+**Lo que sí quedó verificado en esa página:** todo el código es extracto textual del sample oficial `RobotAutoDriveByEncoder_Linear.java` (comprobado por script contra el archivo descargado del repo `FIRST-Tech-Challenge/FtcRobotController`, rama `master`).
+
+---

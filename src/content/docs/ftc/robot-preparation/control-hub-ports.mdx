@@ -1,0 +1,123 @@
+---
+title: Puertos del Control Hub
+description: Qué se conecta en cada puerto del Control Hub — motores, servos, digitales, analógicos, I2C y encoders.
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Esta guía resume los puertos del Control Hub y qué tipo de dispositivo va en cada uno, para que al configurar tu robot sepas dónde conectar cada motor y sensor.
+
+<Aside type="note" title="Fuente">
+Traducido de <a href="https://docs.revrobotics.com/duo-control/control-system-overview/control-hub-basics">Control Hub Specifications</a>, <a href="https://docs.revrobotics.com/duo-control/sensors/digital">Digital</a>, <a href="https://docs.revrobotics.com/duo-control/sensors/analog">Analog</a>, <a href="https://docs.revrobotics.com/duo-control/sensors/i2c">I2C</a> y <a href="https://docs.revrobotics.com/duo-control/hello-robot-blocks/configuration">Setting up a Configuration</a> (docs.revrobotics.com), y <a href="https://ftc-docs.firstinspires.org/en/latest/control_hard_compon/rc_components/encoders/encoders.html">Encoders</a> (ftc-docs).
+</Aside>
+
+<Aside type="caution" title="Cambia por revisión de hardware">
+Los números de esta página corresponden a la documentación vigente de REV para el Control Hub (REV-31-1595). Si tu hardware es de otra revisión, o usas un Expansion Hub, confirma en la fuente oficial.
+</Aside>
+
+<div style="border: 2px dashed var(--sl-color-gray-4); border-radius: 12px; padding: 2rem; text-align: center; opacity: 0.8;">
+  Placeholder: diagrama del Control Hub señalando cada tipo de puerto (motor, encoder, servo, digital, analógico, I2C).
+</div>
+
+---
+
+## Resumen de puertos
+
+| Tipo | Cantidad | Conector | Uso |
+|---|---|---|---|
+| Motor | 4 (0–3) | JST VH, 2 pines | Alimentación de motores |
+| Encoder | 4 | JST PH, 4 pines | Entrada de encoder de cuadratura |
+| Servo | 6 (0–5) | Header de 0.1" | Salida para servos de 5V (rango extendido) |
+| Digital | 8 canales (0–7) en 4 conectores | JST PH, 4 pines | Entrada/salida digital, dos canales por conector |
+| Analógico | 4 canales (0–3) en 2 conectores | JST PH, 4 pines | Entrada analógica, dos canales por conector |
+| I2C | 4 buses (0–3) | JST PH, 4 pines | Sensores I2C, 100/400 kHz |
+
+---
+
+## Puertos de motor y servo
+
+- **Motores:** 4 puertos, del 0 al 3 en la configuración del robot.
+- **Servos:** 6 puertos, del 0 al 5. REV los describe como salida para servos de 5V de rango extendido.
+- **Encoders:** 4 puertos de entrada para encoder de cuadratura. La mayoría de los motores legales de FTC traen uno integrado, compatible con el Hub. Para usarlos en código, ve [Odometría con encoders](/docs/ftc/programming/robot-programming/odometria-con-encoders/).
+
+---
+
+## Puertos digitales (0–7)
+
+Un sensor digital solo reporta dos estados: **HIGH** (alto) o **LOW** (bajo). No hay valores intermedios. Sirve para preguntas de sí/no: ¿está presionado?, ¿llegó el brazo al tope?
+
+- El Hub tiene **ocho** canales digitales. Cada conector físico tiene **dos canales**, por eso vienen etiquetados como **0-1, 2-3**, etc.
+- El Hub y los sensores de REV trabajan con **lógica de 3.3V**. Un sensor digital debe operar a 3.3V para usarse con el Hub.
+- Algunos sensores, como el **Touch Sensor** de REV, usan solo uno de los dos canales del conector. Por eso el Touch Sensor **siempre se configura en un puerto impar** (1, 3, 5 o 7).
+
+**Ejemplos:** Touch Sensor y Magnetic Limit Switch (interruptor de límite magnético), ambos de REV.
+
+<Aside type="note" title="Beam break (nota de FIRSTHub, no es traducción)">
+Un sensor de interrupción de haz (*beam break*) también reporta solo "haz cortado / no cortado", así que conceptualmente es digital. La documentación de REV no lo lista entre sus ejemplos. Antes de conectarlo, confirma en la hoja de datos del fabricante que opera a 3.3V.
+</Aside>
+
+---
+
+## Puertos analógicos (0–3)
+
+Un sensor analógico reporta un **rango continuo** de valores, no solo dos estados.
+
+- El Control Hub lee voltajes de **0V a 5V** en sus entradas analógicas.
+- Ojo: el pin de alimentación del puerto da **3.3V**. Un sensor analógico que necesita 5V requiere un cableado especial que le dé esos 5V.
+- Como en los digitales, cada conector tiene **dos canales**, etiquetados **0-1** y **2-3**.
+
+**Ejemplo:** el Potentiometer de REV (REV-31-1155) mide la posición angular de un eje.
+
+---
+
+## Puertos I2C (buses 0–3)
+
+I2C es un protocolo de comunicación para sensores más complejos, que envían datos en lugar de un simple voltaje.
+
+- El Control Hub tiene **4 buses I2C independientes**. **Cada puerto I2C es su propio bus.**
+- La **IMU interna** del Hub está en el **bus 0**.
+- Velocidad del bus: 100/400 kHz. Lógica de 3.3V.
+
+### Direcciones I2C
+
+Cada dispositivo I2C tiene una **dirección**, un número que normalmente fija el fabricante. En un mismo bus, cada dispositivo debe tener una dirección distinta para que el Hub sepa con cuál está hablando.
+
+<Aside type="caution" title="Misma dirección, buses distintos">
+Si dos dispositivos tienen la misma dirección (por ejemplo, dos Color Sensor V3 iguales), **deben ir en buses I2C diferentes**; si no, su comunicación choca. Es posible poner varios sensores en un mismo bus, pero solo si sus direcciones son distintas.
+</Aside>
+
+**Ejemplos:** Color Sensor V3, 2m Distance Sensor e IMU (como la interna del bus 0), todos de REV.
+
+---
+
+## ¿Qué sensor va en qué puerto?
+
+| Sensor / dispositivo | Tipo de puerto |
+|---|---|
+| Motor de drivetrain o mecanismo | Motor (0–3) |
+| Encoder del motor | Encoder |
+| Servo | Servo (0–5) |
+| Touch Sensor | Digital (puerto impar) |
+| Magnetic Limit Switch | Digital |
+| Beam break | Digital (nota de FIRSTHub: confirma 3.3V con el fabricante) |
+| Potentiometer | Analógico |
+| Color Sensor V3 | I2C |
+| 2m Distance Sensor | I2C |
+| IMU externa | I2C (si tiene la misma dirección que la IMU interna, en un bus distinto al 0) |
+
+---
+
+## Ver también
+
+<CardGrid>
+  <LinkCard
+    title="Configuración del Control Hub"
+    href="/docs/ftc/robot-preparation/control-hub-setup/"
+    description="Encendido inicial y actualización de OS y firmware."
+  />
+  <LinkCard
+    title="Control Hub Specifications - REV"
+    href="https://docs.revrobotics.com/duo-control/control-system-overview/control-hub-basics"
+    description="Especificaciones oficiales completas del hardware."
+  />
+</CardGrid>

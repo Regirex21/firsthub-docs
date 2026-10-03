@@ -1,0 +1,223 @@
+---
+title: Git para equipos de robótica
+description: Control de versiones para el código del equipo — por qué usarlo, instalación, flujo básico y cómo evitar conflictos. Aplica a FRC y FTC.
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Esta página es contenido propio, no traducción oficial">
+Git no es una herramienta de FIRST, así que esta guía no traduce documentación de FIRST: es contenido didáctico de FIRSTHub. Los comandos sí están verificados contra el libro oficial de Git, <a href="https://git-scm.com/book/en/v2">Pro Git</a> (git-scm.com). Aplica igual a equipos de FRC y FTC.
+</Aside>
+
+---
+
+## ¿Por qué usar Git?
+
+Git es un sistema de control de versiones: guarda un historial de cada cambio del código, quién lo hizo y cuándo. Para un equipo de robótica resuelve tres problemas muy comunes:
+
+- **Perder código.** Una laptop que se descompone o una carpeta borrada por error ya no significa empezar de cero: el código vive también en un repositorio remoto (por ejemplo, en GitHub).
+- **Sobrescribir el trabajo de otra persona.** Si dos programadores editan el mismo proyecto, Git detecta los cambios de cada uno en vez de que el último en guardar borre al otro.
+- **No poder regresar a una versión que funcionaba.** Si un cambio rompe el robot el día del evento, puedes ver exactamente qué cambió y volver a la versión anterior.
+
+---
+
+## Instalación
+
+<Tabs>
+  <TabItem label="Git (línea de comandos)">
+
+Descarga Git desde el sitio oficial: <a href="https://git-scm.com/install/">git-scm.com/install</a>. Después de instalarlo, abre una terminal y configura tu nombre y correo. Git los usa para firmar cada commit:
+
+```bash
+git config --global user.name "Tu Nombre"
+git config --global user.email tucorreo@ejemplo.com
+```
+
+Agrega también esta línea:
+
+```bash
+git config --global pull.rebase false
+```
+
+Le dice a Git que, al hacer `pull`, combine los cambios del remoto con los tuyos. Sin ella, algunas versiones de Git se detienen con el mensaje `fatal: Need to specify how to reconcile divergent branches` la primera vez que tus cambios y los de alguien más se cruzan.
+
+Para revisar tu configuración:
+
+```bash
+git config --list
+```
+
+  </TabItem>
+  <TabItem label="GitHub Desktop (visual)">
+
+Si tu equipo prefiere no usar la terminal, <a href="https://github.com/apps/desktop">GitHub Desktop</a> hace las mismas operaciones (commit, push, pull) con botones. Los conceptos de esta página son idénticos; solo cambia la interfaz.
+
+  </TabItem>
+</Tabs>
+
+<Aside type="tip" title="VS Code y Android Studio">
+Tanto VS Code (FRC) como Android Studio (FTC) tienen integración con Git, pero necesitan que Git esté instalado en la computadora.
+</Aside>
+
+---
+
+## Conceptos mínimos
+
+| Concepto | Qué es |
+|---|---|
+| **Repositorio (repo)** | La carpeta del proyecto más todo su historial de cambios. |
+| **Commit** | Una "foto" guardada de los cambios, con un mensaje que explica qué se hizo. |
+| **Remoto** | Una copia del repositorio en un servidor (por ejemplo, GitHub). Por convención se llama `origin`. |
+| **Clonar** | Descargar una copia completa de un repositorio remoto a tu computadora (`git clone`). |
+| **Push / Pull** | `push` sube tus commits al remoto; `pull` trae los commits que subieron los demás. |
+| **Terminal** | La ventana donde se escriben comandos (en Windows, Git Bash o PowerShell). |
+| **Branch (rama)** | Una línea de trabajo paralela. Es un tema intermedio: aquí solo lo mencionamos, y el flujo de esta página trabaja en una sola rama. |
+
+---
+
+## Flujo básico: add → commit → push
+
+<Steps>
+
+1. **Revisa qué cambió:**
+
+   ```bash
+   git status
+   ```
+
+2. **Prepara los archivos** que quieres incluir en el commit:
+
+   ```bash
+   git add src/main/java/frc/robot/Robot.java
+   ```
+
+   Esa es la ruta de un proyecto de FRC; en FTC tu código vive en `TeamCode/src/main/java/...`. Para incluir todos los archivos que cambiaste, usa `git add .` (con punto).
+
+3. **Guarda el commit** con un mensaje descriptivo:
+
+   ```bash
+   git commit -m "Invertir motor derecho del drivetrain"
+   ```
+
+4. **Sube tus commits** al repositorio remoto:
+
+   ```bash
+   git push
+   ```
+
+   Si clonaste el repositorio, `git push` ya sabe a dónde subir. `git status` te dice en qué rama estás (por ejemplo, `On branch main`). Ojo: el SDK de FTC usa la rama `master`, no `main`.
+
+</Steps>
+
+Para traer los cambios que subieron tus compañeros:
+
+```bash
+git pull
+```
+
+### Mensajes de commit: bueno vs. malo
+
+| Malo | Bueno |
+|---|---|
+| `cambios` | `Ajustar velocidad máxima del brazo a 0.6` |
+| `arreglo` | `Corregir CAN ID del motor trasero izquierdo` |
+| `asdf` | `Agregar autónomo de 2 piezas desde posición central` |
+
+Un buen mensaje le dice a cualquiera del equipo, semanas después, **qué cambió y por qué**, sin tener que abrir el código.
+
+---
+
+## Estructura del repositorio del equipo
+
+- **Un repositorio por robot/temporada.** Mezclar temporadas en una sola carpeta complica encontrar qué código corrió en qué evento.
+- **Nunca subas archivos generados** (resultados de compilación) ni **credenciales** (contraseñas, llaves, tokens).
+
+Eso se controla con un archivo `.gitignore` en la raíz del repo. Cada línea es un patrón de archivos que Git debe ignorar:
+
+- `*.log` ignora todos los archivos con esa extensión.
+- `build/` ignora toda carpeta llamada `build`, esté donde esté en el proyecto (la diagonal final indica que es carpeta). Para ignorar solo la de la raíz, escribe `/build/`.
+- `#` empieza un comentario.
+- `!` hace una excepción: vuelve a incluir un archivo que una regla anterior ignoraba (por ejemplo, `*.log` y luego `!importante.log`).
+
+<Aside type="note" title="Ejemplo real: el .gitignore oficial de FtcRobotController">
+El repositorio oficial del SDK de FTC ya incluye un `.gitignore`. Este es un fragmento textual de <a href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/blob/master/.gitignore">su archivo</a>:
+
+```
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+```
+
+Si partes de una plantilla oficial (el SDK de FTC o un proyecto nuevo de WPILib), revisa primero si ya trae su propio `.gitignore` antes de escribir uno desde cero.
+</Aside>
+
+<Aside type="caution" title="Credenciales">
+Si alguna vez subes por accidente una contraseña o llave a un repositorio remoto, borrarla del archivo no basta: sigue en el historial. Cambia esa credencial de inmediato.
+</Aside>
+
+---
+
+## Ejemplo: conflicto por editar sin hacer pull primero
+
+Supón que Ana y Luis clonan el repositorio el mismo día:
+
+1. Ana cambia la velocidad del brazo en `Constants.java`, hace commit y **push**.
+2. Luis, sin hacer `pull`, cambia **la misma línea** en su copia, hace commit e intenta hacer push.
+
+El push de Luis es **rechazado**. Pro Git lo explica así: si alguien más subió cambios después de que clonaste, tu push se rechaza, y tienes que traer su trabajo e incorporarlo al tuyo antes de poder subir.
+
+Luis hace `git pull`. Como ambos cambiaron la misma línea, Git no puede decidir solo y marca un conflicto:
+
+```
+CONFLICT (content): Merge conflict in src/main/java/frc/robot/Constants.java
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Dentro del archivo aparecen marcadores con las dos versiones:
+
+```
+<<<<<<< HEAD
+public static final double ARM_SPEED = 0.8;
+=======
+public static final double ARM_SPEED = 0.6;
+>>>>>>> (identificador de la versión que viene del remoto)
+```
+
+Arriba de `=======` está tu versión (`HEAD`); abajo, la que llegó con el pull.
+
+Para resolverlo:
+
+<Steps>
+
+1. Edita el archivo: deja la versión correcta (o combina ambas) y **borra las líneas** `<<<<<<<`, `=======` y `>>>>>>>`.
+2. Marca el conflicto como resuelto:
+
+   ```bash
+   git add src/main/java/frc/robot/Constants.java
+   ```
+
+3. Completa la fusión:
+
+   ```bash
+   git commit
+   ```
+
+4. Ahora sí, `git push`.
+
+</Steps>
+
+<Aside type="tip" title="Cómo evitarlo">
+Haz `git pull` **antes** de empezar a programar cada sesión, y haz commits y push pequeños y frecuentes. Entre menos tiempo pase entre tu último pull y tu push, menos probable es un conflicto.
+</Aside>
+
+---
+
+## Referencias
+
+<CardGrid>
+  <LinkCard title="Pro Git (libro oficial)" href="https://git-scm.com/book/en/v2" description="La referencia completa de Git, gratuita." />
+  <LinkCard title="Descargar Git" href="https://git-scm.com/install/" description="Instalador oficial para Windows, macOS y Linux." />
+</CardGrid>
