@@ -263,3 +263,22 @@ usuario decida explícitamente que sí:
   ningún mecanismo que detecte que una página quedó desactualizada
   después de escrita) — no se implementa ningún mecanismo automático de
   esto sin que el usuario apruebe el enfoque primero.
+
+
+## Estructura: dos documentaciones (desde octubre 2026)
+
+Este repo publica DOS sitios Starlight a partir del mismo contenido:
+
+- **Docs FTC** en `/docs-ftc/` → `src/content/docs/ftc/` + carpetas compartidas
+- **Docs FRC** en `/docs-frc/` → `src/content/docs/frc/` + carpetas compartidas
+- **Compartidas** (aparecen en las dos): `first/`, `voluntarios/`, `herramientas/` (lista en `src/programa.mjs`)
+
+Cómo funciona:
+
+- `DOCS_PROGRAM=ftc|frc` decide qué sitio se construye (`src/programa.mjs`).
+- `npm run dev` levanta FTC; `npm run dev:frc` levanta FRC; `npm run build` construye los dos en `dist/docs-ftc` y `dist/docs-frc`.
+- La carpeta del programa se publica en la raíz del sitio: `ftc/robot-preparation/x.mdx` → `/docs-ftc/robot-preparation/x/`. `ftc/index.mdx` es la portada.
+- Los sidebars viven en `src/sidebar.mjs` (uno por programa). Página nueva = agregarla ahí.
+- En los .mdx los enlaces internos se siguen escribiendo como `/docs/ftc/...`, `/docs/frc/...`, `/docs/first/...`. El plugin `src/plugins/remark-enlaces.mjs` los convierte al construir; los compartidos apuntan a la documentación en la que se está leyendo.
+- Acento por programa (naranja FTC, turquesa FRC) en `src/components/overrides/Head.astro`.
+- `/docs` en firsthub.dev es una página del sitio principal para elegir programa; las direcciones viejas `/docs/ftc/...`, `/docs/frc/...` y compartidas redirigen desde `vercel.json` del repo principal.

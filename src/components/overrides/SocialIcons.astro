@@ -1,16 +1,21 @@
 ---
 /* ================================================= */
 /* ENLACES DEL ENCABEZADO                            */
-/* Antes de los íconos sociales de Starlight agrega  */
-/* el regreso al sitio principal, para que la        */
-/* documentación se sienta parte de FIRSTHub.        */
-/* URL absolutas: la documentación también se        */
-/* publica en firsthub-docs.vercel.app.              */
+/* Indica en qué documentación estás (FTC o FRC),    */
+/* permite cambiar a la otra y regresar al sitio     */
+/* principal. URL absolutas: la documentación        */
+/* también se publica en firsthub-docs.vercel.app.   */
 /* ================================================= */
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
+
+const esFTC = import.meta.env.BASE_URL.includes('docs-ftc');
+const actual = esFTC ? 'FTC' : 'FRC';
+const otro = esFTC ? 'FRC' : 'FTC';
 ---
 
 <nav class="fh-nav-sitio" aria-label="FIRSTHub">
+  <span class="fh-programa" title={`Estás en la documentación de ${actual}`}>Docs {actual}</span>
+  <a class="fh-cambiar" href={`https://www.firsthub.dev/docs-${otro.toLowerCase()}/`}>Ir a {otro}</a>
   <a href="https://www.firsthub.dev/">Inicio</a>
   <a href="https://www.firsthub.dev/blog">Blog</a>
   <a href="https://www.firsthub.dev/contacto">Contacto</a>

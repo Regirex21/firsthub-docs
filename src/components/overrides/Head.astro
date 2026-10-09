@@ -3,8 +3,16 @@ import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Head.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+
+/* Color de acento de cada documentación (lo usa custom.css):
+   FTC naranja, FRC turquesa, igual que en firsthub.dev */
+const esFTC = import.meta.env.BASE_URL.includes('docs-ftc');
+const acento = esFTC
+  ? ':root{--fh-accent:#ff8c42;--fh-accent-low:#4a3224;--fh-accent-high:#ffc49c}'
+  : ':root{--fh-accent:#48a9a6;--fh-accent-low:#23383f;--fh-accent-high:#a9dedc}';
 ---
 
 <Default {...Astro.props}><slot /></Default>
+<style is:inline set:html={acento}></style>
 <Analytics />
 <SpeedInsights />

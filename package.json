@@ -3,9 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/dev.mjs ftc",
+    "dev:frc": "node scripts/dev.mjs frc",
+    "start": "node scripts/dev.mjs ftc",
+    "build": "node scripts/build.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
