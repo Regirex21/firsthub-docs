@@ -175,6 +175,7 @@ body {
   padding: 0.2rem 0.65rem;
   border-radius: 999px;
   background: var(--fh-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.18);
   color: var(--fh-navy) !important;
   font-family: var(--fh-font-display);
   font-weight: 700;
@@ -341,9 +342,11 @@ main > .content-panel:first-of-type h1 {
 .static-card article {
   --fh-card: var(--fh-muted);
   background: var(--fh-surface);
-  border: 1px solid rgba(251, 255, 241, 0.1);
+  border: 0;
   border-top: 4px solid var(--fh-card);
-  border-radius: 18px;
+  border-radius: 22px;
+  /* Relieve sutil (mismo que fh-relieve en firsthub.dev) */
+  box-shadow: 10px 10px 24px rgba(10, 11, 22, 0.55), -8px -8px 20px rgba(255, 255, 255, 0.035);
   padding: 1.6rem 1.7rem;
   height: 100%;
 }
@@ -352,8 +355,6 @@ main > .content-panel:first-of-type h1 {
 }
 .card-link:hover article {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--fh-card) 60%, transparent);
-  border-top-color: var(--fh-card);
 }
 
 .card-link .card .title,

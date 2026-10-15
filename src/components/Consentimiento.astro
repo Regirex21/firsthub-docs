@@ -110,11 +110,10 @@
     max-width: 620px;
     margin: 0 auto;
     padding: 1.25rem;
-    border: 1px solid rgba(251, 255, 241, 0.15);
-    border-radius: 16px;
-    background: #313553;
+    border-radius: 20px;
+    background: #2e3149;
     color: #fbfff1;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 10px 10px 24px rgba(10, 11, 22, 0.55), -8px -8px 20px rgba(255, 255, 255, 0.035);
   }
   .fh-consentimiento[hidden] {
     display: none;
@@ -155,19 +154,34 @@
   .fh-consentimiento-botones button {
     flex: 1;
     padding: 0.625rem 1.25rem;
-    border: 2px solid rgba(251, 255, 241, 0.7);
-    border-radius: 12px;
-    background: transparent;
+    border: 0;
+    border-radius: 16px;
+    background: #343858;
     color: #fbfff1;
     font: inherit;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -3px 0 rgba(0, 0, 0, 0.28), 0 6px 14px rgba(8, 9, 18, 0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
   }
-  .fh-consentimiento-botones button:hover,
+  .fh-consentimiento-botones button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+  .fh-consentimiento-botones button:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 3px 8px rgba(8, 9, 18, 0.4);
+  }
   .fh-consentimiento-botones button:focus-visible {
-    border-color: #fbfff1;
-    background: #fbfff1;
-    color: #2a2d43;
+    outline: 2px solid #fbfff1;
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fh-consentimiento-botones button,
+    .fh-consentimiento-botones button:hover,
+    .fh-consentimiento-botones button:active {
+      transition: none;
+      transform: none;
+    }
   }
 </style>
