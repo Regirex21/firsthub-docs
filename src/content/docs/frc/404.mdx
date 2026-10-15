@@ -1,0 +1,32 @@
+---
+title: Esta página no existe
+description: La dirección no lleva a ninguna página de la documentación de FRC.
+template: splash
+editUrl: false
+pagefind: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+La dirección que abriste no lleva a ninguna página de **Docs FRC**. Puede que la
+hayamos movido, que el enlace tenga un error de dedo o que la página todavía no
+exista.
+
+**Lo más rápido:** usa el buscador de arriba (o `Ctrl` + `K`) y escribe lo que
+buscabas.
+
+<CardGrid>
+  <LinkCard title="Inicio de Docs FRC" href="/docs/frc/" description="Todas las secciones de FIRST Robotics Competition." />
+  <LinkCard title="Instalar WPILib" href="/docs/frc/programming/installation-tools/wpilib-setup/" description="Lo que más se consulta para empezar." />
+  <LinkCard title="Preparar el robot" href="/docs/frc/robot-preparation/" description="roboRIO, radio y Driver Station." />
+  <LinkCard title="¿Buscabas FTC?" href="/docs/ftc/" description="La documentación de FIRST Tech Challenge." />
+</CardGrid>
+
+¿Llegaste aquí desde un enlace de FIRSTHub? Escríbenos a
+[firsthubofficial@gmail.com](mailto:firsthubofficial@gmail.com?subject=Enlace%20roto%20en%20Docs%20FRC)
+con la dirección y lo arreglamos.

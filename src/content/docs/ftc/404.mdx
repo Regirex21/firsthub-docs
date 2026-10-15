@@ -1,0 +1,32 @@
+---
+title: Esta página no existe
+description: La dirección no lleva a ninguna página de la documentación de FTC.
+template: splash
+editUrl: false
+pagefind: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+La dirección que abriste no lleva a ninguna página de **Docs FTC**. Puede que la
+hayamos movido, que el enlace tenga un error de dedo o que la página todavía no
+exista.
+
+**Lo más rápido:** usa el buscador de arriba (o `Ctrl` + `K`) y escribe lo que
+buscabas.
+
+<CardGrid>
+  <LinkCard title="Inicio de Docs FTC" href="/docs/ftc/" description="Todas las secciones de FIRST Tech Challenge." />
+  <LinkCard title="Configurar el Control Hub" href="/docs/ftc/robot-preparation/control-hub-setup/" description="Lo que más se consulta para empezar." />
+  <LinkCard title="Programación del robot" href="/docs/ftc/programming/robot-programming/" description="Tu primer drivetrain en Java o Blocks." />
+  <LinkCard title="¿Buscabas FRC?" href="/docs/frc/" description="La documentación de FIRST Robotics Competition." />
+</CardGrid>
+
+¿Llegaste aquí desde un enlace de FIRSTHub? Escríbenos a
+[firsthubofficial@gmail.com](mailto:firsthubofficial@gmail.com?subject=Enlace%20roto%20en%20Docs%20FTC)
+con la dirección y lo arreglamos.
