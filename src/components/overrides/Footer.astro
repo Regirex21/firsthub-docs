@@ -9,6 +9,7 @@
 /* donde /privacidad no existe.                      */
 /* ================================================= */
 import Default from '@astrojs/starlight/components/Footer.astro';
+import Consentimiento from '../Consentimiento.astro';
 ---
 
 <Default><slot /></Default>
@@ -16,8 +17,9 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 <div class="firsthub-legal">
   <nav>
     <a href="https://www.firsthub.dev/privacidad">Privacidad</a>
-    <a href="https://www.firsthub.dev/terminos">Términos</a>
+    <a href="https://www.firsthub.dev/terminos">Aviso legal</a>
     <a href="https://www.firsthub.dev/licencia">Licencia</a>
+    <button type="button" data-fh-preferencias>Preferencias de privacidad</button>
   </nav>
 
   <p>
@@ -27,6 +29,8 @@ import Default from '@astrojs/starlight/components/Footer.astro';
     original.
   </p>
 </div>
+
+<Consentimiento />
 
 <style>
   .firsthub-legal {
@@ -44,12 +48,22 @@ import Default from '@astrojs/starlight/components/Footer.astro';
     margin-bottom: 0.75rem;
   }
 
-  .firsthub-legal a {
+  .firsthub-legal a,
+  .firsthub-legal button {
     color: var(--sl-color-gray-2);
     text-decoration: none;
   }
 
-  .firsthub-legal a:hover {
+  .firsthub-legal button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .firsthub-legal a:hover,
+  .firsthub-legal button:hover {
     color: var(--sl-color-text-accent);
     text-decoration: underline;
   }

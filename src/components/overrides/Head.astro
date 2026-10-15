@@ -1,8 +1,8 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Head.astro';
-import Analytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
+/* La analítica de Vercel la carga Consentimiento.astro (en el pie)
+   solo si la persona acepta. */
 
 /* Color de acento de cada documentación (lo usa custom.css):
    FTC naranja, FRC turquesa, igual que en firsthub.dev */
@@ -14,5 +14,3 @@ const acento = esFTC
 
 <Default {...Astro.props}><slot /></Default>
 <style is:inline set:html={acento}></style>
-<Analytics />
-<SpeedInsights />

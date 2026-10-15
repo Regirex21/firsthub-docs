@@ -1,0 +1,173 @@
+---
+/* ================================================= */
+/* CONSENTIMIENTO PARA LA ANALÍTICA (documentación)  */
+/*                                                   */
+/* Copia del componente del repo firsthub            */
+/* (src/components/Consentimiento.astro), con CSS    */
+/* propio porque Starlight no usa Tailwind. Las dos  */
+/* documentaciones se sirven desde www.firsthub.dev, */
+/* así que comparten la decisión con el sitio        */
+/* principal: misma clave "fh-consentimiento" y      */
+/* misma VERSION. Si cambias una, cambia la otra.    */
+/*                                                   */
+/* Vercel Web Analytics y Speed Insights solo se     */
+/* cargan si la persona acepta.                      */
+/* ================================================= */
+---
+
+<div
+  id="fh-consentimiento"
+  class="fh-consentimiento"
+  role="dialog"
+  aria-labelledby="fh-consentimiento-titulo"
+  aria-describedby="fh-consentimiento-texto"
+  hidden
+>
+  <p id="fh-consentimiento-titulo" class="fh-consentimiento-titulo">¿Podemos contar tu visita?</p>
+  <p id="fh-consentimiento-texto" class="fh-consentimiento-texto">
+    Medimos qué páginas se leen con Vercel Analytics. No usa cookies ni guarda
+    datos que te identifiquen, pero solo lo activamos si aceptas. Puedes cambiar
+    tu decisión cuando quieras desde el pie de página.
+    <a href="https://www.firsthub.dev/privacidad#analitica">Aviso de privacidad</a>
+  </p>
+  <div class="fh-consentimiento-botones">
+    <button type="button" data-fh-decision="rechazado">Rechazar</button>
+    <button type="button" data-fh-decision="aceptado">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  import { inject } from '@vercel/analytics';
+  import { injectSpeedInsights } from '@vercel/speed-insights';
+
+  const CLAVE = 'fh-consentimiento';
+  const VERSION = 1;
+
+  type Decision = 'aceptado' | 'rechazado';
+
+  function leer(): Decision | null {
+    try {
+      const d = JSON.parse(localStorage.getItem(CLAVE) ?? 'null');
+      if (d && d.v === VERSION && (d.decision === 'aceptado' || d.decision === 'rechazado')) {
+        return d.decision;
+      }
+    } catch {}
+    return null;
+  }
+
+  function guardar(decision: Decision) {
+    try {
+      localStorage.setItem(CLAVE, JSON.stringify({ v: VERSION, decision, fecha: new Date().toISOString() }));
+    } catch {}
+  }
+
+  let cargada = false;
+  function cargarAnalitica() {
+    if (cargada) return;
+    cargada = true;
+    inject({ framework: 'astro' });
+    injectSpeedInsights({ framework: 'astro' });
+  }
+
+  const aviso = document.getElementById('fh-consentimiento');
+  // Starlight pinta el pie dentro de una capa que queda debajo de la
+  // barra lateral: el aviso se mueve al <body> para quedar siempre encima.
+  if (aviso && aviso.parentElement !== document.body) document.body.appendChild(aviso);
+  const mostrar = () => aviso && (aviso.hidden = false);
+  const ocultar = () => aviso && (aviso.hidden = true);
+
+  const actual = leer();
+  if (actual === 'aceptado') cargarAnalitica();
+  else if (actual === null) mostrar();
+
+  aviso?.querySelectorAll<HTMLButtonElement>('[data-fh-decision]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const decision = b.dataset.fhDecision as Decision;
+      const antes = leer();
+      guardar(decision);
+      ocultar();
+      if (decision === 'aceptado') cargarAnalitica();
+      else if (antes === 'aceptado') location.reload();
+    }),
+  );
+
+  document.querySelectorAll('[data-fh-preferencias]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      mostrar();
+      aviso?.querySelector<HTMLButtonElement>('[data-fh-decision]')?.focus();
+    }),
+  );
+</script>
+
+<style>
+  .fh-consentimiento {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1000;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    border: 1px solid rgba(251, 255, 241, 0.15);
+    border-radius: 16px;
+    background: #313553;
+    color: #fbfff1;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .fh-consentimiento[hidden] {
+    display: none;
+  }
+  @media (min-width: 50rem) {
+    .fh-consentimiento {
+      left: 1.5rem;
+      right: auto;
+      margin: 0;
+      padding: 1.5rem;
+    }
+  }
+  .fh-consentimiento-titulo {
+    margin: 0;
+    font-family: var(--fh-font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  .fh-consentimiento-texto {
+    margin: 0.5rem 0 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #bfc0c6;
+  }
+  .fh-consentimiento-texto a {
+    color: #fbfff1;
+    text-underline-offset: 3px;
+  }
+  .fh-consentimiento-texto a:hover {
+    color: var(--fh-accent);
+  }
+  .fh-consentimiento-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .fh-consentimiento-botones button {
+    flex: 1;
+    padding: 0.625rem 1.25rem;
+    border: 2px solid rgba(251, 255, 241, 0.7);
+    border-radius: 12px;
+    background: transparent;
+    color: #fbfff1;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .fh-consentimiento-botones button:hover,
+  .fh-consentimiento-botones button:focus-visible {
+    border-color: #fbfff1;
+    background: #fbfff1;
+    color: #2a2d43;
+  }
+</style>
