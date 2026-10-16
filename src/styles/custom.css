@@ -445,6 +445,10 @@ main > .content-panel:first-of-type h1 {
 main > .content-panel:first-of-type {
   padding-top: 0;
 }
+/* Sin la línea que Starlight pone entre el título y el contenido */
+.content-panel + .content-panel {
+  border-top: 0;
+}
 
 /* Tabla de contenidos (derecha) */
 .right-sidebar a {
