@@ -109,3 +109,16 @@ Nota informativa, no pendiente de decisión: confirmé que "Woodie Flowers Final
 **Lo que sí quedó verificado en esa página:** todo el código es extracto textual del sample oficial `RobotAutoDriveByEncoder_Linear.java` (comprobado por script contra el archivo descargado del repo `FIRST-Tech-Challenge/FtcRobotController`, rama `master`).
 
 ---
+
+---
+
+## 8. Premios FTC con contenido real (2026-10-17) — hallazgos de la revisión
+
+Se ampliaron las 15 páginas de premios FTC y el índice con los criterios de la Sección 6 del Competition Manual 2026-2027 (BIOBUZZ) y las preguntas del Judging Question Bank 2026-2027 (rev. 26-27.1). Decisión del usuario: preguntas en traducción fiel (no hay versión oficial en español del banco; la traducción del manual que publica FIRST es V0.9, no oficial, y la versión en inglés manda). Quedaron estos pendientes:
+
+- **Judges' Choice y avance.** La página de premios de firstinspires.org dice que no da puntos de avance; la regla A211 del manual dice que dan puntos los premios de la Tabla 6-1, y el Judges' Choice está en esa tabla como opcional. Ambas variantes documentadas en `ftc/premios/premios-opcionales/judges-choice-award.mdx` con el marcador literal. Decisión pendiente.
+- **Woodie Flowers Award (FTC) y Volunteer Award (FTC).** Ninguno aparece en la Sección 6 del manual 2026-2027. Se agregó el marcador literal en ambas páginas. No se borraron (fuera de alcance). Decisión pendiente: confirmar si existen en FTC o retirarlos.
+- **FIRST Leadership Award.** Falta la fecha límite 2026-2027 y el formato de la nominación: la guía enlazada desde la página oficial sigue siendo la de 2025-2026. Marcador literal en la página.
+- **Control Award.** El manual 2026-2027 pide que la información de control vaya dentro del Engineering Portfolio. `ftc/portafolio-de-equipo/requisitos-oficiales.mdx` (verificado contra DECODE) todavía dice que el "Control Award submission" es un documento aparte del Portfolio. Fuera del alcance de esta tanda; hay que actualizarla.
+- **Compass Award.** El manual dice "video de 40 a 60 segundos" en la descripción y "máximo 60 segundos con créditos" en la regla. Documentado como tal en la página; no requiere decisión.
+- **Pregunta cortada en el banco oficial.** La primera pregunta de Control termina en "and how did you". Se completó como "cómo lo resolvieron" con nota visible en la página.

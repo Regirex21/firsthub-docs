@@ -1,26 +1,88 @@
 ---
 title: Control Award
-description: Premio FTC al uso de sensores y software para ampliar la funcionalidad del robot.
+description: Premio FTC al uso de sensores y software para mejorar el desempeño del robot. Criterios y preguntas de práctica.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="note" title="Fuente">
-Traducido de <a href="https://www.firstinspires.org/robotics/ftc/awards">Awards</a> (firstinspires.org).
+Criterios traducidos y resumidos de la <a href="https://ftc-resources.firstinspires.org/ftc/game/manual-06">Sección 6 (Awards) del Competition Manual 2026-2027</a> (BIOBUZZ). Preguntas traducidas del <a href="https://ftc-resources.firstinspires.org/ftc/event/question-bank">Judging Question Bank 2026-2027</a> (revisión 26-27.1). Ambos consultados el 17 de octubre de 2026.
 </Aside>
 
 ## Propósito
 
-Celebra a un equipo que usa sensores y software para ampliar la funcionalidad del robot durante el juego — el énfasis está en cómo el software y la retroalimentación de sensores hacen que el robot haga más, o lo haga mejor, no solo en que el código "funcione".
+Celebra a un equipo que usa sensores y software para ampliar lo que el robot puede hacer durante el juego. El énfasis está en cómo la retroalimentación de sensores hace que el robot haga más, o lo haga mejor, no solo en que el código funcione.
 
-<Aside type="caution" title="No confundir con el Control Award submission">
-Este premio evalúa el sistema de control del robot en general. No debe confundirse con el "Control Award submission", un documento específico de judging con su propio formato — ese es un artefacto de evaluación distinto a lo que describe esta página.
+## Ficha rápida
+
+| | |
+|---|---|
+| **Categoría oficial** | Machine, Creativity, and Innovation (junto con Innovate y Design) |
+| **Requiere Engineering Portfolio** | Sí: es el único premio de su categoría que lo pide |
+| **Lugares que se entregan** | En eventos de 4 a 10 equipos se entrega solo uno de los tres premios de esta categoría. De 11 a 20, 1.er lugar. De 21 a 40, 1.º y, a criterio del evento, 2.º. De 41 a 64, hasta 3.º |
+| **Cuenta para el Inspire Award** | Sí: Inspire pide ser contendiente fuerte en al menos un premio de esta categoría |
+
+<Aside type="caution" title="Ya no hay documento aparte">
+En temporadas anteriores el Control Award pedía un documento propio (el "Control Award submission"). En el manual 2026-2027 el criterio pide que esa información vaya dentro del Engineering Portfolio. Si tu equipo usa una plantilla de años pasados, revísala.
+</Aside>
+
+## Qué buscan los jueces
+
+1. **Obligatorio:** entregar un Engineering Portfolio que incluya:
+   - los componentes de control del robot, de hardware o de software,
+   - qué reto resuelve cada uno, y
+   - qué hace cada uno.
+
+   No hace falta incluir el código completo.
+2. **Obligatorio:** usar al menos una solución de hardware o software que use retroalimentación externa (por ejemplo, de sensores) para controlar y mejorar el desempeño del robot.
+3. **Recomendado:** que la solución de control funcione de forma consistente en la mayoría de los partidos.
+4. **Recomendado:** explicar qué tan confiable es la solución, demostrándola o describiendo cómo se podría mejorar.
+5. **Recomendado:** describir qué aprendió el equipo con el proceso de ingeniería mientras desarrollaba sus soluciones de control.
+
+## Preguntas de práctica
+
+<Aside type="note" title="Sobre estas preguntas">
+Traducción nuestra del Judging Question Bank; no encontramos una versión oficial en español. En la entrevista inicial, el JUDGE Advisor elige dos preguntas del banco para todos los equipos (una de Team Attributes y una de Machine, Creativity, and Innovation), y los jueces pueden hacer otras que no están aquí. Las preguntas con sangría son seguimientos de la anterior.
+</Aside>
+
+- ¿Qué sensores y hardware usaron? ¿Qué funcionó, qué no, y cómo lo resolvieron?
+- Cuéntennos sobre su código:
+  - ¿Qué bibliotecas usaron o qué rutinas propias escribieron?
+  - ¿Qué decisiones de software funcionaron y cuáles no?
+- ¿Cómo hace su robot para:
+  - saber dónde está en el campo?
+  - controlar cómo toma los elementos de puntuación?
+  - medir y controlar la velocidad de los motores?
+- ¿Para qué tareas específicas del juego construyeron su sistema de control?
+  - ¿Qué automatizaron en el periodo autónomo o en el teleoperado?
+- Explíquennos paso a paso el proceso de ingeniería que siguió su equipo para desarrollar la rutina autónoma o la función de control más compleja de su robot.
+  - ¿Les funcionó bien ese proceso?
+  - ¿Cuál fue el mayor obstáculo o la mayor falla que encontró su equipo?
+  - ¿Cómo midió su equipo la confiabilidad?
+
+<Aside type="note" title="Nota de traducción">
+En el banco original, la primera pregunta está cortada después de "and how did you". La completamos con "cómo lo resolvieron", que es la lectura más probable; confírmalo en el original.
+</Aside>
+
+## Cómo prepararte
+
+<Aside type="note" title="Contenido propio">
+Esta sección son consejos de FIRSTHub, no texto del manual.
+</Aside>
+
+- **Una tabla de sensores ayuda.** Una página del Portfolio con cada sensor o rutina, el problema que resuelve y cómo lo hace cubre el criterio 1 de forma fácil de revisar.
+- **Muestra la retroalimentación.** El criterio 2 pide que el control use información del exterior. Un autónomo con tiempos fijos no lo cumple; uno que corrige con encoders, IMU, odometría o AprilTags sí.
+- **Lleva números.** Cuántas veces de cada diez completa el autónomo, o cuánto se desvía en una ruta, responde directo a la pregunta de confiabilidad.
+
+<Aside type="tip" title="Páginas relacionadas">
+Si tu equipo apenas empieza con sensores, revisa <a href="/docs/ftc/programming/robot-programming/odometria-con-encoders/">odometría con encoders</a>.
 </Aside>
 
 <Aside type="caution" title="Cambia por temporada">
-El criterio completo de evaluación vive en la fuente oficial, no aquí — puede variar cada año.
+Criterios, preguntas y número de lugares corresponden a la temporada 2026-2027. FIRST los revisa cada año y puede ajustarlos con Team Updates durante la temporada.
 </Aside>
 
 ## Para el criterio completo
 
-<a href="https://www.firstinspires.org/robotics/ftc/awards">Awards</a> (firstinspires.org)
+- [Competition Manual 2026-2027, Sección 6: Awards](https://ftc-resources.firstinspires.org/ftc/game/manual-06) (firstinspires.org)
+- [Judging Question Bank 2026-2027](https://ftc-resources.firstinspires.org/ftc/event/question-bank) (firstinspires.org)
