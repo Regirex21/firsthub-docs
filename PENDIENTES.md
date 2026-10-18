@@ -141,5 +141,7 @@ Se ampliaron las 21 páginas de premios FRC y los índices con: criterios del Aw
 - **Woodie Flowers Award (FTC):** no aparece ni en el manual 2026-2027 ni en el Game Manual Part 1 2023-2024. Todo indica que es solo de FRC. La página se reescribió como nota que redirige a la de FRC y al Compass Award. **Decisión pendiente: borrar la página y su entrada del sidebar** (recomendado).
 - **Volunteer Award (FTC):** tampoco aparece en ninguno de los dos manuales. Marcador actualizado. **Decisión pendiente:** borrarla o moverla a `_pendiente-secciones-futuras/voluntarios/`, como se hizo con la de FRC.
 - **FIRST Leadership Award (FTC):** sigue sin fecha 2026-2027 publicada para FTC. Se agregó la de FRC como referencia.
-- **Judges' Choice y avance:** sin cambios, sigue pendiente de decisión.
+- **Judges' Choice y avance:** resuelto por decisión del usuario (2026-10-18): se sigue el manual (A211 + Tabla 6-1): sí da puntos de avance cuando se entrega. Se quitó el marcador de la página y se dejó nota de que firstinspires.org/awards dice lo contrario.
 - **Requisitos del Engineering Portfolio:** resuelto. `requisitos-oficiales.mdx` se reescribió contra A201/A202 del manual 2026-2027 (portada aparte más 15 páginas de contenido, Control dentro del Portfolio, 15 MB, datos personales, IA con crédito, sin enlaces ni videos). También se corrigió en el índice del Portfolio y de Premios FTC que el Portfolio es obligatorio solo para Inspire, Think y Control.
+
+- **Patrocinadores (2026-10-18):** por decisión del usuario se quitó toda mención de patrocinadores de las páginas de premios FRC y FTC (badges, filas de ficha, avisos). Ya no se rastrean; los pendientes sobre patrocinadores de la sección 9 quedan sin efecto.
