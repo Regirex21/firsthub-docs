@@ -99,10 +99,6 @@ export const sidebarFTC = [
           {
             "label": "FIRST Leadership Award",
             "link": "/premios/reconocimiento-individual/first-leadership-award/"
-          },
-          {
-            "label": "Woodie Flowers Award",
-            "link": "/premios/reconocimiento-individual/woodie-flowers-award/"
           }
         ]
       },
@@ -137,10 +133,6 @@ export const sidebarFTC = [
           {
             "label": "Judges' Choice Award",
             "link": "/premios/premios-opcionales/judges-choice-award/"
-          },
-          {
-            "label": "Volunteer Award",
-            "link": "/premios/premios-opcionales/volunteer-award/"
           }
         ]
       }
@@ -448,7 +440,8 @@ export const sidebarFRC = [
           },
           {
             "label": "Safety Animation Award",
-            "link": "/premios/por-postulacion/safety-animation/"
+            "link": "/premios/por-postulacion/safety-animation/",
+            "badge": { "text": "No en 2026-27", "variant": "caution" }
           }
         ]
       },
