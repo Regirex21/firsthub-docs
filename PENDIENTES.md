@@ -122,3 +122,24 @@ Se ampliaron las 15 páginas de premios FTC y el índice con los criterios de la
 - **Control Award.** El manual 2026-2027 pide que la información de control vaya dentro del Engineering Portfolio. `ftc/portafolio-de-equipo/requisitos-oficiales.mdx` (verificado contra DECODE) todavía dice que el "Control Award submission" es un documento aparte del Portfolio. Fuera del alcance de esta tanda; hay que actualizarla.
 - **Compass Award.** El manual dice "video de 40 a 60 segundos" en la descripción y "máximo 60 segundos con créditos" en la regla. Documentado como tal en la página; no requiere decisión.
 - **Pregunta cortada en el banco oficial.** La primera pregunta de Control termina en "and how did you". Se completó como "cómo lo resolvieron" con nota visible en la página.
+
+---
+
+## 9. Premios FRC con contenido real y seguimiento de pendientes FTC (2026-10-18)
+
+Se ampliaron las 21 páginas de premios FRC y los índices con: criterios del Award Workbook (rev. oct. 2025, temporada 2026) y de las páginas Machine/Team Awards (actualizadas oct. 2026); preguntas guía del Workbook traducidas (en FRC no hay banco por premio, son dos listas generales: robot y equipo, ahora completas en los índices de categoría); reglas de juzgamiento del Judge Manual 2026 (rev. 2); formato y fechas 2027 de Submitted Awards; y la guía para jueces técnicos 2027 (rev. oct. 2026). Tips marcados como contenido propio.
+
+### Hallazgos que cambian páginas
+- **Safety Animation Award: no se entrega en 2026-2027.** Lo dice firstinspires.org/resources/library/safety. La página FRC se quedó como referencia con aviso visible. Decisión pendiente: ¿se quita del sidebar o se deja?
+- **FIRST Impact Award 2027:** tres ensayos de 4,000 caracteres, sin resumen ejecutivo, término nuevo "sustained". Abre 29 oct 2026 12pm ET, **cierra 11 feb 2027 3pm ET**. El 29 de octubre es la **apertura**, no una primera fecha límite. El doc del proyecto `claude/como-nombrar-temporadas-first.md` habla de "dos fechas de sumisión (29 de octubre y 11 de febrero)"; conviene revisar si el post del blog dice lo mismo y corregirlo.
+- **Leadership y Woodie Flowers (FRC):** cierran el 4 feb 2027 3pm ET.
+- **Patrocinadores FRC.** La página oficial actual solo muestra: Creativity (Rockwell Automation), Excellence in Engineering (Littelfuse), Industrial Design (**GE Aerospace**, nuevo). Autonomous (Google DeepMind en el Judge Manual 2026; la página decía Google.org), Innovation in Control (nVent), Engineering Inspiration (SpaceX) y Team Sustainability (Dow) ya no aparecen en la página. Se quitaron sus badges y se dejó el dato de 2026 como referencia. Revisar cuando salga el Game Manual 2027 (9 ene 2027).
+- **Digital Animation Award:** tema 2027 "Rewind the Future". La página de WPI lo presenta como premio de WPI; Submitted Awards de FIRST dice "sponsored by AutomationDirect.com". Las dos documentadas en la página. Además, para 2025-2026 WPI y FIRST publicaban rúbricas distintas (30/25/25/20 contra 30/30/30/10); también documentado. Marcador literal en la página para reglas y fecha 2027.
+- **Rookie All-Star:** el umbral de número de equipo (10,900 o más) es de 2026; para 2027 cambiará. Pendiente cuando salga el Judge Manual 2027.
+
+### Pendientes FTC de la tanda anterior
+- **Woodie Flowers Award (FTC):** no aparece ni en el manual 2026-2027 ni en el Game Manual Part 1 2023-2024. Todo indica que es solo de FRC. La página se reescribió como nota que redirige a la de FRC y al Compass Award. **Decisión pendiente: borrar la página y su entrada del sidebar** (recomendado).
+- **Volunteer Award (FTC):** tampoco aparece en ninguno de los dos manuales. Marcador actualizado. **Decisión pendiente:** borrarla o moverla a `_pendiente-secciones-futuras/voluntarios/`, como se hizo con la de FRC.
+- **FIRST Leadership Award (FTC):** sigue sin fecha 2026-2027 publicada para FTC. Se agregó la de FRC como referencia.
+- **Judges' Choice y avance:** sin cambios, sigue pendiente de decisión.
+- **Requisitos del Engineering Portfolio:** resuelto. `requisitos-oficiales.mdx` se reescribió contra A201/A202 del manual 2026-2027 (portada aparte más 15 páginas de contenido, Control dentro del Portfolio, 15 MB, datos personales, IA con crédito, sin enlaces ni videos). También se corrigió en el índice del Portfolio y de Premios FTC que el Portfolio es obligatorio solo para Inspire, Think y Control.
